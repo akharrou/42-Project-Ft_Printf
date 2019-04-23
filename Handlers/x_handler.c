@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/20 11:50:20 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 01:32:52 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 **             Flags: '-', '+', ' ', '0', '#'
 **             Width: defined or '*'
 **             Precision: defined or '*'
-**             Length: 'hh', 'h', 'l', 'll'
+**             Length: 'hh', 'h', 'l', 'll', 'j', 'z', 't'
 **
 **
 **    RETURN VALUES
@@ -47,23 +47,29 @@
 
 t_char	*x_handler(t_format format)
 {
-	t_char	*intstr;
+	intmax_t	temp;
+	t_char		*intstr;
 
-	intstr = (format.length < L) ?
-		ft_itoa_base(
-			format.data.intgr,
-			((format.specifier == 'x') ? HEX_LOWER_BASE : HEX_UPPER_BASE),
-			format.precision) :
-		ft_itoa_base(
-			format.data.intmax_t ,
-			((format.specifier == 'x') ? HEX_LOWER_BASE : HEX_UPPER_BASE),
-			format.precision);
-	if (format.flags & PLUS && !ft_strchr(intstr, '-'))
-		intstr = ft_strprepend(intstr, "+", 1, 0);
-	if (format.flags & SPACE && !ft_strchr(intstr, '-'))
-		intstr = ft_strprepend(intstr, " ", 1, 0);
-	if (format.flags & HASH)
-		intstr = ft_strprepend(
-			intstr, ((format.specifier == 'x') ? "0x" : "0X"), 1, 0);
+	temp = (format.length < L && format.length != NONE) ?
+		format.data.intgr :
+		format.data.intmax_t;
+	if ((format.precision == NONE || format.precision == 0) && !temp)
+		intstr = ft_strdup("");
+	else
+	{
+		temp = (temp < 0) ? ~(-temp) + 1 : temp;
+		intstr = ft_utoa_base(temp, HEX_LOWER_BASE, format.precision);
+		if (format.flags & PLUS && !ft_strchr(intstr, '-'))
+			intstr = ft_strprepend(intstr, "+", 1, 0);
+		if (format.flags & SPACE && !ft_strchr(intstr, '-'))
+			intstr = ft_strprepend(intstr, " ", 1, 0);
+		format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 2 : 0);
+	}
+	if (format.width)
+		intstr = (format.flags & MINUS) ?
+			ft_strappend(intstr, ft_padding(format.width, format.pad), 1, 1) :
+			ft_strprepend(intstr, ft_padding(format.width, format.pad), 1, 1);
+	if (format.flags & HASH && temp)
+		intstr = ft_strprepend(intstr, "0x", 1, 0);
 	return (intstr);
 }

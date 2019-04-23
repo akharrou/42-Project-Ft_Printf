@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 01:21:59 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/21 11:45:18 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 01:41:00 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
 */
 
-# include "Libft/Includes/libft.h"
+# include "Libft/libft.h"
+# include <stddef.h>
 # include <stdarg.h>
 
 /*
@@ -42,6 +43,8 @@ typedef union			u_data
 	long double			ldble;
 	char				*str;
 	intptr_t			ptr;
+	ptrdiff_t			ptrdiff;
+	size_t				sizet;
 }						t_data;
 
 typedef struct			s_style
@@ -90,7 +93,10 @@ enum	e_lengths
 	HH = sizeof(char),
 	L = sizeof(long int),
 	LL = sizeof(long long int),
-	LLL = sizeof(long double)
+	LLL = sizeof(long double),
+	IU_MAX = sizeof(intmax_t),
+	SIZET = sizeof(size_t),
+	PTRDIFF = sizeof(ptrdiff_t)
 };
 
 /*
@@ -116,7 +122,7 @@ t_int8					parse_specifier(const char *format, t_int8 *i);
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
 */
 
-# define				SPECIFIERS "cspdifouxXbr%"
+# define				SPECIFIERS "csrpiufodxXb%"
 
 t_char					*c_handler(t_format format);
 t_char					*i_handler(t_format format);
@@ -125,6 +131,7 @@ t_char					*u_handler(t_format format);
 t_char					*f_handler(t_format format);
 t_char					*o_handler(t_format format);
 t_char					*x_handler(t_format format);
+t_char					*X_handler(t_format format);
 t_char					*b_handler(t_format format);
 t_char					*s_handler(t_format format);
 t_char					*r_handler(t_format format);

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:45 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/21 13:16:52 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 00:41:59 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,8 +214,9 @@ t_int32			parse_precison(const char *format, va_list *args, t_int8 *i)
 **    DESCRIPTION
 **         Parses for the 'length' field in the formatted string.
 **
-**         We check for an exact match of 'h', 'l', 'L', 'hh', or
-**         'll' with a series of if/else if statements.
+**         We check for an exact match of 'h', 'l', 'L', 'hh',
+**         'll', 'j', 'z', 't' with a series of if/else if
+**         statements.
 **
 **         (switch statements are not permitted with the school's
 **         'norminette').
@@ -245,6 +246,12 @@ t_int8			parse_length(const char *format, t_int8 *i)
 		return (L);
 	else if (format[(*i) - 1] == 'L')
 		return (LLL);
+	else if (format[(*i) - 1] == 'j')
+		return (IU_MAX);
+	else if (format[(*i) - 1] == 'z')
+		return (SIZET);
+	else if (format[(*i) - 1] == 't')
+		return (PTRDIFF);
 	(*i) -= 1;
 	return (NONE);
 }

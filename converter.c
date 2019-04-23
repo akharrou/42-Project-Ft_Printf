@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/21 12:02:13 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 01:57:32 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_handler table[] =
 	{    'o',    &o_handler,      },
 	{    'd',    &d_handler,      },
 	{    'x',    &x_handler,      },
-	{    'X',    &x_handler,      },
+	{    'X',    &X_handler,      },
 	{    's',    &s_handler,      },
 	{    'r',    &r_handler,      },
 	{    'p',    &p_handler,      },
@@ -210,8 +210,8 @@ t_char			*format_converter(const char **format, va_list *args)
 			if (info.specifier == table[i].specifier)
 			{
 				fstr = table[i].handler(info);
-				info.width = info.width - ft_strlen(fstr);
-				if (info.width > 0)
+				info.width -= ft_strlen(fstr);
+				if (info.width > 0 && (!ft_ischarset(info.specifier, "cboxX")))
 					fstr = (info.flags & MINUS) ?
 					ft_strappend(fstr, ft_padding(info.width, info.pad), 1, 1) :
 					ft_strprepend(fstr, ft_padding(info.width, info.pad), 1, 1);

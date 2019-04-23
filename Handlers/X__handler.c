@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   b_handler.c                                        :+:      :+:    :+:   */
+/*   X__handler.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 01:14:27 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 01:38:57 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 **    NAME
-**         b_handler -- formatted binary number conversion
+**         X_handler -- formatted (uppercased) hexadecimal number conversion
 **
 **    SYNOPSIS
 **         #include <libft.h>
 **
 **         t_char	*
-**         b_handler(t_format format);
+**         X_handler(t_format format);
 **
 **    PARAMETERS
 **
@@ -27,8 +27,7 @@
 **                                 be formatted.
 **
 **    DESCRIPTION
-**         Handles the '%b' specifier; binary number conversion, similar
-**         to the hexadecimal or octal or decimal conversions.
+**         Handles the '%X' specifier like the libc 'printf()' function.
 **
 **         Note: the only flags and fields that apply to this specifier
 **         are the following:
@@ -46,25 +45,31 @@
 
 #include "../ft_printf.h"
 
-t_char	*b_handler(t_format format)
+t_char	*X_handler(t_format format)
 {
 	intmax_t	temp;
 	t_char		*intstr;
 
-	temp = (format.length < L) ?
+	temp = (format.length < L && format.length != NONE) ?
 		format.data.intgr :
 		format.data.intmax_t;
-	intstr = ft_itoa_base(temp, BINARY_BASE, format.precision);
-	if (format.flags & PLUS && !ft_strchr(intstr, '-'))
-		intstr = ft_strprepend(intstr, "+", 1, 0);
-	if (format.flags & SPACE && !ft_strchr(intstr, '-'))
-		intstr = ft_strprepend(intstr, " ", 1, 0);
-	format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 2 : 0);
+	if ((format.precision == NONE || format.precision == 0) && !temp)
+		intstr = ft_strdup("");
+	else
+	{
+		temp = (temp < 0) ? ~(-temp) + 1 : temp;
+		intstr = ft_utoa_base(temp, HEX_UPPER_BASE, format.precision);
+		if (format.flags & PLUS && !ft_strchr(intstr, '-'))
+			intstr = ft_strprepend(intstr, "+", 1, 0);
+		if (format.flags & SPACE && !ft_strchr(intstr, '-'))
+			intstr = ft_strprepend(intstr, " ", 1, 0);
+		format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 2 : 0);
+	}
 	if (format.width)
 		intstr = (format.flags & MINUS) ?
 			ft_strappend(intstr, ft_padding(format.width, format.pad), 1, 1) :
 			ft_strprepend(intstr, ft_padding(format.width, format.pad), 1, 1);
 	if (format.flags & HASH && temp)
-		intstr = ft_strprepend(intstr, "0b", 1, 0);
+		intstr = ft_strprepend(intstr, "0X", 1, 0);
 	return (intstr);
 }

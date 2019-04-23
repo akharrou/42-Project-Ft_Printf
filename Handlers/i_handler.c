@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:31 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/17 07:13:21 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 01:14:01 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 **             Flags: '-', '+', ' ', '0'
 **             Width: defined or '*'
 **             Precision: defined or '*'
-**             Length: 'hh', 'h', 'l', 'll'
+**             Length: 'hh', 'h', 'l', 'll', 'j', 'z', 't'
 **
 **
 **    RETURN VALUES

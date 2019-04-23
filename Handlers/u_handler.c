@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:15 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/18 22:08:51 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 01:13:54 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@
 **             Flags: '-', '0'
 **             Width: defined or '*'
 **             Precision: defined or '*'
-**             Length: 'hh', 'h', 'l', 'll'
+**             Length: 'hh', 'h', 'l', 'll', 'j', 'z', 't'
 **
+**         PS: two's complement is used for negatives.
 **
 **    RETURN VALUES
 **         If successful, returns a formatted string that follows the

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:33 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/17 00:34:20 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 01:14:24 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@
 **         Note: the only flags and fields that apply to this specifier
 **         are the following:
 **
-**             Flags: '-'
+**             Flags: '-', '+', ' ', '0'
 **             Width: defined or '*'
+**             Precision: defined or '*'
+**             Length: 'hh', 'h', 'l', 'll', 'j', 'z', 't'
 **
 **
 **    RETURN VALUES

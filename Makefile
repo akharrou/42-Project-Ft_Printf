@@ -6,7 +6,7 @@
 #    By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/17 16:23:01 by akharrou          #+#    #+#              #
-#    Updated: 2019/04/21 12:55:01 by akharrou         ###   ########.fr        #
+#    Updated: 2019/04/22 01:41:31 by akharrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ PLUGINS     =   Handlers/c_handler.c                                          \
                 Handlers/o_handler.c                                          \
                 Handlers/d_handler.c                                          \
                 Handlers/x_handler.c                                          \
+                Handlers/X__handler.c                                         \
                 Handlers/s_handler.c                                          \
                 Handlers/r_handler.c                                          \
                 Handlers/p_handler.c                                          \
@@ -57,7 +58,7 @@ all: $(NAME)
 $(NAME): Libft/libft.a $(OBJECTS)
 	@ar -rcs $(NAME) $(OBJECTS) $(shell find Libft/ -name '*.o')
 	@echo && echo $(GREEN) "[√]     [Extended Library Successfully Compiled!]"
-	@echo
+	@echo $(WHITE)
 
 Libft/libft.a:
 	@make -C Libft

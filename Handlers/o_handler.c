@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 22:48:58 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 23:37:53 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,42 @@ t_char	*o_handler(t_format format)
 	intmax_t	temp;
 	t_char		*intstr;
 
+	// temp = (format.length < L && format.length != NONE) ?
+	// 	format.data.intgr :
+	// 	format.data.intmax_t;
+	// intstr = ft_strdup("");
+	// if (!(format.precision == NONE && format.precision == 0) && temp)
+	// {
+	// 	if (temp < 0)
+	// 		temp = ~(-temp) + 1;
+	// 	intstr = ft_utoa_base(temp, OCTAL_BASE, format.precision - ((format.flags & HASH) ? 1 : 0));
+	// 	if (format.flags & PLUS && !ft_strchr(intstr, '-'))
+	// 		intstr = ft_strprepend(intstr, "+", 1, 0);
+	// 	if (format.flags & SPACE && !ft_strchr(intstr, '-'))
+	// 		intstr = ft_strprepend(intstr, " ", 1, 0);
+	// 	format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 1 : 0);
+	// }
+	// if (format.width && !(format.flags & HASH))
+	// 	intstr = apply_width(format, intstr);
+	// if (format.flags & HASH)
+	// 	intstr = ft_strprepend(intstr, "0", 1, 0);
+	// if (format.width && (format.flags & HASH))
+	// 	intstr = apply_width(format, intstr);
+	// return (intstr);
 	temp = (format.length < L && format.length != NONE) ?
 		format.data.intgr :
 		format.data.intmax_t;
 	intstr = ft_strdup("");
 	if (!(format.precision == NONE && format.precision == 0) && temp)
 	{
-		if (temp < 0)
-			temp = ~(-temp) + 1;
-		intstr = ft_utoa_base(temp, OCTAL_BASE, format.precision - ((format.flags & HASH) ? 1 : 0));
+		temp = (temp < 0) ? ~(-temp) + 1 : temp;
+		intstr = ft_strjoinfre(
+			intstr, ft_utoa_base(temp, OCTAL_BASE, format.precision), 1, 1);
 		if (format.flags & PLUS && !ft_strchr(intstr, '-'))
 			intstr = ft_strprepend(intstr, "+", 1, 0);
 		if (format.flags & SPACE && !ft_strchr(intstr, '-'))
 			intstr = ft_strprepend(intstr, " ", 1, 0);
-		format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 1 : 0);
+		format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 1 : 0) - (!temp);
 	}
 	if (format.width && !(format.flags & HASH))
 		intstr = apply_width(format, intstr);

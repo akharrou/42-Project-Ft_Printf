@@ -2141,13 +2141,13 @@ int		main(int ac, char *av[])
 
 /* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
 
- ft_printf("%.0x %.x\n", 10, 10);
-	printf("%.0x %.x\n", 10, 10);
+//  ft_printf("%#5.0x %#5.x\n", 0, 0);
+// 	printf("%#5.0x %#5.x\n", 0, 0);
 
- ft_printf("%.0o %.o\n", 10, 10);
-	printf("%.0o %.o\n", 10, 10);
+ ft_printf("%5.o %5.o\n", 0, 0);
+	printf("%5.o %5.o\n", 0, 0);
 
- ft_printf("%.0b %.b\n", 10, 10);
+//  ft_printf("%#5.0b %#5.b\n", 0, 0);
 
 	(void)ac;
 	(void)av;

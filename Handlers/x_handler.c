@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 23:34:03 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/23 15:33:10 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_char	*x_handler(t_format format)
 		format.data.intgr :
 		format.data.intmax_t;
 	intstr = ft_strdup("");
-	if (!(format.precision == NONE && format.precision == 0) && temp)
+	if (!(format.precision == NONE && format.precision == 0))
 	{
 		temp = (temp < 0) ? ~(-temp) + 1 : temp;
 		intstr = ft_strjoinfre(
@@ -73,11 +73,11 @@ t_char	*x_handler(t_format format)
 			intstr = ft_strprepend(intstr, " ", 1, 0);
 		format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 2 : 0);
 	}
-	if (format.width && !(format.flags & HASH))
+	if (format.width && (format.flags & HASH) && format.pad == '0')
 		intstr = apply_width(format, intstr);
 	if (format.flags & HASH && temp)
 		intstr = ft_strprepend(intstr, "0x", 1, 0);
-	if (format.width && (format.flags & HASH))
+	if (format.width && (format.flags & HASH) && format.pad != '0')
 		intstr = apply_width(format, intstr);
 	return (intstr);
 }

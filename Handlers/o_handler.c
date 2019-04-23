@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 23:37:53 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/23 14:56:12 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ t_char	*o_handler(t_format format)
 			intstr = ft_strprepend(intstr, " ", 1, 0);
 		format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 1 : 0) - (!temp);
 	}
-	if (format.width && !(format.flags & HASH))
+	if (format.width && (format.flags & HASH))
 		intstr = apply_width(format, intstr);
 	if (format.flags & HASH && temp)
 		intstr = ft_strprepend(intstr, "0", 1, 0);
-	if (format.width && (format.flags & HASH))
+	if (format.width && !(format.flags & HASH))
 		intstr = apply_width(format, intstr);
 	return (intstr);
 }

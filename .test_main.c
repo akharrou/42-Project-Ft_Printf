@@ -2129,8 +2129,8 @@ int		main(int ac, char *av[])
 /* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
 
 
-	ft_printf("%#6x\n", 2500);
-	printf("%#6x\n", 2500);
+	ft_printf("%##6o\n", 2500);
+	printf("%##6o\n", 2500);
 
 	(void)ac;
 	(void)av;

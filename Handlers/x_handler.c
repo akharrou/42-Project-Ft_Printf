@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 19:58:27 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 22:48:32 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_char	*x_handler(t_format format)
 		format.data.intgr :
 		format.data.intmax_t;
 	intstr = ft_strdup("");
-	if (!((format.precision == NONE && format.precision == 0) && !temp))
+	if (!(format.precision == NONE && format.precision == 0) && temp)
 	{
 		temp = (temp < 0) ? ~(-temp) + 1 : temp;
 		intstr = ft_strjoinfre(

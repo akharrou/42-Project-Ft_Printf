@@ -6,7 +6,7 @@
 #    By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/17 16:23:01 by akharrou          #+#    #+#              #
-#    Updated: 2019/04/22 01:41:31 by akharrou         ###   ########.fr        #
+#    Updated: 2019/04/22 22:43:51 by akharrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ Libft/libft.a:
 	@make -C Libft
 
 %.o: %.c $(HEADERS)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -O0 -g -c $< -o $@
 	@echo "Compiling => " $<
 
 # House Keeping — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —

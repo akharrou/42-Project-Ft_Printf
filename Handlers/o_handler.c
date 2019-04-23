@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 01:13:57 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 22:48:58 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@
 
 #include "../ft_printf.h"
 
+static t_char	*apply_width(t_format format, t_char *str)
+{
+	str = (format.flags & MINUS) ?
+		ft_strappend(str, ft_padding(format.width, format.pad), 1, 1) :
+		ft_strprepend(str, ft_padding(format.width, format.pad), 1, 1);
+	return (str);
+}
+
 t_char	*o_handler(t_format format)
 {
 	intmax_t	temp;
@@ -54,19 +62,23 @@ t_char	*o_handler(t_format format)
 	temp = (format.length < L && format.length != NONE) ?
 		format.data.intgr :
 		format.data.intmax_t;
-	if (temp < 0)
-		temp = ~(-temp) + 1;
-	intstr = ft_utoa_base(temp, OCTAL_BASE, format.precision);
-	if (format.flags & PLUS && !ft_strchr(intstr, '-'))
-		intstr = ft_strprepend(intstr, "+", 1, 0);
-	if (format.flags & SPACE && !ft_strchr(intstr, '-'))
-		intstr = ft_strprepend(intstr, " ", 1, 0);
-	format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 1 : 0);
-	if (format.width)
-		intstr = (format.flags & MINUS) ?
-			ft_strappend(intstr, ft_padding(format.width, format.pad), 1, 1) :
-			ft_strprepend(intstr, ft_padding(format.width, format.pad), 1, 1);
+	intstr = ft_strdup("");
+	if (!(format.precision == NONE && format.precision == 0) && temp)
+	{
+		if (temp < 0)
+			temp = ~(-temp) + 1;
+		intstr = ft_utoa_base(temp, OCTAL_BASE, format.precision - ((format.flags & HASH) ? 1 : 0));
+		if (format.flags & PLUS && !ft_strchr(intstr, '-'))
+			intstr = ft_strprepend(intstr, "+", 1, 0);
+		if (format.flags & SPACE && !ft_strchr(intstr, '-'))
+			intstr = ft_strprepend(intstr, " ", 1, 0);
+		format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 1 : 0);
+	}
+	if (format.width && !(format.flags & HASH))
+		intstr = apply_width(format, intstr);
 	if (format.flags & HASH && temp)
 		intstr = ft_strprepend(intstr, "0", 1, 0);
+	if (format.width && (format.flags & HASH))
+		intstr = apply_width(format, intstr);
 	return (intstr);
 }

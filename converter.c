@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 19:52:24 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/22 22:15:32 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ t_format		parse_format(const char *format, va_list *args)
 		info.data = va_arg(*args, t_data);
 	else
 		info.data.dble = va_arg(*args, double);
-	if (info.precision == NONE && info.flags & ZERO)
+	if (info.precision == NONE && info.flags & ZERO && !(info.flags & MINUS))
 		info.pad = '0';
 	return (info);
 }

@@ -10,6 +10,19 @@
 // #include "parser.c"
 // #include "converter.c"
 
+// #include "Handlers/b_handler.c"
+// #include "Handlers/c_handler.c"
+// #include "Handlers/d_handler.c"
+// #include "Handlers/f_handler.c"
+// #include "Handlers/i_handler.c"
+// #include "Handlers/mod_handler.c"
+// #include "Handlers/o_handler.c"
+// #include "Handlers/x_handler.c"
+// #include "Handlers/X__handler.c"
+// #include "Handlers/p_handler.c"
+// #include "Handlers/r_handler.c"
+// #include "Handlers/s_handler.c"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -2128,9 +2141,13 @@ int		main(int ac, char *av[])
 
 /* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
 
+ ft_printf("%.0x %.x\n", 10, 10);
+	printf("%.0x %.x\n", 10, 10);
 
-	ft_printf("%##6o\n", 2500);
-	printf("%##6o\n", 2500);
+ ft_printf("%.0o %.o\n", 10, 10);
+	printf("%.0o %.o\n", 10, 10);
+
+ ft_printf("%.0b %.b\n", 10, 10);
 
 	(void)ac;
 	(void)av;

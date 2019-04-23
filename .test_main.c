@@ -2144,10 +2144,11 @@ int		main(int ac, char *av[])
 //  ft_printf("%#5.0x %#5.x\n", 0, 0);
 // 	printf("%#5.0x %#5.x\n", 0, 0);
 
- ft_printf("%5.o %5.o\n", 0, 0);
-	printf("%5.o %5.o\n", 0, 0);
+//  ft_printf("%#.o %#.o\n", 0, 0);
+// 	printf("%#.o %#.o\n", 0, 0);
 
-//  ft_printf("%#5.0b %#5.b\n", 0, 0);
+	// ft_printf("% +d\n", 42);
+	// printf("% +d\n", 42);
 
 	(void)ac;
 	(void)av;

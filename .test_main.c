@@ -2146,15 +2146,8 @@ int		main(int ac, char *av[])
 
 	// printf("\n------------------------------\n[%i] vs [%i]\n", i , j);
 
-	// ft_printf("% 05d\n", 42);
-	//    printf("% 05d\n", 42);
-
-
-	// ft_printf("%05d\n", -42);
-	//    printf("%05d\n", -42);
-
-	ft_printf("%05i\n", -42);
-	   printf("%05i\n", -42);
+	ft_printf("%+12.10d\n", 42);
+	   printf("%+12.10d\n", 42);
 
 	(void)ac;
 	(void)av;

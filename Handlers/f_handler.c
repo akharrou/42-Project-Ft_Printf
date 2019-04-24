@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:28 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 02:46:42 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 02:59:46 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,20 @@ t_char			*f_handler(t_format format)
 		fltstr = ft_strprepend(fltstr, " ", 1, 0);
 	return (fltstr);
 }
+
+
+
+	/** TODO
+	 *
+	 * KEEP TESTING HUGO + NEW + FILECHECKER
+	 * FIX %c with 0 (i.e '\0')
+	 * FIX %f
+	 *
+	 * check with christian
+	 */
+
+
+
 	// format.width -= ft_strlen(fstr);
 	// if (format.width > 0)
 	// 	fstr = apply_width(format, fstr);

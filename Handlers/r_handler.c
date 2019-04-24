@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:51:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 02:45:53 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 02:51:40 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_char			*r_handler(t_format format)
 				ft_strappend(fstr, ft_strndup(tmp + i, 1), 1, 1) :
 				ft_strappend(fstr, ft_strprepend(
 						ft_itoa_base(tmp[i], HEX_LOWER_BASE, 2), "\\x", 1, 0),
-				1, 1);
+					1, 1);
 	else
 		fstr = tmp;
 	format.width -= ft_strlen(fstr);

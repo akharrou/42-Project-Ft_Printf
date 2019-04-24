@@ -6,11 +6,24 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 22:15:32 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/23 22:17:23 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+**    Utility function.
+*/
+
+t_char	*apply_width(t_format format, t_char *str)
+{
+	return(
+		(format.flags & MINUS) ?
+			ft_strappend(str, ft_padding(format.width, format.pad), 1, 1) :
+			ft_strprepend(str, ft_padding(format.width, format.pad), 1, 1)
+	);
+}
 
 /*
 **    DESCRIPTION
@@ -212,9 +225,7 @@ t_char			*format_converter(const char **format, va_list *args)
 				fstr = table[i].handler(info);
 				info.width -= ft_strlen(fstr);
 				if (info.width > 0 && (!ft_ischarset(info.specifier, "cboxX")))
-					fstr = (info.flags & MINUS) ?
-					ft_strappend(fstr, ft_padding(info.width, info.pad), 1, 1) :
-					ft_strprepend(fstr, ft_padding(info.width, info.pad), 1, 1);
+					fstr = apply_width(info, fstr);
 				fstr = style_handler(info, fstr);
 			}
 	}

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 01:21:59 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 01:41:00 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/23 22:16:05 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ t_int32					parse_precison(const char *format, va_list *args,
 						t_int8 *i);
 t_int8					parse_length(const char *format, t_int8 *i);
 t_int8					parse_specifier(const char *format, t_int8 *i);
+
+t_char					*apply_width(t_format format, t_char *str);
 
 /*
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **

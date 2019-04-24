@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:40 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 19:37:47 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/23 22:18:10 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,10 @@ t_char	*c_handler(t_format format)
 	character = malloc(2);
 	if (!character)
 		exit(-1);
-	character[0] = format.data.chr;
+	character[0] = ~format.data.chr;
 	character[1] = '\0';
-	format.width -= ft_strlen(character) - (format.data.chr == 0);
+	format.width -= 1;
 	if (format.width > 0)
-		character = (format.flags & MINUS) ?
-		ft_strappend(character, ft_padding(format.width, format.pad), 1, 1) :
-		ft_strprepend(character, ft_padding(format.width, format.pad), 1, 1);
+		character = apply_width(format, character);
 	return (character);
 }

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/23 14:56:00 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/23 22:18:15 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,6 @@
 
 #include "../ft_printf.h"
 
-static t_char	*apply_width(t_format format, t_char *str)
-{
-	str = (format.flags & MINUS) ?
-		ft_strappend(str, ft_padding(format.width, format.pad), 1, 1) :
-		ft_strprepend(str, ft_padding(format.width, format.pad), 1, 1);
-	return (str);
-}
-
 t_char			*X_handler(t_format format)
 {
 	intmax_t	temp;
@@ -62,7 +54,7 @@ t_char			*X_handler(t_format format)
 		format.data.intgr :
 		format.data.intmax_t;
 	intstr = ft_strdup("");
-	if (!((format.precision == NONE && format.precision == 0) && !temp))
+	if (!(format.precision == 0 && temp == 0))
 	{
 		temp = (temp < 0) ? ~(-temp) + 1 : temp;
 		intstr = ft_strjoinfre(
@@ -73,11 +65,11 @@ t_char			*X_handler(t_format format)
 			intstr = ft_strprepend(intstr, " ", 1, 0);
 		format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 2 : 0);
 	}
-	if (format.width && (format.flags & HASH))
+	if (format.width && format.pad == '0')
 		intstr = apply_width(format, intstr);
 	if (format.flags & HASH && temp)
 		intstr = ft_strprepend(intstr, "0X", 1, 0);
-	if (format.width && !(format.flags & HASH))
+	if (format.width && format.pad != '0')
 		intstr = apply_width(format, intstr);
 	return (intstr);
 }

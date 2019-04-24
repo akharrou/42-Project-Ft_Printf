@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/23 14:56:12 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/23 23:05:30 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,46 +46,16 @@
 
 #include "../ft_printf.h"
 
-static t_char	*apply_width(t_format format, t_char *str)
-{
-	str = (format.flags & MINUS) ?
-		ft_strappend(str, ft_padding(format.width, format.pad), 1, 1) :
-		ft_strprepend(str, ft_padding(format.width, format.pad), 1, 1);
-	return (str);
-}
-
 t_char	*o_handler(t_format format)
 {
 	intmax_t	temp;
 	t_char		*intstr;
 
-	// temp = (format.length < L && format.length != NONE) ?
-	// 	format.data.intgr :
-	// 	format.data.intmax_t;
-	// intstr = ft_strdup("");
-	// if (!(format.precision == NONE && format.precision == 0) && temp)
-	// {
-	// 	if (temp < 0)
-	// 		temp = ~(-temp) + 1;
-	// 	intstr = ft_utoa_base(temp, OCTAL_BASE, format.precision - ((format.flags & HASH) ? 1 : 0));
-	// 	if (format.flags & PLUS && !ft_strchr(intstr, '-'))
-	// 		intstr = ft_strprepend(intstr, "+", 1, 0);
-	// 	if (format.flags & SPACE && !ft_strchr(intstr, '-'))
-	// 		intstr = ft_strprepend(intstr, " ", 1, 0);
-	// 	format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 1 : 0);
-	// }
-	// if (format.width && !(format.flags & HASH))
-	// 	intstr = apply_width(format, intstr);
-	// if (format.flags & HASH)
-	// 	intstr = ft_strprepend(intstr, "0", 1, 0);
-	// if (format.width && (format.flags & HASH))
-	// 	intstr = apply_width(format, intstr);
-	// return (intstr);
 	temp = (format.length < L && format.length != NONE) ?
 		format.data.intgr :
 		format.data.intmax_t;
 	intstr = ft_strdup("");
-	if (!(format.precision == NONE && format.precision == 0) && temp)
+	if (!(format.precision == 0 && temp == 0 && !(format.flags & HASH)))
 	{
 		temp = (temp < 0) ? ~(-temp) + 1 : temp;
 		intstr = ft_strjoinfre(
@@ -94,13 +64,13 @@ t_char	*o_handler(t_format format)
 			intstr = ft_strprepend(intstr, "+", 1, 0);
 		if (format.flags & SPACE && !ft_strchr(intstr, '-'))
 			intstr = ft_strprepend(intstr, " ", 1, 0);
-		format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 1 : 0) - (!temp);
+		format.width -= ft_strlen(intstr) + ((format.flags & HASH && temp) ? 1 : 0);
 	}
-	if (format.width && (format.flags & HASH))
+	if (format.width && format.pad == '0')
 		intstr = apply_width(format, intstr);
 	if (format.flags & HASH && temp)
 		intstr = ft_strprepend(intstr, "0", 1, 0);
-	if (format.width && !(format.flags & HASH))
+	if (format.width && format.pad != '0')
 		intstr = apply_width(format, intstr);
 	return (intstr);
 }

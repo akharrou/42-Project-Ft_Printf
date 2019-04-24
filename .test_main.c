@@ -2141,8 +2141,13 @@ int		main(int ac, char *av[])
 
 /* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
 
-    ft_printf("%#8x\n", 42);
-       printf("%#8x\n", 42);
+    // int i = ft_printf("and %c stuff\n", '\0');
+    // int j =    printf("and %c stuff\n", '\0');
+
+	// printf("\n------------------------------\n[%i] vs [%i]\n", i , j);
+
+	ft_printf("% +d", 42);
+	   printf("% +d", 42);
 
 	(void)ac;
 	(void)av;

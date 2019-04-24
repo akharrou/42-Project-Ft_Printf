@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:51:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/20 15:37:03 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 02:45:53 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,31 @@
 
 #include "../ft_printf.h"
 
-t_char	*r_handler(t_format format)
+t_char			*r_handler(t_format format)
 {
-	t_int32 i;
-	t_char	*fstr;
+	t_char		*fstr;
+	t_char		*tmp;
+	t_int32 	i;
 
-	if (format.data.str == NULL)
-		return (ft_strdup("(null)"));
+	tmp = (format.data.str == NULL) ?
+		ft_strdup("(null)") :
+		ft_strdup(format.data.str);
+	if (format.precision != NONE)
+		if (0 <= format.precision && format.precision < (long)ft_strlen(tmp))
+			tmp[format.precision] = '\0';
 	i = -1;
 	fstr = NULL;
-	if (format.precision == NONE)
-		format.precision = ft_strlen(format.data.str);
-	while (format.data.str[++i] && i < format.precision)
-	{
-		if (ISPRINT(format.data.str[i]))
-			fstr = ft_strappend(
-				fstr, ft_strndup(format.data.str + i, 1), 1, 1);
-		else
-			fstr = ft_strappend(
-				fstr,
-				ft_strprepend(
-					ft_itoa_base(format.data.str[i], HEX_LOWER_BASE, 2),
-					"\\x",
-					1, 0),
+	if (format.data.str != NULL)
+		while (tmp[++i] && i < format.precision)
+			fstr = (ISPRINT(tmp[i])) ?
+				ft_strappend(fstr, ft_strndup(tmp + i, 1), 1, 1) :
+				ft_strappend(fstr, ft_strprepend(
+						ft_itoa_base(tmp[i], HEX_LOWER_BASE, 2), "\\x", 1, 0),
 				1, 1);
-	}
+	else
+		fstr = tmp;
+	format.width -= ft_strlen(fstr);
+	if (format.width > 0 && format.pad == ' ')
+		fstr = apply_width(format, fstr);
 	return (fstr);
 }

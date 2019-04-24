@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:51:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/20 15:26:45 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 02:47:28 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,18 @@
 
 #include "../ft_printf.h"
 
-t_char	*s_handler(t_format format)
+t_char			*s_handler(t_format format)
 {
-	t_char	*fstr;
+	t_char		*fstr;
 
-	fstr = (format.data.str != NULL) ?
-		ft_strdup(format.data.str):
-		ft_strdup("(null)");
+	fstr = (format.data.str == NULL) ?
+		ft_strdup("(null)") :
+		ft_strdup(format.data.str);
 	if (format.precision != NONE)
-		if (0 < format.precision && format.precision < (long)ft_strlen(fstr))
+		if (0 <= format.precision && format.precision < (long)ft_strlen(fstr))
 			fstr[format.precision] = '\0';
+	format.width -= ft_strlen(fstr);
+	if (format.width > 0 && format.pad == ' ')
+		fstr = apply_width(format, fstr);
 	return (fstr);
 }

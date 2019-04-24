@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:15 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/23 23:44:01 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 02:47:57 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@
 
 #include "../ft_printf.h"
 
-t_char	*u_handler(t_format format)
+t_char			*u_handler(t_format format)
 {
-	t_char	*intstr;
+	t_char		*intstr;
 
 	intstr = (format.length < L && format.length != NONE) ?
 		ft_utoa_base(format.data.uintgr, DECIMAL_BASE, format.precision) :

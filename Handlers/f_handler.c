@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:28 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/18 21:57:14 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 02:46:42 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@
 
 #include "../ft_printf.h"
 
-t_char	*f_handler(t_format format)
+t_char			*f_handler(t_format format)
 {
-	t_char	*fltstr;
+	t_char		*fltstr;
 
 	fltstr = ft_ftoa_base(
 		(long double)format.data.dble, DECIMAL_BASE, -1, format.precision);
@@ -57,3 +57,32 @@ t_char	*f_handler(t_format format)
 		fltstr = ft_strprepend(fltstr, " ", 1, 0);
 	return (fltstr);
 }
+	// format.width -= ft_strlen(fstr);
+	// if (format.width > 0)
+	// 	fstr = apply_width(format, fstr);
+
+
+	// intmax_t	temp;
+	// t_int8		sign;
+	// t_char		*intstr;
+
+	// temp = (format.length < L) ? format.data.intgr : format.data.intmax_t;
+	// sign = (temp < 0);
+	// intstr = ft_strdup("");
+	// if (!(format.precision == 0 && temp == 0))
+	// {
+	// 	temp = (temp < 0) ? -temp : temp;
+	// 	intstr = ft_strappend(
+	// 		intstr, ft_utoa_base(temp, DECIMAL_BASE, format.precision), 1, 1);
+	// 	format.width -= ft_strlen(intstr) +
+	// 		(sign || (format.flags & PLUS || format.flags & SPACE) ? 1 : 0);
+	// }
+	// if (format.width && format.pad == '0')
+	// 	intstr = apply_width(format, intstr);
+	// intstr = (sign) ? ft_strprepend(intstr, "-", 1, 0) : intstr;
+	// if (format.flags & PLUS && !sign)
+	// 	intstr = ft_strprepend(intstr, "+", 1, 0);
+	// if (format.flags & SPACE && !(format.flags & PLUS) && !sign)
+	// 	intstr = ft_strprepend(intstr, " ", 1, 0);
+	// if (format.width && format.pad != '0')
+	// 	intstr = apply_width(format, intstr);

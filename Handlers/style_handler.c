@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 00:27:33 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 02:47:41 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 **    DESCRIPTION
-**         Dispatch table associating every style to its ANSI code.
+**         Dispatch styles_table associating every style to its ANSI code.
 **
 **         Note:
 **
@@ -132,7 +132,7 @@ t_style styles_table[] =
 **         untouched is returned.
 */
 
-t_char	*style_handler(t_format format, t_char *string)
+t_char		*style_handler(t_format format, t_char *string)
 {
 	t_int8	i;
 	t_int8	j;

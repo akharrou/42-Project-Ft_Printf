@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/23 23:24:07 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 02:46:06 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 
 #include "../ft_printf.h"
 
-t_char	*b_handler(t_format format)
+t_char			*b_handler(t_format format)
 {
 	intmax_t	temp;
 	t_char		*intstr;

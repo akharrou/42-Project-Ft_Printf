@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:39 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/17 06:57:33 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 02:47:17 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,17 @@
 
 #include "../ft_printf.h"
 
-t_char	*p_handler(t_format format)
+t_char			*p_handler(t_format format)
 {
-	t_char	*addr;
+	t_char		*addr;
 
 	addr = ft_utoa_base(
 		(uintmax_t)format.data.ptr, HEX_LOWER_BASE, format.precision);
 	addr = ft_strprepend(addr, "0x", 1, 0);
 	if (!addr)
 		exit (-1);
+	format.width -= ft_strlen(addr);
+	if (format.width > 0 && format.pad == ' ')
+		addr = apply_width(format, addr);
 	return (addr);
 }

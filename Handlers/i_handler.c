@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:31 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 00:49:35 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 02:46:56 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 
 #include "../ft_printf.h"
 
-t_char	*i_handler(t_format format)
+t_char			*i_handler(t_format format)
 {
 	intmax_t	temp;
 	t_int8		sign;
@@ -67,7 +67,7 @@ t_char	*i_handler(t_format format)
 	intstr = (sign) ? ft_strprepend(intstr, "-", 1, 0) : intstr;
 	if (format.flags & PLUS && !sign)
 		intstr = ft_strprepend(intstr, "+", 1, 0);
-	if (format.flags & SPACE &&	!(format.flags & PLUS) && !sign)
+	if (format.flags & SPACE && !(format.flags & PLUS) && !sign)
 		intstr = ft_strprepend(intstr, " ", 1, 0);
 	if (format.width && format.pad != '0')
 		intstr = apply_width(format, intstr);

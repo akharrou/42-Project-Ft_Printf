@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/23 23:46:21 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 02:05:39 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,13 +221,7 @@ t_char			*format_converter(const char **format, va_list *args)
 		i = -1;
 		while (table[++i].specifier != '\0')
 			if (info.specifier == table[i].specifier)
-			{
-				fstr = table[i].handler(info);
-				info.width -= ft_strlen(fstr);
-				if (info.width > 0 && ft_ischarset(info.specifier, "fprs%"))
-					fstr = apply_width(info, fstr);
-				fstr = style_handler(info, fstr);
-			}
+				fstr = style_handler(info, table[i].handler(info));
 	}
 	(*format) += info.format_length + 1;
 	return (fstr);

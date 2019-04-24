@@ -2146,8 +2146,7 @@ int		main(int ac, char *av[])
 
 	// printf("\n------------------------------\n[%i] vs [%i]\n", i , j);
 
-	ft_printf("%#X\n", (unsigned)90);
-	   printf("%#X\n", (unsigned)90);
+	ft_printf("%25.12r", "hey jack \x01\x02\x03\x04\x05");
 
 	(void)ac;
 	(void)av;

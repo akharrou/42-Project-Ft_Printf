@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:31 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/23 23:08:52 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/23 23:47:38 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,27 @@
 
 t_char	*i_handler(t_format format)
 {
-	t_char	*intstr;
+	intmax_t	temp;
+	t_int8		sign;
+	t_char		*intstr;
 
-	intstr = (format.length < L) ?
-		ft_itoa_base(format.data.intgr, DECIMAL_BASE, format.precision) :
-		ft_itoa_base(format.data.intmax_t, DECIMAL_BASE, format.precision);
+	temp = (format.length < L) ?
+		format.data.intgr :
+		format.data.intmax_t;
+	sign = (temp < 0);
+	temp = (temp < 0) ? -temp : temp;
+	intstr = ft_utoa_base(temp, DECIMAL_BASE, format.precision);
+	format.width -= ft_strlen(intstr) + sign +
+		((format.flags & SPACE || format.flags & PLUS) ? 1 : 0);
+	if (format.width && format.pad == '0')
+		intstr = apply_width(format, intstr);
+	if (sign)
+		intstr = ft_strprepend(intstr, "-", 1, 0);
 	if (format.flags & PLUS && !ft_strchr(intstr, '-'))
 		intstr = ft_strprepend(intstr, "+", 1, 0);
 	if (format.flags & SPACE && !ft_strchr(intstr, '-'))
 		intstr = ft_strprepend(intstr, " ", 1, 0);
+	if (format.width && format.pad != '0')
+		intstr = apply_width(format, intstr);
 	return (intstr);
 }

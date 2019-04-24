@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:15 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 01:13:54 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/23 23:44:01 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ t_char	*u_handler(t_format format)
 {
 	t_char	*intstr;
 
-	intstr = (format.length < L) ?
+	intstr = (format.length < L && format.length != NONE) ?
 		ft_utoa_base(format.data.uintgr, DECIMAL_BASE, format.precision) :
 		ft_utoa_base(format.data.uintmax_t, DECIMAL_BASE, format.precision);
+	format.width -= ft_strlen(intstr);
+	intstr = apply_width(format, intstr);
 	return (intstr);
 }

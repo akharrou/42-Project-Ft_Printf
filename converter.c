@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/23 22:17:23 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/23 23:46:21 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ t_char			*format_converter(const char **format, va_list *args)
 			{
 				fstr = table[i].handler(info);
 				info.width -= ft_strlen(fstr);
-				if (info.width > 0 && (!ft_ischarset(info.specifier, "cboxX")))
+				if (info.width > 0 && ft_ischarset(info.specifier, "fprs%"))
 					fstr = apply_width(info, fstr);
 				fstr = style_handler(info, fstr);
 			}

@@ -2146,8 +2146,8 @@ int		main(int ac, char *av[])
 
 	// printf("\n------------------------------\n[%i] vs [%i]\n", i , j);
 
-	ft_printf("%lu\n", 4294967296);
-	   printf("%lu\n", 4294967296);
+	ft_printf("%X\n", (unsigned)4294967296);
+	   printf("%X\n", (unsigned)4294967296);
 
 	(void)ac;
 	(void)av;

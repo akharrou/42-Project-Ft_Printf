@@ -2190,10 +2190,26 @@ int		main(int ac, char *av[])
     // i = ft_printf("%20.f\n", -2836.232);
     // j =    printf("%20.f\n", -2836.232);
 
+    // i = ft_printf("%f\n", 0.0);
+    // j =    printf("%f\n", 0.0);
+
     i = ft_printf("%f\n", -0.0);
     j =    printf("%f\n", -0.0);
 
-	printf("\n------------------------------\n[%i] vs [%i]\n", i , j);
+    // i = ft_printf("%.23f\n", -0.0);
+    // j =    printf("%.23f\n", -0.0);
+
+    // i = ft_printf("%54.23f\n", -0.0);
+    // j =    printf("%54.23f\n", -0.0);
+
+    // i = ft_printf("%054.23f\n", -0.0);
+    // j =    printf("%054.23f\n", -0.0);
+
+    // i = ft_printf("%+54.23f\n", 0.0);
+    // j =    printf("%+54.23f\n", 0.0);
+
+	printf("\n------------------------------\n");
+	printf("[%i] vs [%i]\n", i, j);
 
 	(void)ac;
 	(void)av;

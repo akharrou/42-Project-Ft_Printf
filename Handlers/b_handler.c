@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 02:46:06 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 16:14:42 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_char			*b_handler(t_format format)
 		temp = (temp < 0) ? ~(-temp) + 1 : temp;
 		intstr = ft_strjoinfre(
 			intstr, ft_utoa_base(temp, BINARY_BASE, format.precision), 1, 1);
-		format.width -= ft_strlen(intstr) + ((format.flags & HASH) ? 2 : 0);
+		format.width -= ft_strlen(intstr) + ((format.flags & HASH && temp) ? 2 : 0);
 	}
 	if (format.width && format.pad == '0')
 		intstr = apply_width(format, intstr);

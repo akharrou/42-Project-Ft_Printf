@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:40 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 02:46:19 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/24 17:04:45 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_char			*c_handler(t_format format)
 		exit(-1);
 	character[0] = format.data.chr;
 	character[1] = '\0';
+	if (format.flags & ZERO && !(format.flags & MINUS))
+		format.pad = '0';
 	format.width -= 1;
 	if (format.width > 0)
 		character = apply_width(format, character);

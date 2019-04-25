@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 02:05:39 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:11:55 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **    Utility function.
 */
 
-t_char	*apply_width(t_format format, t_char *str)
+char	*apply_width(t_format format, char *str)
 {
 	return(
 		(format.flags & MINUS) ?
@@ -47,11 +47,11 @@ t_handler table[] =
 	{    'o',    &o_handler,      },
 	{    'd',    &d_handler,      },
 	{    'x',    &x_handler,      },
-	{    'X',    &X_handler,      },
+	{    'X',    &xx_handler,     },
 	{    's',    &s_handler,      },
 	{    'r',    &r_handler,      },
 	{    'p',    &p_handler,      },
-	{    '\0',   NULL,            }
+	{    0,      NULL,            }
 };
 
 /*
@@ -61,14 +61,14 @@ t_handler table[] =
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_char **
-**         parse_style(const char *format, t_int8 *i);
+**         char **
+**         parse_style(const char *format, int8_t *i);
 **
 **    PARAMETERS
 **
 **         const char *format      Formatted string.
 **
-**         t_int8 *i               Current index in the formatted
+**         int8_t *i               Current index in the formatted
 **                                 string.
 **
 **    DESCRIPTION
@@ -88,10 +88,10 @@ t_handler table[] =
 
 #include "ft_printf.h"
 
-t_char	**parse_style(const char *format, t_int8 *i)
+char	**parse_style(const char *format, int8_t *i)
 {
-	t_char		**styles;
-	t_char		*closing_bracket;
+	char		**styles;
+	char		*closing_bracket;
 
 	styles = NULL;
 	if (format[*i] == '{')
@@ -140,7 +140,7 @@ t_char	**parse_style(const char *format, t_int8 *i)
 
 t_format		parse_format(const char *format, va_list *args)
 {
-	t_int8		i;
+	int8_t		i;
 	t_format	info;
 
 	i = 0;
@@ -151,14 +151,14 @@ t_format		parse_format(const char *format, va_list *args)
 		parse_length(format, &i),
 		parse_specifier(format, &i),
 		parse_style(format, &i),
-		{(intmax_t)0},
+		{0},
 		' ',
 		i
 	};
 	if (info.specifier != 'f')
 		info.data = va_arg(*args, t_data);
 	else
-		info.data.dble = va_arg(*args, double);
+		info.data.double_ = va_arg(*args, double);
 	if (info.precision == NONE && info.flags & ZERO && !(info.flags & MINUS))
 		info.pad = '0';
 	return (info);
@@ -171,7 +171,7 @@ t_format		parse_format(const char *format, va_list *args)
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_char *
+**         char *
 **         format_converter(const char **buf, va_list *args);
 **
 **    PARAMETERS
@@ -206,11 +206,11 @@ t_format		parse_format(const char *format, va_list *args)
 **         output string; otherwise returns the format string.
 */
 
-t_char			*format_converter(const char **format, va_list *args)
+char			*format_converter(const char **format, va_list *args)
 {
-	t_int32		i;
+	int32_t		i;
 	t_format	info;
-	t_char		*fstr;
+	char		*fstr;
 
 	fstr = NULL;
 	info = parse_format((*format) + 1, args);

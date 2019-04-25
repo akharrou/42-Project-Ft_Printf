@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:33 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 02:46:32 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 07:07:41 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_char	*
+**         char	*
 **         d_handler(t_format format);
 **
 **    PARAMETERS
@@ -45,7 +45,7 @@
 
 #include "../ft_printf.h"
 
-t_char	*d_handler(t_format format)
+char	*d_handler(t_format format)
 {
 	return (i_handler(format));
 }

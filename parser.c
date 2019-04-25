@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:45 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/22 00:41:59 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:11:10 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_int8
-**         parse_flags(const char *format, t_int8 *i);
+**         int8_t
+**         parse_flags(const char *format, int8_t *i);
 **
 **    PARAMETERS
 **
 **         const char *format      Formatted string.
 **
-**         t_int8 *i               Current index in the formatted
+**         int8_t *i               Current index in the formatted
 **                                 string.
 **
 **    DESCRIPTION
@@ -43,9 +43,9 @@
 **         Returns a mask representing the specified flags.
 */
 
-t_int8			parse_flags(const char *format, t_int8 *i)
+int8_t			parse_flags(const char *format, int8_t *i)
 {
-	t_int8		flags;
+	int8_t		flags;
 
 	flags = 0;
 	while (format[*i])
@@ -74,8 +74,8 @@ t_int8			parse_flags(const char *format, t_int8 *i)
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_int32
-**         parse_width(const char *format, va_list *args, t_int8 *i);
+**         int32_t
+**         parse_width(const char *format, va_list *args, int8_t *i);
 **
 **    PARAMETERS
 **
@@ -83,7 +83,7 @@ t_int8			parse_flags(const char *format, t_int8 *i)
 **
 **         va_list *args           Variable argument list.
 **
-**         t_int8 *i               Current index in the formatted
+**         int8_t *i               Current index in the formatted
 **                                 string.
 **
 **    DESCRIPTION
@@ -106,13 +106,13 @@ t_int8			parse_flags(const char *format, t_int8 *i)
 **         specified.
 */
 
-t_int32			parse_width(const char *format, va_list *args, t_int8 *i)
+int32_t			parse_width(const char *format, va_list *args, int8_t *i)
 {
-	t_int32		width;
+	int32_t		width;
 
 	if (format[*i] == '*')
 	{
-		width = va_arg(*args, t_int32);
+		width = va_arg(*args, int32_t);
 		++(*i);
 	}
 	else
@@ -132,8 +132,8 @@ t_int32			parse_width(const char *format, va_list *args, t_int8 *i)
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_int32
-**         parse_precison(const char *format, va_list *args, t_int8 *i);
+**         int32_t
+**         parse_precison(const char *format, va_list *args, int8_t *i);
 **
 **    PARAMETERS
 **
@@ -141,7 +141,7 @@ t_int32			parse_width(const char *format, va_list *args, t_int8 *i)
 **
 **         va_list *args           Variable argument list.
 **
-**         t_int8 *i               Current index in the formatted
+**         int8_t *i               Current index in the formatted
 **                                 string.
 **
 **    DESCRIPTION
@@ -169,16 +169,16 @@ t_int32			parse_width(const char *format, va_list *args, t_int8 *i)
 **         indicate that no precision was specified.
 */
 
-t_int32			parse_precison(const char *format, va_list *args, t_int8 *i)
+int32_t			parse_precison(const char *format, va_list *args, int8_t *i)
 {
-	t_int32		precision;
+	int32_t		precision;
 
 	if (format[*i] == '.')
 	{
 		++(*i);
 		if (format[*i] == '*')
 		{
-			precision = va_arg(*args, t_int32);
+			precision = va_arg(*args, int32_t);
 			++(*i);
 		}
 		else
@@ -201,14 +201,14 @@ t_int32			parse_precison(const char *format, va_list *args, t_int8 *i)
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_int8
-**         parse_length(const char *format, t_int8 *i);
+**         int8_t
+**         parse_length(const char *format, int8_t *i);
 **
 **    PARAMETERS
 **
 **         const char *format      Formatted string.
 **
-**         t_int8 *i               Current index in the formatted
+**         int8_t *i               Current index in the formatted
 **                                 string.
 **
 **    DESCRIPTION
@@ -232,7 +232,7 @@ t_int32			parse_precison(const char *format, va_list *args, t_int8 *i)
 **         that the defaults should be use.
 */
 
-t_int8			parse_length(const char *format, t_int8 *i)
+int8_t			parse_length(const char *format, int8_t *i)
 {
 	(*i) += 2;
 	if (format[(*i) - 2] == 'h' && format[(*i) - 1] == 'h')
@@ -264,14 +264,14 @@ t_int8			parse_length(const char *format, t_int8 *i)
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_int8
-**         parse_specifier(const char *format, t_int8 *i);
+**         int8_t
+**         parse_specifier(const char *format, int8_t *i);
 **
 **    PARAMETERS
 **
 **         const char *format      Formatted string.
 **
-**         t_int8 *i               Current index in the formatted
+**         int8_t *i               Current index in the formatted
 **                                 string.
 **
 **    DESCRIPTION
@@ -290,7 +290,7 @@ t_int8			parse_length(const char *format, t_int8 *i)
 **         was specified.
 */
 
-t_int8			parse_specifier(const char *format, t_int8 *i)
+int8_t			parse_specifier(const char *format, int8_t *i)
 {
 	if (ft_ischarset(format[*i], SPECIFIERS))
 	{

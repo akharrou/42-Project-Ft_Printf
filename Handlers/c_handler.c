@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:40 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 17:04:45 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 07:07:41 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_char	*
+**         char	*
 **         c_handler(t_format format);
 **
 **    PARAMETERS
@@ -43,9 +43,9 @@
 
 #include "../ft_printf.h"
 
-t_char			*c_handler(t_format format)
+char			*c_handler(t_format format)
 {
-	t_char		*character;
+	char		*character;
 
 	character = malloc(2);
 	if (!character)

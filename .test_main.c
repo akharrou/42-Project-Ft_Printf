@@ -17,7 +17,7 @@
 // #include "Handlers/i_handler.c"
 // #include "Handlers/mod_handler.c"
 // #include "Handlers/o_handler.c"
-// #include "Handlers/x_handler.c"
+// #include "Handlers/xx_handler.c"
 // #include "Handlers/X__handler.c"
 // #include "Handlers/p_handler.c"
 // #include "Handlers/r_handler.c"
@@ -2122,7 +2122,7 @@ int		main(int ac, char *av[])
 
 	// ft_printf("%r{lyellow bgred}%p{bgred}%s{bgred}\n", " DANGER ZONE ", NULL, " ! ");
 
-	// ft_printf("%s{dim italic}\n", "/*\n**    NAME\n**         style_handler -- formatted style conversion\n**\n**    SYNOPSIS\n**         #include <libft.h>\n**\n**         t_char	*\n**         style_handler(t_format format, t_char *string);\n**\n**    PARAMETERS\n**\n**         t_format format         Structure containing the variable\n**                                 and information about how it must\n**                                 be formatted.\n**\n**         t_char *string          Output string that we want to style.\n**\n**    DESCRIPTION\n**         Handles the 'style' specification of a formatted string.\n**\n**         Goes through the styles parsed in the format string and\n**         prepends them as their corresponding ANSI code to the output\n**         string.\n**\n**         After having applied all styles, a reset ANSI code is appended\n**         to the end of the output string; this is so that the styling is\n**         not applied to characters that might come after in the output.\n**\n**    RETURN VALUES\n**         If style(s) were specified and successfully applied, the output\n**         string all styled up is returned; otherwise the output string\n**         untouched is returned.\n*/");
+	// ft_printf("%s{dim italic}\n", "/*\n**    NAME\n**         style_handler -- formatted style conversion\n**\n**    SYNOPSIS\n**         #include <libft.h>\n**\n**         char	*\n**         style_handler(t_format format, char *string);\n**\n**    PARAMETERS\n**\n**         t_format format         Structure containing the variable\n**                                 and information about how it must\n**                                 be formatted.\n**\n**         char *string          Output string that we want to style.\n**\n**    DESCRIPTION\n**         Handles the 'style' specification of a formatted string.\n**\n**         Goes through the styles parsed in the format string and\n**         prepends them as their corresponding ANSI code to the output\n**         string.\n**\n**         After having applied all styles, a reset ANSI code is appended\n**         to the end of the output string; this is so that the styling is\n**         not applied to characters that might come after in the output.\n**\n**    RETURN VALUES\n**         If style(s) were specified and successfully applied, the output\n**         string all styled up is returned; otherwise the output string\n**         untouched is returned.\n*/");
 
 	// ft_printf("%s{red inverted}", "hello world");
 
@@ -2173,8 +2173,8 @@ int		main(int ac, char *av[])
     // int i = ft_printf("%--.4u et %#o%#012o%1lc\n", -12, 0, 0, 95);
     // int j =    printf("%--.4u et %#o%#012o%1lc\n", -12, 0, 0, 95);
 
-    int i = ft_printf("%0.23d\n", (int)0);
-    int j =    printf("%0.23d\n", (int)0);
+    int i = ft_printf("%0.23d\n", 0);
+    int j =    printf("%0.23d\n", 0);
 
 
 	printf("\n------------------------------\n[%i] vs [%i]\n", i , j);

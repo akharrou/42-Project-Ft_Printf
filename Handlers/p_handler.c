@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:39 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 02:47:17 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 07:07:41 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_char	*
+**         char	*
 **         p_handler(t_format format);
 **
 **    PARAMETERS
@@ -43,9 +43,9 @@
 
 #include "../ft_printf.h"
 
-t_char			*p_handler(t_format format)
+char			*p_handler(t_format format)
 {
-	t_char		*addr;
+	char		*addr;
 
 	addr = ft_utoa_base(
 		(uintmax_t)format.data.ptr, HEX_LOWER_BASE, format.precision);

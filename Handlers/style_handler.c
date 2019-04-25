@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 02:47:41 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 07:54:32 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ t_style styles_table[] =
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_char	*
-**         style_handler(t_format format, t_char *string);
+**         char	*
+**         style_handler(t_format format, char *string);
 **
 **    PARAMETERS
 **
@@ -113,7 +113,7 @@ t_style styles_table[] =
 **                                 and information about how it must
 **                                 be formatted.
 **
-**         t_char *string          Output string that we want to style.
+**         char *string          Output string that we want to style.
 **
 **    DESCRIPTION
 **         Handles the 'style' specification of a formatted string.
@@ -132,11 +132,11 @@ t_style styles_table[] =
 **         untouched is returned.
 */
 
-t_char		*style_handler(t_format format, t_char *string)
+char		*style_handler(t_format format, char *string)
 {
-	t_int8	i;
-	t_int8	j;
-	t_char	*style_str;
+	int8_t	i;
+	int8_t	j;
+	char	*style_str;
 
 	if (format.style == NULL)
 		return (string);

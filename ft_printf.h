@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 01:21:59 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 02:05:39 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:12:57 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,59 +18,36 @@
 */
 
 # include "Libft/libft.h"
-# include <stddef.h>
 # include <stdarg.h>
 
 /*
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
 */
 
-typedef union			u_data
+typedef struct	s_format_info
 {
-	signed char			chr;
-	signed short		shrt;
-	signed int			intgr;
-	signed long			lng;
-	signed long long	lnglng;
-	intmax_t			intmax_t;
-	unsigned char		uchr;
-	unsigned short		ushrt;
-	unsigned int		uintgr;
-	unsigned long		ulng;
-	unsigned long long	ulnglng;
-	uintmax_t			uintmax_t;
-	double				dble;
-	long double			ldble;
-	char				*str;
-	intptr_t			ptr;
-	ptrdiff_t			ptrdiff;
-	size_t				sizet;
-}						t_data;
+	int8_t		flags;
+	int32_t		width;
+	int32_t		precision;
+	int8_t		length;
+	int8_t		specifier;
+	char		**style;
+	t_data		data;
+	char		pad;
+	int8_t		format_length;
+}				t_format;
 
-typedef struct			s_style
+typedef struct	s_handler
 {
-	t_char				*style;
-	t_char				*ansi_code;
-}						t_style;
+	char		specifier;
+	char		*(*handler)(t_format format);
+}				t_handler;
 
-typedef struct			s_format_info
+typedef struct	s_style
 {
-	t_int8				flags;
-	t_int32				width;
-	t_int32				precision;
-	t_int8				length;
-	t_int8				specifier;
-	t_char				**style;
-	t_data				data;
-	t_char				pad;
-	t_int8				format_length;
-}						t_format;
-
-typedef struct			s_handler
-{
-	char				specifier;
-	t_char				*(*handler)(t_format format);
-}						t_handler;
+	char		*style;
+	char		*ansi_code;
+}				t_style;
 
 /*
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
@@ -103,45 +80,41 @@ enum	e_lengths
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
 */
 
-int						ft_printf(const char *format, ...);
-int						ft_fprintf(int filedes, const char *format, ...);
-int						ft_sprintf(char *str, const char *format, ...);
+int				ft_printf(const char *format, ...);
 
-t_format				parse_format(const char *format, va_list *args);
-t_char					**parse_style(const char *format, t_int8 *i);
+char			**parse_style(const char *format, int8_t *i);
+t_format		parse_format(const char *format, va_list *args);
 
-t_int8					parse_flags(const char *format, t_int8 *i);
-t_int32					parse_width(const char *format, va_list *args,
-						t_int8 *i);
-t_int32					parse_precison(const char *format, va_list *args,
-						t_int8 *i);
-t_int8					parse_length(const char *format, t_int8 *i);
-t_int8					parse_specifier(const char *format, t_int8 *i);
+int8_t			parse_flags(const char *format, int8_t *i);
+int32_t			parse_width(const char *format, va_list *args, int8_t *i);
+int32_t			parse_precison(const char *format, va_list *args, int8_t *i);
+int8_t			parse_length(const char *format, int8_t *i);
+int8_t			parse_specifier(const char *format, int8_t *i);
 
-t_char					*apply_width(t_format format, t_char *str);
+char			*apply_width(t_format format, char *str);
 
 /*
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
 */
 
-# define				SPECIFIERS "csrpiufodxXb%"
+# define SPECIFIERS "csrpiufodxXb%"
 
-t_char					*c_handler(t_format format);
-t_char					*i_handler(t_format format);
-t_char					*d_handler(t_format format);
-t_char					*u_handler(t_format format);
-t_char					*f_handler(t_format format);
-t_char					*o_handler(t_format format);
-t_char					*x_handler(t_format format);
-t_char					*X_handler(t_format format);
-t_char					*b_handler(t_format format);
-t_char					*s_handler(t_format format);
-t_char					*r_handler(t_format format);
-t_char					*p_handler(t_format format);
-t_char					*mod_handler(t_format format);
-t_char					*style_handler(t_format format, t_char *fstr);
+char			*c_handler(t_format format);
+char			*i_handler(t_format format);
+char			*d_handler(t_format format);
+char			*u_handler(t_format format);
+char			*f_handler(t_format format);
+char			*o_handler(t_format format);
+char			*x_handler(t_format format);
+char			*xx_handler(t_format format);
+char			*b_handler(t_format format);
+char			*s_handler(t_format format);
+char			*r_handler(t_format format);
+char			*p_handler(t_format format);
+char			*mod_handler(t_format format);
+char			*style_handler(t_format format, char *fstr);
 
-t_char					*format_converter(const char **buf, va_list *args);
+char			*format_converter(const char **buf, va_list *args);
 
 /*
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **

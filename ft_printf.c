@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 23:17:26 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/23 22:13:53 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:11:17 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,8 +179,8 @@
 int		ft_printf(const char *format, ...)
 {
 	va_list		args;
-	t_char		*fstr;
-	t_int32		tt_bytes_written;
+	char		*fstr;
+	int32_t		tt_bytes_written;
 
 	tt_bytes_written = 0;
 	if (format != NULL)
@@ -240,8 +240,8 @@ int		ft_printf(const char *format, ...)
 int		ft_fprintf(int filedes, const char *format, ...)
 {
 	va_list		args;
-	t_char		*fstr;
-	t_int32		tt_bytes_written;
+	char		*fstr;
+	int32_t		tt_bytes_written;
 
 	if (!format)
 		return (0);
@@ -299,8 +299,8 @@ int		ft_fprintf(int filedes, const char *format, ...)
 int		ft_sprintf(char *str, const char *format, ...)
 {
 	va_list		args;
-	t_char		*fstr;
-	t_char		*tmp;
+	char		*fstr;
+	char		*tmp;
 
 	(str) = NULL;
 	if (!format)
@@ -524,7 +524,7 @@ int		ft_sprintf(char *str, const char *format, ...)
 // {
 // 	va_list		args;
 // 	t_output	output;
-// 	t_int32		tt_bytes_written;
+// 	int32_t		tt_bytes_written;
 
 // 	tt_bytes_written = 0;
 // 	if (format != NULL)
@@ -583,8 +583,8 @@ int		ft_sprintf(char *str, const char *format, ...)
 // int		ft_fprintf(int filedes, const char *format, ...)
 // {
 // 	va_list		args;
-// 	t_char		*fstr;
-// 	t_int32		tt_bytes_written;
+// 	char		*fstr;
+// 	int32_t		tt_bytes_written;
 
 // 	if (!format)
 // 		return (0);

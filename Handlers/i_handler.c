@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:31 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 02:46:56 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 07:54:32 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_char	*
+**         char	*
 **         i_handler(t_format format);
 **
 **    PARAMETERS
@@ -45,11 +45,11 @@
 
 #include "../ft_printf.h"
 
-t_char			*i_handler(t_format format)
+char			*i_handler(t_format format)
 {
 	intmax_t	temp;
-	t_int8		sign;
-	t_char		*intstr;
+	int8_t		sign;
+	char		*intstr;
 
 	temp = (format.length < L) ? format.data.intgr : format.data.intmax_t;
 	sign = (temp < 0);

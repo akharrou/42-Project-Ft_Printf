@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:15 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 03:05:29 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 07:07:41 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_char	*
+**         char	*
 **         u_handler(t_format format);
 **
 **    PARAMETERS
@@ -46,10 +46,10 @@
 
 #include "../ft_printf.h"
 
-t_char			*u_handler(t_format format)
+char			*u_handler(t_format format)
 {
 	uintmax_t	temp;
-	t_char		*intstr;
+	char		*intstr;
 
 	temp = (format.length < L && format.length != NONE) ?
 		format.data.uintgr :

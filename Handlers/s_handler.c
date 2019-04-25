@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:51:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/24 02:47:28 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 07:07:41 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **    SYNOPSIS
 **         #include <libft.h>
 **
-**         t_char	*
+**         char	*
 **         s_handler(t_format format);
 **
 **    PARAMETERS
@@ -44,9 +44,9 @@
 
 #include "../ft_printf.h"
 
-t_char			*s_handler(t_format format)
+char			*s_handler(t_format format)
 {
-	t_char		*fstr;
+	char		*fstr;
 
 	fstr = (format.data.str == NULL) ?
 		ft_strdup("(null)") :

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:28 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 09:50:49 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 10:13:39 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ char			*f_handler(t_format format, t_data arg)
 	if (!(format.precision == 0 && temp == 0))
 	{
 		temp = (temp < 0) ? -temp : temp;
-		fltstr = ft_strappend(
-			fltstr, ft_ftoa_base(
+		fltstr = ft_strappend(fltstr, ft_ftoa_base(
 				(long double)temp, DECIMAL_BASE, -1, format.precision), 1, 1);
 		format.width -= ft_strlen(fltstr) +
 			(sign || (format.flags & PLUS || format.flags & SPACE) ? 1 : 0);

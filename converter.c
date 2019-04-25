@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 09:44:15 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 10:12:41 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ char			**parse_style(const char *format, int8_t *i)
 **         specifier and style.
 */
 
-t_format		parse_format(const char *format)
+t_format		parse_format(const char *format, va_list *args)
 {
 	int8_t		i;
 	t_format	info;
@@ -203,28 +203,22 @@ char			*format_converter(const char **format, va_list *args)
 	char		*fstr;
 
 	fstr = NULL;
-	info = parse_format((*format) + 1);
+	info = parse_format((*format) + 1, args);
 	if (info.specifier != 'f')
 		arg = va_arg(*args, t_data);
 	else
 		arg.double_ = va_arg(*args, double);
 	if (!ft_ischarset(info.specifier, "cf") &&
-		info.precision == NONE &&
-		info.flags & ZERO &&
-		!(info.flags & MINUS))
-	{
+		info.precision == NONE && info.flags & ZERO && !(info.flags & MINUS))
 		info.pad = '0';
-	}
 	else if (info.flags & ZERO && !(info.flags & MINUS))
 		info.pad = '0';
 	if (info.specifier == NONE)
 		return (ft_strndup((*format)++, 1));
 	i = -1;
 	while (g_table[++i].specifier != '\0')
-	{
 		if (info.specifier == g_table[i].specifier)
-			fstr = style_handler(info, g_table[i].handler(info));
-	}
+			fstr = style_handler(info, g_table[i].handler(info, arg));
 	(*format) += info.format_length + 1;
 	return (fstr);
 }

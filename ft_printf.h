@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 01:21:59 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 09:51:16 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 10:12:46 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct	s_format_info
 typedef struct	s_handler
 {
 	char		specifier;
-	char		*(*handler)(t_format format);
+	char		*(*handler)(t_format format, t_data arg);
 }				t_handler;
 
 typedef struct	s_style
@@ -82,7 +82,7 @@ enum	e_lengths
 int				ft_printf(const char *format, ...);
 
 char			**parse_style(const char *format, int8_t *i);
-t_format		parse_format(const char *format);
+t_format		parse_format(const char *format, va_list *args);
 
 int8_t			parse_flags(const char *format, int8_t *i);
 int32_t			parse_width(const char *format, va_list *args, int8_t *i);

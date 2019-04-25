@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 07:07:41 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:18:39 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ char			*o_handler(t_format format)
 	char		*intstr;
 
 	temp = (format.length < L && format.length != NONE) ?
-		format.data.intgr :
-		format.data.intmax_t;
+		format.data.int_ :
+		format.data.intmax_;
 	intstr = ft_strdup("");
 	if (!(format.precision == 0 && temp == 0 && !(format.flags & HASH)))
 	{

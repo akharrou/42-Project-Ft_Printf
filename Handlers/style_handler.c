@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 07:54:32 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:24:14 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 **    DESCRIPTION
-**         Dispatch styles_table associating every style to its ANSI code.
+**         Dispatch g_styles_table associating every style to its ANSI code.
 **
 **         Note:
 **
@@ -46,10 +46,9 @@
 **         to the formatted string; it kinda looks like this:
 **
 **              \033[<code1>;<code2>; ... <codeN>m
-**
 */
 
-t_style styles_table[] =
+t_style g_styles_table[] =
 {
 	{    "default",     "0"       },
 	\
@@ -145,11 +144,11 @@ char		*style_handler(t_format format, char *string)
 	while (format.style[++i])
 	{
 		j = -1;
-		while (styles_table[++j].style)
-			if (ft_strcmp(format.style[i], styles_table[j].style) == 0)
+		while (g_styles_table[++j].style)
+			if (ft_strcmp(format.style[i], g_styles_table[j].style) == 0)
 			{
 				style_str = ft_strappend(
-						style_str, styles_table[j].ansi_code, 1, 0);
+						style_str, g_styles_table[j].ansi_code, 1, 0);
 				if (format.style[i + 1] != NULL)
 					style_str = ft_strappend(style_str, ";", 1, 0);
 			}

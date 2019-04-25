@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:51:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:09:03 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:22:02 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ char			*r_handler(t_format format)
 {
 	char		*fstr;
 	char		*tmp;
-	int32_t 	i;
+	int32_t		i;
 
-	tmp = (format.data.str == NULL) ?
+	tmp = (format.data.str_ == NULL) ?
 		ft_strdup("(null)") :
-		ft_strdup(format.data.str);
+		ft_strdup(format.data.str_);
 	if (format.precision != NONE)
 		if (0 <= format.precision && format.precision < (long)ft_strlen(tmp))
 			tmp[format.precision] = '\0';
 	i = -1;
 	fstr = NULL;
-	if (format.data.str != NULL)
+	if (format.data.str_ != NULL)
 		while (tmp[++i] && i < format.precision)
 			fstr = (ISPRINT(tmp[i])) ?
 				ft_strappend(fstr, ft_strndup(tmp + i, 1), 1, 1) :

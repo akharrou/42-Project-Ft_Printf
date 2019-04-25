@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:31 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 07:54:32 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:16:47 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char			*i_handler(t_format format)
 	int8_t		sign;
 	char		*intstr;
 
-	temp = (format.length < L) ? format.data.intgr : format.data.intmax_t;
+	temp = (format.length < L) ? format.data.int_ : format.data.intmax_;
 	sign = (temp < 0);
 	intstr = ft_strdup("");
 	if (!(format.precision == 0 && temp == 0))

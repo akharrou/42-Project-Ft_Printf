@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:28 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 07:54:32 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:17:21 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char			*f_handler(t_format format)
 	char		*fltstr;
 
 	fltstr = ft_ftoa_base(
-		(long double)format.data.dble, DECIMAL_BASE, -1, format.precision);
+		(long double)format.data.double_, DECIMAL_BASE, -1, format.precision);
 	if (format.flags & PLUS && !ft_strchr(fltstr, '-'))
 		fltstr = ft_strprepend(fltstr, "+", 1, 0);
 	if (format.flags & SPACE && !ft_strchr(fltstr, '-'))
@@ -80,7 +80,7 @@ char			*f_handler(t_format format)
 	// int8_t		sign;
 	// char		*intstr;
 
-	// temp = (format.length < L) ? format.data.intgr : format.data.intmax_t;
+	// temp = (format.length < L) ? format.data.int_ : format.data.intmax_;
 	// sign = (temp < 0);
 	// intstr = ft_strdup("");
 	// if (!(format.precision == 0 && temp == 0))

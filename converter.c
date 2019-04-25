@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:11:55 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:27:42 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 **    Utility function.
 */
 
-char	*apply_width(t_format format, char *str)
+char			*apply_width(t_format format, char *str)
 {
-	return(
+	return (
 		(format.flags & MINUS) ?
 			ft_strappend(str, ft_padding(format.width, format.pad), 1, 1) :
-			ft_strprepend(str, ft_padding(format.width, format.pad), 1, 1)
-	);
+			ft_strprepend(str, ft_padding(format.width, format.pad), 1, 1));
 }
 
 /*
@@ -36,7 +35,7 @@ char	*apply_width(t_format format, char *str)
 **         out individually, and in seperate files.
 */
 
-t_handler table[] =
+t_handler g_table[] =
 {
 	{    '%',    &mod_handler,    },
 	{    'c',    &c_handler,      },
@@ -86,9 +85,7 @@ t_handler table[] =
 **         will be returned; otherwise NULL is returned.
 */
 
-#include "ft_printf.h"
-
-char	**parse_style(const char *format, int8_t *i)
+char			**parse_style(const char *format, int8_t *i)
 {
 	char		**styles;
 	char		*closing_bracket;
@@ -101,8 +98,7 @@ char	**parse_style(const char *format, int8_t *i)
 		{
 			format = ft_strndup(
 						format + (*i) + 1,
-						closing_bracket - (format + (*i) + 1)
-					);
+						closing_bracket - (format + (*i) + 1));
 			styles = ft_strsplit(format, ' ');
 		}
 		(*i) += ft_strlen(format) + 2;
@@ -219,9 +215,9 @@ char			*format_converter(const char **format, va_list *args)
 	else
 	{
 		i = -1;
-		while (table[++i].specifier != '\0')
-			if (info.specifier == table[i].specifier)
-				fstr = style_handler(info, table[i].handler(info));
+		while (g_table[++i].specifier != '\0')
+			if (info.specifier == g_table[i].specifier)
+				fstr = style_handler(info, g_table[i].handler(info));
 	}
 	(*format) += info.format_length + 1;
 	return (fstr);

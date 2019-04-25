@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:31 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 07:07:41 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:18:47 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@
 
 char	*mod_handler(t_format format)
 {
-	format.data.chr = '%';
+	format.data.char_ = '%';
 	return (c_handler(format));
 }

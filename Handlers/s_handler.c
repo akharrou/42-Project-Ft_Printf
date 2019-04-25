@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:51:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 07:07:41 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:22:18 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ char			*s_handler(t_format format)
 {
 	char		*fstr;
 
-	fstr = (format.data.str == NULL) ?
+	fstr = (format.data.str_ == NULL) ?
 		ft_strdup("(null)") :
-		ft_strdup(format.data.str);
+		ft_strdup(format.data.str_);
 	if (format.precision != NONE)
 		if (0 <= format.precision && format.precision < (long)ft_strlen(fstr))
 			fstr[format.precision] = '\0';

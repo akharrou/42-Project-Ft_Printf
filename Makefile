@@ -6,7 +6,7 @@
 #    By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/17 16:23:01 by akharrou          #+#    #+#              #
-#    Updated: 2019/04/24 02:48:25 by akharrou         ###   ########.fr        #
+#    Updated: 2019/04/25 08:49:28 by akharrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ PLUGINS     =   Handlers/c_handler.c                                          \
                 Handlers/o_handler.c                                          \
                 Handlers/d_handler.c                                          \
                 Handlers/x_handler.c                                          \
-                Handlers/X__handler.c                                         \
+                Handlers/xx_handler.c                                         \
                 Handlers/s_handler.c                                          \
                 Handlers/r_handler.c                                          \
                 Handlers/p_handler.c                                          \

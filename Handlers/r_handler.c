@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:51:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:22:02 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:52:12 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 **         #include <libft.h>
 **
 **         char	*
-**         r_handler(t_format format);
+**         r_handler(t_format format, t_data arg);
 **
 **    PARAMETERS
 **
-**         t_format format         Structure containing the variable
-**                                 and information about how it must
-**                                 be formatted.
+**         t_format format     Structure containing the variable
+**                             and information about how it must
+**                             be formatted.
+**
+**         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%r' specifier; prints a string of non-printable.
@@ -45,21 +47,21 @@
 
 #include "../ft_printf.h"
 
-char			*r_handler(t_format format)
+char			*r_handler(t_format format, t_data arg)
 {
 	char		*fstr;
 	char		*tmp;
 	int32_t		i;
 
-	tmp = (format.data.str_ == NULL) ?
+	tmp = (arg.str_ == NULL) ?
 		ft_strdup("(null)") :
-		ft_strdup(format.data.str_);
+		ft_strdup(arg.str_);
 	if (format.precision != NONE)
 		if (0 <= format.precision && format.precision < (long)ft_strlen(tmp))
 			tmp[format.precision] = '\0';
 	i = -1;
 	fstr = NULL;
-	if (format.data.str_ != NULL)
+	if (arg.str_ != NULL)
 		while (tmp[++i] && i < format.precision)
 			fstr = (ISPRINT(tmp[i])) ?
 				ft_strappend(fstr, ft_strndup(tmp + i, 1), 1, 1) :

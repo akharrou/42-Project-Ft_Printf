@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:39 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:21:22 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:52:12 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 **         #include <libft.h>
 **
 **         char	*
-**         p_handler(t_format format);
+**         p_handler(t_format format, t_data arg);
 **
 **    PARAMETERS
 **
-**         t_format format         Structure containing the variable
-**                                 and information about how it must
-**                                 be formatted.
+**         t_format format     Structure containing the variable
+**                             and information about how it must
+**                             be formatted.
+**
+**         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%p' specifier like the libc 'printf()' function.
@@ -43,12 +45,12 @@
 
 #include "../ft_printf.h"
 
-char			*p_handler(t_format format)
+char			*p_handler(t_format format, t_data arg)
 {
 	char		*addr;
 
 	addr = ft_utoa_base(
-		(uintmax_t)format.data.intptr_, HEX_LOWER_BASE, format.precision);
+		(uintmax_t)arg.intptr_, HEX_LOWER_BASE, format.precision);
 	addr = ft_strprepend(addr, "0x", 1, 0);
 	format.width -= ft_strlen(addr);
 	if (format.width > 0 && format.pad == ' ')

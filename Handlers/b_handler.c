@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:16:55 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:51:27 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 **         #include <libft.h>
 **
 **         char	*
-**         b_handler(t_format format);
+**         b_handler(t_format format, t_data arg);
 **
 **    PARAMETERS
 **
-**         t_format format         Structure containing the variable
-**                                 and information about how it must
-**                                 be formatted.
+**         t_format format     Structure containing the variable
+**                             and information about how it must
+**                             be formatted.
+**
+**         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%b' specifier; binary number conversion, similar
@@ -46,14 +48,14 @@
 
 #include "../ft_printf.h"
 
-char			*b_handler(t_format format)
+char			*b_handler(t_format format, t_data arg)
 {
 	intmax_t	temp;
 	char		*intstr;
 
 	temp = (format.length < L && format.length != NONE) ?
-		format.data.int_ :
-		format.data.intmax_;
+		arg.int_ :
+		arg.intmax_;
 	intstr = ft_strdup("");
 	if (!(format.precision == 0 && temp == 0))
 	{

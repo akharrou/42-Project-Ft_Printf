@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:51:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:22:18 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:52:12 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 **         #include <libft.h>
 **
 **         char	*
-**         s_handler(t_format format);
+**         s_handler(t_format format, t_data arg);
 **
 **    PARAMETERS
 **
-**         t_format format         Structure containing the variable
-**                                 and information about how it must
-**                                 be formatted.
+**         t_format format     Structure containing the variable
+**                             and information about how it must
+**                             be formatted.
+**
+**         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%s' specifier like the libc 'printf()' function.
@@ -44,13 +46,13 @@
 
 #include "../ft_printf.h"
 
-char			*s_handler(t_format format)
+char			*s_handler(t_format format, t_data arg)
 {
 	char		*fstr;
 
-	fstr = (format.data.str_ == NULL) ?
+	fstr = (arg.str_ == NULL) ?
 		ft_strdup("(null)") :
-		ft_strdup(format.data.str_);
+		ft_strdup(arg.str_);
 	if (format.precision != NONE)
 		if (0 <= format.precision && format.precision < (long)ft_strlen(fstr))
 			fstr[format.precision] = '\0';

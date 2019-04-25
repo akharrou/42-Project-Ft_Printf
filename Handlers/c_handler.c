@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:40 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:14:39 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:51:21 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 **         #include <libft.h>
 **
 **         char	*
-**         c_handler(t_format format);
+**         c_handler(t_format format, t_data arg);
 **
 **    PARAMETERS
 **
-**         t_format format         Structure containing the variable
-**                                 and information about how it must
-**                                 be formatted.
+**         t_format format     Structure containing the variable
+**                             and information about how it must
+**                             be formatted.
+**
+**         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%c' specifier like the libc 'printf()' function.
@@ -43,17 +45,15 @@
 
 #include "../ft_printf.h"
 
-char			*c_handler(t_format format)
+char			*c_handler(t_format format, t_data arg)
 {
 	char		*character;
 
 	character = malloc(2);
 	if (!character)
 		exit(-1);
-	character[0] = format.data.char_;
+	character[0] = arg.char_;
 	character[1] = '\0';
-	if (format.flags & ZERO && !(format.flags & MINUS))
-		format.pad = '0';
 	format.width -= 1;
 	if (format.width > 0)
 		character = apply_width(format, character);

@@ -6,7 +6,7 @@
 #    By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/17 16:23:01 by akharrou          #+#    #+#              #
-#    Updated: 2019/04/21 23:56:59 by akharrou         ###   ########.fr        #
+#    Updated: 2019/04/25 08:53:06 by akharrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	@ar -rcs $(NAME) $(OBJECTS)
-	@echo && echo $(GREEN) "[√]     [Library Successfully Compiled!]" && echo
+	@echo && echo $(GREEN) "[√]     [Library Successfully Compiled!]"
 	@echo $(WHITE)
 
 %.o: %.c $(HEADERS)

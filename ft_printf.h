@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 01:21:59 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:28:32 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:51:16 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct	s_format_info
 	int8_t		length;
 	int8_t		specifier;
 	char		**style;
-	t_data		data;
 	char		pad;
 	int8_t		format_length;
 }				t_format;
@@ -83,7 +82,7 @@ enum	e_lengths
 int				ft_printf(const char *format, ...);
 
 char			**parse_style(const char *format, int8_t *i);
-t_format		parse_format(const char *format, va_list *args);
+t_format		parse_format(const char *format);
 
 int8_t			parse_flags(const char *format, int8_t *i);
 int32_t			parse_width(const char *format, va_list *args, int8_t *i);
@@ -99,19 +98,19 @@ char			*apply_width(t_format format, char *str);
 
 # define SPECIFIERS "csrpiufodxXb%"
 
-char			*c_handler(t_format format);
-char			*i_handler(t_format format);
-char			*d_handler(t_format format);
-char			*u_handler(t_format format);
-char			*f_handler(t_format format);
-char			*o_handler(t_format format);
-char			*x_handler(t_format format);
-char			*xx_handler(t_format format);
-char			*b_handler(t_format format);
-char			*s_handler(t_format format);
-char			*r_handler(t_format format);
-char			*p_handler(t_format format);
-char			*mod_handler(t_format format);
+char			*c_handler(t_format format, t_data arg);
+char			*i_handler(t_format format, t_data arg);
+char			*d_handler(t_format format, t_data arg);
+char			*u_handler(t_format format, t_data arg);
+char			*f_handler(t_format format, t_data arg);
+char			*o_handler(t_format format, t_data arg);
+char			*x_handler(t_format format, t_data arg);
+char			*xx_handler(t_format format, t_data arg);
+char			*b_handler(t_format format, t_data arg);
+char			*s_handler(t_format format, t_data arg);
+char			*r_handler(t_format format, t_data arg);
+char			*p_handler(t_format format, t_data arg);
+char			*mod_handler(t_format format, t_data arg);
 char			*style_handler(t_format format, char *fstr);
 
 char			*format_converter(const char **buf, va_list *args);

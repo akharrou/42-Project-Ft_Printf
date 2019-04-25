@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:33 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 07:07:41 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:51:32 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 **         #include <libft.h>
 **
 **         char	*
-**         d_handler(t_format format);
+**         d_handler(t_format format, t_data arg);
 **
 **    PARAMETERS
 **
-**         t_format format         Structure containing the variable
-**                                 and information about how it must
-**                                 be formatted.
+**         t_format format     Structure containing the variable
+**                             and information about how it must
+**                             be formatted.
+**
+**         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%d' specifier like the libc 'printf()' function.
@@ -45,7 +47,7 @@
 
 #include "../ft_printf.h"
 
-char	*d_handler(t_format format)
+char	*d_handler(t_format format, t_data arg)
 {
-	return (i_handler(format));
+	return (i_handler(format, arg));
 }

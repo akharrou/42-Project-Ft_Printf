@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:27:42 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:44:15 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_handler g_table[] =
 	{    's',    &s_handler,      },
 	{    'r',    &r_handler,      },
 	{    'p',    &p_handler,      },
-	{    0,      NULL,            }
+	{    '\0',   NULL,            }
 };
 
 /*
@@ -134,7 +134,7 @@ char			**parse_style(const char *format, int8_t *i)
 **         specifier and style.
 */
 
-t_format		parse_format(const char *format, va_list *args)
+t_format		parse_format(const char *format)
 {
 	int8_t		i;
 	t_format	info;
@@ -147,16 +147,9 @@ t_format		parse_format(const char *format, va_list *args)
 		parse_length(format, &i),
 		parse_specifier(format, &i),
 		parse_style(format, &i),
-		{0},
 		' ',
 		i
 	};
-	if (info.specifier != 'f')
-		info.data = va_arg(*args, t_data);
-	else
-		info.data.double_ = va_arg(*args, double);
-	if (info.precision == NONE && info.flags & ZERO && !(info.flags & MINUS))
-		info.pad = '0';
 	return (info);
 }
 
@@ -205,19 +198,32 @@ t_format		parse_format(const char *format, va_list *args)
 char			*format_converter(const char **format, va_list *args)
 {
 	int32_t		i;
+	t_data		arg;
 	t_format	info;
 	char		*fstr;
 
 	fstr = NULL;
-	info = parse_format((*format) + 1, args);
-	if (info.specifier == NONE)
-		fstr = ft_strndup(*format, info.format_length + 1);
+	info = parse_format((*format) + 1);
+	if (info.specifier != 'f')
+		arg = va_arg(*args, t_data);
 	else
+		arg.double_ = va_arg(*args, double);
+	if (!ft_ischarset(info.specifier, "cf") &&
+		info.precision == NONE &&
+		info.flags & ZERO &&
+		!(info.flags & MINUS))
 	{
-		i = -1;
-		while (g_table[++i].specifier != '\0')
-			if (info.specifier == g_table[i].specifier)
-				fstr = style_handler(info, g_table[i].handler(info));
+		info.pad = '0';
+	}
+	else if (info.flags & ZERO && !(info.flags & MINUS))
+		info.pad = '0';
+	if (info.specifier == NONE)
+		return (ft_strndup((*format)++, 1));
+	i = -1;
+	while (g_table[++i].specifier != '\0')
+	{
+		if (info.specifier == g_table[i].specifier)
+			fstr = style_handler(info, g_table[i].handler(info));
 	}
 	(*format) += info.format_length + 1;
 	return (fstr);

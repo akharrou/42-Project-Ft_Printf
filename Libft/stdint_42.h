@@ -6,13 +6,14 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 12:03:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 07:59:15 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:03:50 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STDINT_42_H
 # define STDINT_42_H
 
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
 

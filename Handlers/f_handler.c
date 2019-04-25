@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:28 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:17:21 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:50:49 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 **         #include <libft.h>
 **
 **         char	*
-**         f_handler(t_format format);
+**         f_handler(t_format format, t_data arg);
 **
 **    PARAMETERS
 **
-**         t_format format         Structure containing the variable
-**                                 and information about how it must
-**                                 be formatted.
+**         t_format format     Structure containing the variable
+**                             and information about how it must
+**                             be formatted.
+**
+**         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%f' specifier like the libc 'printf()' function.
@@ -45,58 +47,32 @@
 
 #include "../ft_printf.h"
 
-char			*f_handler(t_format format)
+char			*f_handler(t_format format, t_data arg)
 {
-	char		*fltstr;
+	char	*fltstr;
+	bool	sign;
+	double	temp;
 
-	fltstr = ft_ftoa_base(
-		(long double)format.data.double_, DECIMAL_BASE, -1, format.precision);
-	if (format.flags & PLUS && !ft_strchr(fltstr, '-'))
+	fltstr = ft_strdup("");
+	temp = arg.double_;
+	sign = (temp < 0);
+	if (!(format.precision == 0 && temp == 0))
+	{
+		temp = (temp < 0) ? -temp : temp;
+		fltstr = ft_strappend(
+			fltstr, ft_ftoa_base(
+				(long double)temp, DECIMAL_BASE, -1, format.precision), 1, 1);
+		format.width -= ft_strlen(fltstr) +
+			(sign || (format.flags & PLUS || format.flags & SPACE) ? 1 : 0);
+	}
+	if (format.width && format.pad == '0')
+		fltstr = apply_width(format, fltstr);
+	fltstr = (sign) ? ft_strprepend(fltstr, "-", 1, 0) : fltstr;
+	if (format.flags & PLUS && !sign)
 		fltstr = ft_strprepend(fltstr, "+", 1, 0);
-	if (format.flags & SPACE && !ft_strchr(fltstr, '-'))
+	if (format.flags & SPACE && !(format.flags & PLUS) && !sign)
 		fltstr = ft_strprepend(fltstr, " ", 1, 0);
+	if (format.width && format.pad != '0')
+		fltstr = apply_width(format, fltstr);
 	return (fltstr);
 }
-
-
-
-	/** TODO
-	 *
-	 * KEEP TESTING HUGO + NEW + FILECHECKER
-	 * FIX %c with 0 (i.e '\0')
-	 * FIX %f
-	 *
-	 * check with christian
-	 */
-
-
-
-	// format.width -= ft_strlen(fstr);
-	// if (format.width > 0)
-	// 	fstr = apply_width(format, fstr);
-
-
-	// intmax_t	temp;
-	// int8_t		sign;
-	// char		*intstr;
-
-	// temp = (format.length < L) ? format.data.int_ : format.data.intmax_;
-	// sign = (temp < 0);
-	// intstr = ft_strdup("");
-	// if (!(format.precision == 0 && temp == 0))
-	// {
-	// 	temp = (temp < 0) ? -temp : temp;
-	// 	intstr = ft_strappend(
-	// 		intstr, ft_utoa_base(temp, DECIMAL_BASE, format.precision), 1, 1);
-	// 	format.width -= ft_strlen(intstr) +
-	// 		(sign || (format.flags & PLUS || format.flags & SPACE) ? 1 : 0);
-	// }
-	// if (format.width && format.pad == '0')
-	// 	intstr = apply_width(format, intstr);
-	// intstr = (sign) ? ft_strprepend(intstr, "-", 1, 0) : intstr;
-	// if (format.flags & PLUS && !sign)
-	// 	intstr = ft_strprepend(intstr, "+", 1, 0);
-	// if (format.flags & SPACE && !(format.flags & PLUS) && !sign)
-	// 	intstr = ft_strprepend(intstr, " ", 1, 0);
-	// if (format.width && format.pad != '0')
-	// 	intstr = apply_width(format, intstr);

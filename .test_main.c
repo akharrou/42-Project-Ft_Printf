@@ -32,6 +32,9 @@
 
 int		main(int ac, char *av[])
 {
+	int i;
+	int j;
+
 	// if (ac < 2)
 	// {
 	// 	printf("Usage: ./a format ...\n");
@@ -2141,41 +2144,48 @@ int		main(int ac, char *av[])
 
 /* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
 
-    // int i = ft_printf("and %c stuff\n", '\0');
-    // int j =    printf("and %c stuff\n", '\0');
+    // i = ft_printf("and %c stuff\n", '\0');
+    // j =    printf("and %c stuff\n", '\0');
 
-
+/* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
 
 	// ft_printf("test%#.4o et %02o %#014.0o!!\n", 012, 036, 12587499);
 	//    printf("test%#.4o et %02o %#014.0o!!\n", 012, 036, 12587499);
 
-    // int i = ft_printf("cc%#.4X et %#0012x %#04hx !!\n", 0xaef, 0xe, (unsigned short)0);
-    // int j =    printf("cc%#.4X et %#0012x %#04hx !!\n", 0xaef, 0xe, (unsigned short)0);
+    // i = ft_printf("cc%#.4X et %#0012x %#04hx !!\n", 0xaef, 0xe, (unsigned short)0);
+    // j =    printf("cc%#.4X et %#0012x %#04hx !!\n", 0xaef, 0xe, (unsigned short)0);
 
-    // int i = ft_printf("test%---10.6x et %01hhX !!\n", 0xaabb, (unsigned char)0);
-    // int j =    printf("test%---10.6x et %01hhX !!\n", 0xaabb, (unsigned char)0);
+    // i = ft_printf("test%---10.6x et %01hhX !!\n", 0xaabb, (unsigned char)0);
+    // j =    printf("test%---10.6x et %01hhX !!\n", 0xaabb, (unsigned char)0);
 
-    // int i = ft_printf("t %#7.5X%0006.2x et %lX!\n", 0xab, 0x876, 0xff11ff11ff1);
-    // int j =    printf("t %#7.5X%0006.2x et %lX!\n", 0xab, 0x876, 0xff11ff11ff1);
+    // i = ft_printf("t %#7.5X%0006.2x et %lX!\n", 0xab, 0x876, 0xff11ff11ff1);
+    // j =    printf("t %#7.5X%0006.2x et %lX!\n", 0xab, 0x876, 0xff11ff11ff1);
 
-    // int i = ft_printf("osef ! %#9llX et %-12hhx\n", (unsigned long long)-1248759650, (unsigned char)-1478223695);
-    // int j =    printf("osef ! %#9llX et %-12hhx\n", (unsigned long long)-1248759650, (unsigned char)-1478223695);
+    // i = ft_printf("osef ! %#9llX et %-12hhx\n", (unsigned long long)-1248759650, (unsigned char)-1478223695);
+    // j =    printf("osef ! %#9llX et %-12hhx\n", (unsigned long long)-1248759650, (unsigned char)-1478223695);
 
-    // int i = ft_printf("%0#10.0x\n", 0);
-    // int j =    printf("%0#10.0x\n", 0);
+    // i = ft_printf("%0#10.0x\n", 0);
+    // j =    printf("%0#10.0x\n", 0);
 
-    // int i = ft_printf("%s\n", NULL);
-    // int j =    printf("%s\n", NULL);
+    // i = ft_printf("%s\n", NULL);
+    // j =    printf("%s\n", NULL);
 
-    // int i = ft_printf("%s\n", "coco");
-    // int j =    printf("%s\n", "coco");
+    // i = ft_printf("%s\n", "coco");
+    // j =    printf("%s\n", "coco");
 
-    // int i = ft_printf("%--.4u et %#o%#012o%1lc\n", -12, 0, 0, 95);
-    // int j =    printf("%--.4u et %#o%#012o%1lc\n", -12, 0, 0, 95);
+    // i = ft_printf("%--.4u et %#o%#012o%1lc\n", -12, 0, 0, 95);
+    // j =    printf("%--.4u et %#o%#012o%1lc\n", -12, 0, 0, 95);
 
-    int i = ft_printf("%0.23d\n", 0);
-    int j =    printf("%0.23d\n", 0);
+/* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
 
+    // i = ft_printf("%020f\n", -2836.232);
+    // j =    printf("%020f\n", -2836.232);
+
+    // i = ft_printf("%020.f\n", -2836.232);
+    // j =    printf("%020.f\n", -2836.232);
+
+    i = ft_printf("%020f\n", -2836.232);
+    j =    printf("%020f\n", -2836.232);
 
 	printf("\n------------------------------\n[%i] vs [%i]\n", i , j);
 

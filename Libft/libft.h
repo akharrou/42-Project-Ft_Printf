@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/17 16:20:29 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 07:59:47 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 08:50:24 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # define STDIN  0
 # define STDOUT 1
 # define STDERR 2
+
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 # define BINARY_BASE "01"
 # define OCTAL_BASE "01234567"

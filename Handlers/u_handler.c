@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:15 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:16:32 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:47:42 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 **         #include <libft.h>
 **
 **         char	*
-**         u_handler(t_format format);
+**         u_handler(t_format format, t_data arg);
 **
 **    PARAMETERS
 **
-**         t_format format         Structure containing the variable
-**                                 and information about how it must
-**                                 be formatted.
+**         t_format format     Structure containing the variable
+**                             and information about how it must
+**                             be formatted.
+**
+**         t_data arg          Argument taken from the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%u' specifier like the libc 'printf()' function.
@@ -46,14 +48,14 @@
 
 #include "../ft_printf.h"
 
-char			*u_handler(t_format format)
+char			*u_handler(t_format format, t_data arg)
 {
 	uintmax_t	temp;
 	char		*intstr;
 
 	temp = (format.length < L && format.length != NONE) ?
-		format.data.uint_ :
-		format.data.uintmax_;
+		arg.uint_ :
+		arg.uintmax_;
 	intstr = ft_strdup("");
 	if (!(format.precision == 0 && temp == 0))
 	{

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:16:08 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 09:52:45 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 **         #include <libft.h>
 **
 **         char	*
-**         x_handler(t_format format);
+**         x_handler(t_format format, t_data arg);
 **
 **    PARAMETERS
 **
-**         t_format format         Structure containing the variable
-**                                 and information about how it must
-**                                 be formatted.
+**         t_format format     Structure containing the variable
+**                             and information about how it must
+**                             be formatted.
+**
+**         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%x' specifier like the libc 'printf()' function.
@@ -45,21 +47,22 @@
 
 #include "../ft_printf.h"
 
-char			*x_handler(t_format format)
+char			*x_handler(t_format format, t_data arg)
 {
 	intmax_t	temp;
 	char		*intstr;
 
 	temp = (format.length < L && format.length != NONE) ?
-		format.data.int_ :
-		format.data.intmax_;
+		arg.int_ :
+		arg.intmax_;
 	intstr = ft_strdup("");
 	if (!(format.precision == 0 && temp == 0))
 	{
 		temp = (temp < 0) ? ~(-temp) + 1 : temp;
 		intstr = ft_strjoinfre(
 			intstr, ft_utoa_base(temp, HEX_LOWER_BASE, format.precision), 1, 1);
-		format.width -= ft_strlen(intstr) + ((format.flags & HASH && temp) ? 2 : 0);
+		format.width -= ft_strlen(intstr) +
+			((format.flags & HASH && temp) ? 2 : 0);
 	}
 	if (format.width && format.pad == '0')
 		intstr = apply_width(format, intstr);

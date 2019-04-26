@@ -6,7 +6,7 @@
 #    By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/17 16:23:01 by akharrou          #+#    #+#              #
-#    Updated: 2019/04/25 23:30:29 by akharrou         ###   ########.fr        #
+#    Updated: 2019/04/26 01:03:46 by akharrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SOURCES     =   ft_atoi.c                                                     \
                 ft_round_with_prior.c                                         \
                 ft_strappend.c                                                \
                 ft_strcat.c                                                   \
+                ft_strncat.c                                                  \
                 ft_strchr.c                                                   \
                 ft_strcmp.c                                                   \
                 ft_strdup.c                                                   \

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 21:41:20 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 23:55:44 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/26 00:14:16 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int				ft_vdprintf(int filedes, const char *format, va_list *args)
 	char		*fstr;
 	size_t		len;
 
+	if (!format)
+		return (0);
 	tt_bytes = 0;
 	while (*format != '\0')
 	{

@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vprintf.c                                       :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/25 21:40:57 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/26 00:17:48 by akharrou         ###   ########.fr       */
+/*   Created: 2019/02/18 16:02:19 by akharrou          #+#    #+#             */
+/*   Updated: 2019/04/26 01:03:23 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_vprintf(const char *format, va_list *args)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	return (ft_vdprintf(STDOUT, format, args));
+	unsigned int i;
+	unsigned int j;
+
+	i = 0;
+	while (s1[i])
+		i++;
+	j = 0;
+	while (s2[j] && n-- > 0)
+		s1[i++] = s2[j++];
+	s1[i] = '\0';
+	return (s1);
 }

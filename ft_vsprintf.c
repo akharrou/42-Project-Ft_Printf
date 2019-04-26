@@ -6,13 +6,13 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 21:41:59 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 23:08:13 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/26 00:17:26 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_vsprintf(char *str, const char *format, va_list *args)
+int				ft_vsprintf(char *str, const char *format, va_list *args)
 {
 	char		*fstr;
 	char		*cur;

@@ -2193,8 +2193,11 @@ int		main(int ac, char *av[])
     // i = ft_printf("%f\n", 0.0);
     // j =    printf("%f\n", 0.0);
 
-    i = ft_printf("%023f\n", -237.0);
-    j =    printf("%023f\n", -237.0);
+    // i = ft_printf("%f\n", -0.0);
+    // j =    printf("%f\n", -0.0);
+
+    // i = ft_printf("%023f\n", -237.0);
+    // j =    printf("%023f\n", -237.0);
 
     // i = ft_printf("%.23f\n", -0.0);
     // j =    printf("%.23f\n", -0.0);
@@ -2208,11 +2211,58 @@ int		main(int ac, char *av[])
     // i = ft_printf("%+54.23f\n", 0.0);
     // j =    printf("%+54.23f\n", 0.0);
 
+    // i= ft_printf("Hello World %c ! This is Mich%cl ! And J%cmes\n", 0, 0, 1);
+    // j=    printf("Hello World %c ! This is Mich%cl ! And J%cmes\n", 0, 0, 1);
+
+    // i= ft_printf("Hello World %c ! This is Mich%cl ! And J%cmes\n", 34, 35, 36);
+    // j=    printf("Hello World %c ! This is Mich%cl ! And J%cmes\n", 34, 35, 36);
+
+    // i = ft_printf("%+54.23f\n", -0.0);
+    // j =    printf("%+54.23f\n", -0.0);
+
+    // i = ft_printf("%54.23f\n", -0.0);
+    // j =    printf("%54.23f\n", -0.0);
+
+    // i = ft_printf("%.23f\n", -0.0);
+    // j =    printf("%.23f\n", -0.0);
+
+    // i = ft_printf("%f\n", -0.0);
+    // j =    printf("%f\n", -0.0);
+
+    // i = ft_printf("%.4f\n", -0.0);
+    // j =    printf("%.4f\n", -0.0);
+
+    // i = ft_printf("%09.4f\n", -0.0);
+    // j =    printf("%09.4f\n", -0.0);
+
+    // i = ft_printf("%-20.4f\n", -0.0);
+    // j =    printf("%-20.4f\n", -0.0);
+
+    // i = ft_printf("%f\n", 0.0);
+    // j =    printf("%f\n", 0.0);
+
+    // i = ft_printf("%+f\n", 0.0);
+    // j =    printf("%+f\n", 0.0);
+
+    // i = ft_printf("%+f\n", 0.0);
+    // j =    printf("%+f\n", 0.0);
+
+	char *str1;
+	char *str2;
+
+	ft_asprintf(&str1, "%2.x", 90);
+	   asprintf(&str2, "%2.x", 90);
+
+	i = printf("%s", str1);
+	j = printf("%s", str2);
+
 	printf("\n------------------------------\n");
 	printf("[%i] vs [%i]\n", i, j);
 
 	(void)ac;
 	(void)av;
+	(void)i;
+	(void)j;
 
 	return (0);
 }

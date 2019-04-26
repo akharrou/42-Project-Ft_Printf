@@ -6,7 +6,7 @@
 #    By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/17 16:23:01 by akharrou          #+#    #+#              #
-#    Updated: 2019/04/25 08:53:06 by akharrou         ###   ########.fr        #
+#    Updated: 2019/04/25 23:30:29 by akharrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,8 +53,14 @@ SOURCES     =   ft_atoi.c                                                     \
                 ft_strdup_range.c                                             \
                 ft_strnew.c                                                   \
                 ft_strnlen.c                                                  \
+                ft_strcpy.c                                                   \
+                ft_strncpy.c                                                  \
                 ft_strprepend.c                                               \
                 ft_strsplit.c                                                 \
+                ft_strnjoin.c                                                 \
+                ft_strnjoinfre.c                                              \
+                ft_strnappend.c                                               \
+                ft_strnprepend.c                                              \
                 ft_uintmaxlen_base.c                                          \
                 ft_utoa_base.c                                                \
                 valid_base.c                                                  \

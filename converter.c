@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 10:12:41 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 21:08:47 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,24 +150,31 @@ t_format		parse_format(const char *format, va_list *args)
 		' ',
 		i
 	};
+	if (info.flags & ZERO && !(info.flags & MINUS))
+		if (info.precision == NONE || ft_ischarset(info.specifier, "cf"))
+			info.pad = '0';
 	return (info);
 }
 
 /*
 **    NAME
-**         format_converter -- formatted string conversion
+**         fstring -- formatted string conversion
 **
 **    SYNOPSIS
 **         #include <libft.h>
 **
 **         char *
-**         format_converter(const char **buf, va_list *args);
+**         fstring(const char **buf, va_list *args, size_t *len);
 **
 **    PARAMETERS
 **
 **         const char *format        A formatted string.
 **
 **         va_list *args             A variable argument list.
+**
+**         int *len                  Variable in which to store
+**                                   the length of the formatted
+**                                   string.
 **
 **    DESCRIPTION
 **         Converts the specified format into the actual output
@@ -195,7 +202,7 @@ t_format		parse_format(const char *format, va_list *args)
 **         output string; otherwise returns the format string.
 */
 
-char			*format_converter(const char **format, va_list *args)
+char			*fstring(const char **format, va_list *args, size_t *len)
 {
 	int32_t		i;
 	t_data		arg;
@@ -204,21 +211,22 @@ char			*format_converter(const char **format, va_list *args)
 
 	fstr = NULL;
 	info = parse_format((*format) + 1, args);
-	if (info.specifier != 'f')
-		arg = va_arg(*args, t_data);
-	else
-		arg.double_ = va_arg(*args, double);
-	if (!ft_ischarset(info.specifier, "cf") &&
-		info.precision == NONE && info.flags & ZERO && !(info.flags & MINUS))
-		info.pad = '0';
-	else if (info.flags & ZERO && !(info.flags & MINUS))
-		info.pad = '0';
 	if (info.specifier == NONE)
-		return (ft_strndup((*format)++, 1));
+		return (ft_strndup(*format, info.format_length + 1));
+	if (info.specifier == 'f' && info.length == NONE)
+		arg.double_ = va_arg(*args, double);
+	else if (info.specifier == 'f' && info.length == LLL)
+		arg.long_double_ = va_arg(*args, long double);
+	else
+		arg = va_arg(*args, t_data);
 	i = -1;
 	while (g_table[++i].specifier != '\0')
 		if (info.specifier == g_table[i].specifier)
+		{
 			fstr = style_handler(info, g_table[i].handler(info, arg));
+			break ;
+		}
 	(*format) += info.format_length + 1;
+	(*len) = ft_strlen(fstr) + (info.specifier == 'c' && arg.char_ == 0);
 	return (fstr);
 }

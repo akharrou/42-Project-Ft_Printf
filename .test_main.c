@@ -2193,8 +2193,8 @@ int		main(int ac, char *av[])
     // i = ft_printf("%f\n", 0.0);
     // j =    printf("%f\n", 0.0);
 
-    i = ft_printf("%f\n", -0.0);
-    j =    printf("%f\n", -0.0);
+    i = ft_printf("%023f\n", -237.0);
+    j =    printf("%023f\n", -237.0);
 
     // i = ft_printf("%.23f\n", -0.0);
     // j =    printf("%.23f\n", -0.0);

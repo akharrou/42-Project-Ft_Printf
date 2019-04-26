@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnlen.c                                       :+:      :+:    :+:   */
+/*   ft_asprintf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/18 15:05:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 23:51:47 by akharrou         ###   ########.fr       */
+/*   Created: 2019/04/25 21:43:29 by akharrou          #+#    #+#             */
+/*   Updated: 2019/04/25 22:26:22 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t		ft_strnlen(const char *s, size_t maxlen)
+int				ft_asprintf(char **ret, const char *format, ...)
 {
-	size_t i;
+	va_list		args;
 
-	i = 0;
-	while (i < maxlen && s[i])
-		++i;
-	return (i);
+	va_start(args, format);
+	return (ft_vasprintf(ret, format, &args));
 }

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/17 16:20:29 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 08:50:24 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 23:29:53 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ char		*ft_strdup(const char *str);
 char		*ft_strndup(const char *src, size_t n);
 char		*ft_strdup_range(const char *str, int index, int end);
 char		*ft_strnew(size_t size);
+char		*ft_strncpy(char *dst, const char *src, size_t len);
+char		*ft_strcpy(char *dst, const char *src);
 char		**ft_strsplit(char const *s, char c);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strjoinfre(char const *s1, char const *s2,
@@ -80,6 +82,13 @@ char		*ft_strappend(char const *s1, char const *s2,
 			int free_s1, int free_s2);
 char		*ft_strprepend(char const *s1, char const *s2,
 			int free_s1, int free_s2);
+char		*ft_strnjoin(char const *dst, char const *src, size_t len);
+char		*ft_strnjoinfre(char const *dst, char const *src, size_t len,
+			int free_str);
+char		*ft_strnappend(char const *dst, char const *src, size_t len,
+			int free_str);
+char		*ft_strnprepend(char const *dst, char const *src, size_t len,
+			int free_str);
 
 int			ft_ischarset(int c, const char *seperators);
 

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:28 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 12:28:59 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 17:51:15 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,20 @@
 
 #include "../ft_printf.h"
 
-char		*ft_dtoa_base(double n, char *base, int width, int precision)
-{
-	return (NULL);
-}
-
-char		*ft_ldtoa_base(long double n, char *base, int width, int precision)
-{
-	return (NULL);
-}
-
-char		*f_handler(t_format format, t_data arg)
+char			*f_handler(t_format format, t_data arg)
 {
 	char	*fltstr;
 	bool	sign;
 	double	temp;
 
 	fltstr = ft_strdup("");
-	temp = (format.length == LLL) ? arg.long_double_ : arg.double_;
-	sign = ((format.length == LLL) ? arg.ldbl_.body[9] : arg.dbl_.body[7]) >> 7;
+	temp = arg.dbl_.val;
+	sign = arg.dbl_.body[7] >> 7;
 	if (!(format.precision == 0 && temp == 0))
 	{
 		temp = (temp < 0) ? -temp : temp;
-		fltstr = ft_strappend(fltstr, (format.length == LLL) ?
-				ft_ldtoa_base(temp, DECIMAL_BASE, -1, format.precision) :
-				ft_dtoa_base(temp, DECIMAL_BASE, -1, format.precision), 1, 1);
+		fltstr = ft_strappend(fltstr, ft_ftoa_base(
+				(long double)temp, DECIMAL_BASE, -1, format.precision), 1, 1);
 		format.width -= ft_strlen(fltstr) +
 			(sign || (format.flags & PLUS || format.flags & SPACE) ? 1 : 0);
 	}

@@ -6,7 +6,7 @@
 #    By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/17 16:23:01 by akharrou          #+#    #+#              #
-#    Updated: 2019/04/25 08:49:28 by akharrou         ###   ########.fr        #
+#    Updated: 2019/04/25 23:55:21 by akharrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,18 @@ HEADERS     =   ft_printf.h
 
 # — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 
-SOURCES     =   ft_printf.c                                                   \
-                parser.c                                                      \
+SOURCES     =   parser.c                                                      \
                 converter.c                                                   \
+                                                                              \
+                ft_printf.c                                                   \
+                ft_dprintf.c                                                  \
+                ft_sprintf.c                                                  \
+                ft_asprintf.c                                                 \
+                ft_vprintf.c                                                  \
+                ft_vdprintf.c                                                 \
+                ft_vsprintf.c                                                 \
+                ft_vasprintf.c                                                \
+                                                                              \
                 $(PLUGINS)                                                    \
 
 # — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —

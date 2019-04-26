@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnlen.c                                       :+:      :+:    :+:   */
+/*   ft_strnprepend.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/18 15:05:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 23:51:47 by akharrou         ###   ########.fr       */
+/*   Created: 2019/04/25 23:26:25 by akharrou          #+#    #+#             */
+/*   Updated: 2019/04/25 23:30:33 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strnlen(const char *s, size_t maxlen)
+char	*ft_strnprepend(char const *dst, char const *src, size_t len,
+			int free_str)
 {
-	size_t i;
-
-	i = 0;
-	while (i < maxlen && s[i])
-		++i;
-	return (i);
+	return (ft_strnjoinfre(src, dst, len, free_str));
 }

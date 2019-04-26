@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 01:21:59 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 10:12:46 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/25 22:33:37 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,18 @@ enum	e_lengths
 */
 
 int				ft_printf(const char *format, ...);
+int				ft_dprintf(int filedes, const char *format, ...);
+int				ft_sprintf(char *str, const char *format, ...);
+int				ft_asprintf(char **ret, const char *format, ...);
+
+int				ft_vprintf(const char *format, va_list *args);
+int				ft_vdprintf(int filedes, const char *format, va_list *args);
+int				ft_vsprintf(char *str, const char *format, va_list *args);
+int				ft_vasprintf(char **ret, const char *format, va_list *args);
+
+/*
+** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
+*/
 
 char			**parse_style(const char *format, int8_t *i);
 t_format		parse_format(const char *format, va_list *args);
@@ -91,6 +103,8 @@ int8_t			parse_length(const char *format, int8_t *i);
 int8_t			parse_specifier(const char *format, int8_t *i);
 
 char			*apply_width(t_format format, char *str);
+
+char			*fstring(const char **buf, va_list *args, size_t *len);
 
 /*
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
@@ -112,8 +126,6 @@ char			*r_handler(t_format format, t_data arg);
 char			*p_handler(t_format format, t_data arg);
 char			*mod_handler(t_format format, t_data arg);
 char			*style_handler(t_format format, char *fstr);
-
-char			*format_converter(const char **buf, va_list *args);
 
 /*
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/17 16:20:29 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 23:29:53 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/26 23:26:30 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ char		*ft_strappend(char const *s1, char const *s2,
 			int free_s1, int free_s2);
 char		*ft_strprepend(char const *s1, char const *s2,
 			int free_s1, int free_s2);
-char		*ft_strnjoin(char const *dst, char const *src, size_t len);
-char		*ft_strnjoinfre(char const *dst, char const *src, size_t len,
+char		*ft_strnjoin(char const *s1, char const *s2, size_t len);
+char		*ft_strnjoinfre(char const *s1, char const *s2, size_t len,
 			int free_str);
-char		*ft_strnappend(char const *dst, char const *src, size_t len,
+char		*ft_strnappend(char const *s1, char const *s2, size_t len,
 			int free_str);
-char		*ft_strnprepend(char const *dst, char const *src, size_t len,
+char		*ft_strnprepend(char const *s1, char const *s2, size_t len,
 			int free_str);
 
 int			ft_ischarset(int c, const char *seperators);

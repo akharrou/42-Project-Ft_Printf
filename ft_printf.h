@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 01:21:59 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 22:33:37 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/26 21:29:47 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int8_t			parse_specifier(const char *format, int8_t *i);
 
 char			*apply_width(t_format format, char *str);
 
-char			*fstring(const char **buf, va_list *args, size_t *len);
+char			*formatter(const char **buf, va_list *args, size_t *len);
 
 /*
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **

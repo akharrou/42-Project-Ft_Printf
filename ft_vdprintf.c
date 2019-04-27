@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 21:41:20 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/26 00:14:16 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/26 21:29:47 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				ft_vdprintf(int filedes, const char *format, va_list *args)
 	{
 		if (*format == '%')
 		{
-			fstr = fstring(&format, args, &len);
+			fstr = formatter(&format, args, &len);
 			if (!fstr)
 				return (-1);
 			tt_bytes += write(filedes, fstr, len);

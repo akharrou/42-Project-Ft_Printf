@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 21:34:20 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 23:57:42 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/26 23:40:02 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int				ft_vasprintf(char **ret, const char *format, va_list *args)
 	{
 		if (*format == '%')
 		{
-			*ret = ft_strnappend(*ret, fstring(&format, args, &len), len, 3);
+			*ret = ft_strnappend(*ret, formatter(&format, args, &len), len, 3);
 			tt_bytes += len;
 		}
 		else

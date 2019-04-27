@@ -6,7 +6,7 @@
 #    By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/17 16:23:01 by akharrou          #+#    #+#              #
-#    Updated: 2019/04/25 23:55:21 by akharrou         ###   ########.fr        #
+#    Updated: 2019/04/26 21:29:35 by akharrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ HEADERS     =   ft_printf.h
 # — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 
 SOURCES     =   parser.c                                                      \
-                converter.c                                                   \
+                formatter.c                                                   \
                                                                               \
                 ft_printf.c                                                   \
                 ft_dprintf.c                                                  \

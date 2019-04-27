@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 16:02:19 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/26 01:03:23 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/26 23:32:39 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ char	*ft_strncat(char *s1, const char *s2, size_t n)
 	unsigned int i;
 	unsigned int j;
 
-	i = 0;
-	while (s1[i])
-		i++;
+	i = ft_strlen(s1);
 	j = 0;
 	while (s2[j] && n-- > 0)
 		s1[i++] = s2[j++];

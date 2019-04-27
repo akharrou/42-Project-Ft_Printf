@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   converter.c                                        :+:      :+:    :+:   */
+/*   formatter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/26 00:48:44 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/27 01:18:08 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,13 +158,57 @@ t_format		parse_format(const char *format, va_list *args)
 
 /*
 **    NAME
-**         fstring -- formatted string conversion
+**         extract_argument -- pulls off the next argument in the variable
+**                             argument list
+**    SYNOPSIS
+**         #include <libft.h>
+**
+**         t_data
+**         extract_argument(args);
+**
+**    PARAMETERS
+**
+**         const char *format        A formatted string.
+**
+**         va_list *args             A variable argument list.
+**
+**    DESCRIPTION
+**         Pulls off the next argument in the variable
+**         argument list & stores it in the 't_data'
+**         union.
+**
+**    RETURN VALUES
+**         Returns the pulled off argument.
+*/
+
+t_data	extract_argument(t_format format, va_list *args)
+{
+	t_data	arg;
+
+	if (format.specifier == 'f' && format.length == LLL)
+	{
+		arg.long_double_ = va_arg(*args, long double);
+	}
+	else if (format.specifier == 'f' && format.length == NONE)
+	{
+		arg.double_ = va_arg(*args, double);
+	}
+	else
+	{
+		arg.intmax_ = va_arg(*args, intmax_t);
+	}
+	return (arg);
+}
+
+/*
+**    NAME
+**         formatter -- formatted string conversion
 **
 **    SYNOPSIS
 **         #include <libft.h>
 **
 **         char *
-**         fstring(const char **buf, va_list *args, size_t *len);
+**         formatter(const char **buf, va_list *args, size_t *len);
 **
 **    PARAMETERS
 **
@@ -202,7 +246,7 @@ t_format		parse_format(const char *format, va_list *args)
 **         output string; otherwise returns the format string.
 */
 
-char			*fstring(const char **format, va_list *args, size_t *len)
+char			*formatter(const char **format, va_list *args, size_t *len)
 {
 	int32_t		i;
 	t_data		arg;
@@ -213,19 +257,16 @@ char			*fstring(const char **format, va_list *args, size_t *len)
 	info = parse_format((*format) + 1, args);
 	if (info.specifier == NONE)
 		return (ft_strndup(*format, info.format_length + 1));
-	if (info.specifier == 'f' && info.length == NONE)
-		arg.double_ = va_arg(*args, double);
-	else if (info.specifier == 'f' && info.length == LLL)
-		arg.long_double_ = va_arg(*args, long double);
-	else
-		arg = va_arg(*args, t_data);
+	arg = extract_argument(info, args);
 	i = -1;
 	while (g_table[++i].specifier != '\0')
+	{
 		if (info.specifier == g_table[i].specifier)
 		{
 			fstr = style_handler(info, g_table[i].handler(info, arg));
 			break ;
 		}
+	}
 	(*format) += info.format_length + 1;
 	(*len) = ft_strlen(fstr) + (info.specifier == 'c' && arg.char_ == 0);
 	return (fstr);

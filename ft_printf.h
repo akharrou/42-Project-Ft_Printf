@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 01:21:59 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/26 21:29:47 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:39:22 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ enum	e_flags
 
 enum	e_lengths
 {
-	H = sizeof(int),
 	HH = sizeof(char),
+	H = sizeof(short),
 	L = sizeof(long int),
 	LL = sizeof(long long int),
 	LLL = sizeof(long double),
@@ -93,8 +93,10 @@ int				ft_vasprintf(char **ret, const char *format, va_list *args);
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
 */
 
+char			*formatter(const char **buf, va_list *args, size_t *len);
 char			**parse_style(const char *format, int8_t *i);
 t_format		parse_format(const char *format, va_list *args);
+t_data			extract_agrument(t_format format, va_list *args);
 
 int8_t			parse_flags(const char *format, int8_t *i);
 int32_t			parse_width(const char *format, va_list *args, int8_t *i);
@@ -103,8 +105,6 @@ int8_t			parse_length(const char *format, int8_t *i);
 int8_t			parse_specifier(const char *format, int8_t *i);
 
 char			*apply_width(t_format format, char *str);
-
-char			*formatter(const char **buf, va_list *args, size_t *len);
 
 /*
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **

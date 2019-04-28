@@ -4,11 +4,19 @@
  *
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <float.h>
+#include <math.h>
+#include <unistd.h>
+
 #include "ft_printf.h"
 
 // #include "ft_printf.c"
 // #include "parser.c"
-// #include "converter.c"
+// #include "formatter.c"
 
 // #include "Handlers/b_handler.c"
 // #include "Handlers/c_handler.c"
@@ -22,13 +30,6 @@
 // #include "Handlers/p_handler.c"
 // #include "Handlers/r_handler.c"
 // #include "Handlers/s_handler.c"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <float.h>
-#include <math.h>
 
 int		main(int ac, char *av[])
 {
@@ -2280,12 +2281,693 @@ int		main(int ac, char *av[])
 	// printf("\n------------------------------\n");
 	// printf("[%i] vs [%i]\n", i, j);
 
-	ft_printf("Done ? %f\n", -0.0);
+/* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
+
+
+		// ft_printf("\n");                                /*-> "" */
+		// printf("\n");                                /*-> "" */
+
+		// ft_printf("\n");                              /*-> "$\n" */
+		// printf("\n");                              /*-> "$\n" */
+
+		// ft_printf("test\n");                            /*-> "test" */
+		// printf("test\n");                            /*-> "test" */
+
+		// ft_printf("test\n");                          /*-> "test$\n" */
+		// printf("test\n");                          /*-> "test$\n" */
+
+		// ft_printf("1234\n");                            /*-> "1234" */
+		// printf("1234\n");                            /*-> "1234" */
+
+		// ft_printf("%%\n");                              /*-> "%" */
+		// printf("%%\n");                              /*-> "%" */
+
+		// ft_printf("%5%\n");                             /*-> "    %" */
+		// printf("%5%\n");                             /*-> "    %" */
+
+		// ft_printf("%-5%\n");                            /*-> "%    " */
+		// printf("%-5%\n");                            /*-> "%    " */
+
+		// ft_printf("%.0%\n");                            /*-> "%" */
+		// printf("%.0%\n");                            /*-> "%" */
+
+		// ft_printf("%%\n");                      /*-> "%" */
+		// printf("%%\n");                              /*-> "%" */
+
+		// ft_printf("%   %\n");                           /*-> "%" */
+		// printf("%   %\n");                           /*-> "%" */
+
+		// ft_printf("%x\n", 42);                          /*-> "2a" */
+		// printf("%x\n", 42);                          /*-> "2a" */
+
+		// ft_printf("%X\n", 42);                          /*-> "2A" */
+		// printf("%X\n", 42);                          /*-> "2A" */
+
+		// ft_printf("%x\n", 0);                           /*-> "0" */
+		// printf("%x\n", 0);                           /*-> "0" */
+
+		// ft_printf("%X\n", 0);                           /*-> "0" */
+		// printf("%X\n", 0);                           /*-> "0" */
+
+		// ft_printf("%x\n", -42);                         /*-> "ffffffd6" */
+		// printf("%x\n", -42);                         /*-> "ffffffd6" */
+
+		// ft_printf("%X\n", -42);                         /*-> "FFFFFFD6" */
+		// printf("%X\n", -42);                         /*-> "FFFFFFD6" */
+
+		// ft_printf("%x\n", (unsigned int)4294967296);                  /*-> "0" */
+		// printf("%x\n", (unsigned int)4294967296);                  /*-> "0" */
+
+		// ft_printf("%X\n", (unsigned int)4294967296);                  /*-> "0" */
+		// printf("%X\n", (unsigned int)4294967296);                  /*-> "0" */
+
+		// ft_printf("%x\n", 0);                        /*-> "0" */
+		// printf("%x\n", 0);                        /*-> "0" */
+
+		// ft_printf("%10x\n", 42);                        /*-> "        2a" */
+		// printf("%10x\n", 42);                        /*-> "        2a" */
+
+		// ft_printf("%-10x\n", 42);                       /*-> "2a        " */
+		// printf("%-10x\n", 42);                       /*-> "2a        " */
+
+		// ft_printf("%lx\n", 4294967296);                 /*-> "100000000" */
+		// printf("%lx\n", 4294967296);                 /*-> "100000000" */
+
+		// ft_printf("%llX\n", (long long)4294967296);                /*-> "100000000" */
+		// printf("%llX\n", (long long)4294967296);                /*-> "100000000" */
+
+		// ft_printf("%hx\n", (unsigned short)4294967296);                 /*-> "0" */
+		// printf("%hx\n", (unsigned short)4294967296);                 /*-> "0" */
+
+		// ft_printf("%hhX\n", (unsigned char)4294967296);                /*-> "0" */
+		// printf("%hhX\n", (unsigned char)4294967296);                /*-> "0" */
+
+		// ft_printf("%jx\n", 4294967295);                 /*-> "ffffffff" */
+		// printf("%jx\n", 4294967295);                 /*-> "ffffffff" */
+
+		// ft_printf("%jx\n", 4294967296);                 /*-> "100000000" */
+		// printf("%jx\n", 4294967296);                 /*-> "100000000" */
+
+		// ft_printf("%jx\n", -4294967296);                /*-> "ffffffff00000000" */
+		// printf("%jx\n", -4294967296);                /*-> "ffffffff00000000" */
+
+		// ft_printf("%jx\n", -4294967297);                /*-> "fffffffeffffffff" */
+		// printf("%jx\n", -4294967297);                /*-> "fffffffeffffffff" */
+
+		// ft_printf("%llx\n", (long long)9223372036854775807);       /*-> "7fffffffffffffff" */
+		// printf("%llx\n", (long long)9223372036854775807);       /*-> "7fffffffffffffff" */
+
+		// // ft_printf("%llx\n", 9223372036854775808);       /*-> "7fffffffffffffff" */
+		// // printf("%llx\n", 9223372036854775808);       /*-> "7fffffffffffffff" */
+
+		// ft_printf("%010x\n", 542);                      /*-> "000000021e" */
+		// printf("%010x\n", 542);                      /*-> "000000021e" */
+
+		// ft_printf("%-15x\n", 542);                      /*-> "21e            " */
+		// printf("%-15x\n", 542);                      /*-> "21e            " */
+
+		// ft_printf("%2x\n", 542);                        /*-> "21e" */
+		// printf("%2x\n", 542);                        /*-> "21e" */
+
+		// ft_printf("%.2x\n", 5427);                      /*-> "1533" */
+		// printf("%.2x\n", 5427);                      /*-> "1533" */
+
+		// ft_printf("%5.2x\n", 5427);                     /*-> " 1533" */
+		// printf("%5.2x\n", 5427);                     /*-> " 1533" */
+
+		// ft_printf("%#x\n", 42);                         /*-> "0x2a" */
+		// printf("%#x\n", 42);                         /*-> "0x2a" */
+
+		// ft_printf("%#llx\n", (long long)9223372036854775807);      /*-> "0x7fffffffffffffff" */
+		// printf("%#llx\n", (long long)9223372036854775807);      /*-> "0x7fffffffffffffff" */
+
+		// ft_printf("%#x\n", 0);                          /*-> "0" */
+		// printf("%#x\n", 0);                          /*-> "0" */
+
+		// ft_printf("%#x\n", 42);                         /*-> "0x2a" */
+		// printf("%#x\n", 42);                         /*-> "0x2a" */
+
+		// ft_printf("%#X\n", 42);                         /*-> "0X2A" */
+		// printf("%#X\n", 42);                         /*-> "0X2A" */
+
+		// ft_printf("%#8x\n", 42);                        /*-> "    0x2a" */
+		// printf("%#8x\n", 42);                        /*-> "    0x2a" */
+
+		// ft_printf("%#08x\n", 42);                       /*-> "0x00002a" */
+		// printf("%#08x\n", 42);                       /*-> "0x00002a" */
+
+		// ft_printf("%#-8x\n", 42);                      /*-> "0x2a    " */
+		// printf("%#-8x\n", 42);                      /*-> "0x2a    " */
+
+		// ft_printf("@moulitest: %#.x %#.0x\n", 0, 0);    /*-> "@moulitest:  " */
+		// printf("@moulitest: %#.x %#.0x\n", 0, 0);    /*-> "@moulitest:  " */
+
+		// ft_printf("@moulitest: %.x %.0x\n", 0, 0);      /*-> "@moulitest:  " */
+		// printf("@moulitest: %.x %.0x\n", 0, 0);      /*-> "@moulitest:  " */
+
+		// ft_printf("@moulitest: %5.x %5.0x\n", 0, 0);    /*-> "@moulitest:            " */
+		// printf("@moulitest: %5.x %5.0x\n", 0, 0);    /*-> "@moulitest:            " */
+
+		// ft_printf("%s\n", "abc");                       /*-> "abc" */
+		// printf("%s\n", "abc");                       /*-> "abc" */
+
+		// ft_printf("%s\n", "this is a string");          /*-> "this is a string" */
+		// printf("%s\n", "this is a string");          /*-> "this is a string" */
+
+		// ft_printf("%s \n", "this is a string");         /*-> "this is a string " */
+		// printf("%s \n", "this is a string");         /*-> "this is a string " */
+
+		// ft_printf("%s  \n", "this is a string");        /*-> "this is a string  " */
+		// printf("%s  \n", "this is a string");        /*-> "this is a string  " */
+
+		// ft_printf("this is a %s\n", "string");          /*-> "this is a string" */
+		// printf("this is a %s\n", "string");          /*-> "this is a string" */
+
+		// ft_printf("%s is a string\n", "this");          /*-> "this is a string" */
+		// printf("%s is a string\n", "this");          /*-> "this is a string" */
+
+		// ft_printf("Line Feed %s", "\n");              /*-> "Line Feed $\n" */
+		// printf("Line Feed %s", "\n");              /*-> "Line Feed $\n" */
+
+		// ft_printf("%10s is a string\n", "this");        /*-> "      this is a string" */
+		// printf("%10s is a string\n", "this");        /*-> "      this is a string" */
+
+		// ft_printf("%.2s is a string\n", "this");        /*-> "th is a string" */
+		// printf("%.2s is a string\n", "this");        /*-> "th is a string" */
+
+		// ft_printf("%5.2s is a string\n", "this");       /*-> "   th is a string" */
+		// printf("%5.2s is a string\n", "this");       /*-> "   th is a string" */
+
+		// ft_printf("%10s is a string\n", "");            /*-> "           is a string" */
+		// printf("%10s is a string\n", "");            /*-> "           is a string" */
+
+		// ft_printf("%.2s is a string\n", "");            /*-> " is a string" */
+		// printf("%.2s is a string\n", "");            /*-> " is a string" */
+
+		// ft_printf("%5.2s is a string\n", "");           /*-> "      is a string" */
+		// printf("%5.2s is a string\n", "");           /*-> "      is a string" */
+
+		// ft_printf("%-10s is a string\n", "this");       /*-> "this       is a string" */
+		// printf("%-10s is a string\n", "this");       /*-> "this       is a string" */
+
+		// ft_printf("%-.2s is a string\n", "this");       /*-> "th is a string" */
+		// printf("%-.2s is a string\n", "this");       /*-> "th is a string" */
+
+		// ft_printf("%-5.2s is a string\n", "this");      /*-> "th    is a string" */
+		// printf("%-5.2s is a string\n", "this");      /*-> "th    is a string" */
+
+		// ft_printf("%-10s is a string\n", "");           /*-> "           is a string" */
+		// printf("%-10s is a string\n", "");           /*-> "           is a string" */
+
+		// ft_printf("%-.2s is a string\n", "");           /*-> " is a string" */
+		// printf("%-.2s is a string\n", "");           /*-> " is a string" */
+
+		// ft_printf("%-5.2s is a string\n", "");          /*-> "      is a string" */
+		// printf("%-5.2s is a string\n", "");          /*-> "      is a string" */
+
+		// ft_printf("%s %s\n", "this", "is");             /*-> "this is" */
+		// printf("%s %s\n", "this", "is");             /*-> "this is" */
+
+		// ft_printf("%s %s %s\n", "this", "is", "a");     /*-> "this is a" */
+		// printf("%s %s %s\n", "this", "is", "a");     /*-> "this is a" */
+
+		// ft_printf("%s %s %s %s\n", "this", "is", "a", "multi"); /*-> "this is a multi" */
+		// printf("%s %s %s %s\n", "this", "is", "a", "multi"); /*-> "this is a multi" */
+
+		// ft_printf("%s %s %s %s string. gg!\n", "this", "is", "a", "multi"); /*-> "this is a multi string. gg!" */
+		// printf("%s %s %s %s string. gg!\n", "this", "is", "a", "multi"); /*-> "this is a multi string. gg!" */
+
+		// ft_printf("%s%s%s%s%s\n", "this", "is", "a", "multi", "string"); /*-> "thisisamultistring" */
+		// printf("%s%s%s%s%s\n", "this", "is", "a", "multi", "string"); /*-> "thisisamultistring" */
+
+		// ft_printf("@moulitest: %s\n", NULL);            /*-> "@moulitest: (null)" */
+		// printf("@moulitest: %s\n", NULL);            /*-> "@moulitest: (null)" */
+
+		// ft_printf("%2c\n", 0);                      /*-> "^@" */
+		// printf("%2c\n", 0);                      /*-> "^@" */
+
+		// ft_printf("%s %s\n", NULL, "string");             /*-> "(null) string" */
+		// printf("%s %s\n", NULL, "string");             /*-> "(null) string" */
+
+		// ft_printf("%c\n", 42);                          /*-> "*" */
+		// printf("%c\n", 42);                          /*-> "*" */
+
+		// ft_printf("%5c\n", 42);                         /*-> "    *" */
+		// printf("%5c\n", 42);                         /*-> "    *" */
+
+		// ft_printf("%-5c\n", 42);                        /*-> "*    " */
+		// printf("%-5c\n", 42);                        /*-> "*    " */
+
+		// ft_printf("@moulitest: %c\n", 0);               /*-> "@moulitest: ^@" */
+		// printf("@moulitest: %c\n", 0);               /*-> "@moulitest: ^@" */
+
+		// ft_printf("%2c\n", 0);                          /*-> " ^@" */
+		// printf("%2c\n", 0);                          /*-> " ^@" */
+
+		// ft_printf("null %c and text\n", 0);             /*-> "null ^@ and text" */
+		// printf("null %c and text\n", 0);             /*-> "null ^@ and text" */
+
+		// ft_printf("%c\n", 0);                          /*-> "^@" */
+		// printf("%c\n", 0);                          /*-> "^@" */
+
+		// ft_printf("%o\n", 40);                          /*-> "50" */
+		// printf("%o\n", 40);                          /*-> "50" */
+
+		// ft_printf("%5o\n", 41);                         /*-> "   51" */
+		// printf("%5o\n", 41);                         /*-> "   51" */
+
+		// ft_printf("%05o\n", 42);                        /*-> "00052" */
+		// printf("%05o\n", 42);                        /*-> "00052" */
+
+		// ft_printf("%-5o\n", 2500);                      /*-> "4704 " */
+		// printf("%-5o\n", 2500);                      /*-> "4704 " */
+
+		// ft_printf("%#6o\n", 2500);                      /*-> " 04704" */
+		// printf("%#6o\n", 2500);                      /*-> " 04704" */
+
+		// ft_printf("%-#6o\n", 2500);                     /*-> "04704 " */
+		// printf("%-#6o\n", 2500);                     /*-> "04704 " */
+
+		// ft_printf("%-5o\n", 2500);                     /*-> "4704 " */
+		// printf("%-5o\n", 2500);                     /*-> "4704 " */
+
+		// ft_printf("%-5.10o\n", 2500);                   /*-> "0000004704" */
+		// printf("%-5.10o\n", 2500);                   /*-> "0000004704" */
+
+		// ft_printf("%-10.5o\n", 2500);                   /*-> "04704     " */
+		// printf("%-10.5o\n", 2500);                   /*-> "04704     " */
+
+		// ft_printf("@moulitest: %o\n", 0);               /*-> "@moulitest: 0" */
+		// printf("@moulitest: %o\n", 0);               /*-> "@moulitest: 0" */
+
+		// ft_printf("@moulitest: %.o %.0o\n", 0, 0);      /*-> "@moulitest:  " */
+		// printf("@moulitest: %.o %.0o\n", 0, 0);      /*-> "@moulitest:  " */
+
+		// ft_printf("@moulitest: %5.o %5.0o\n", 0, 0);    /*-> "@moulitest:            " */
+		// printf("@moulitest: %5.o %5.0o\n", 0, 0);    /*-> "@moulitest:            " */
+
+		// ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);    /*-> "@moulitest: 0 0" */
+		// printf("@moulitest: %#.o %#.0o\n", 0, 0);    /*-> "@moulitest: 0 0" */
+
+		// ft_printf("@moulitest: %.10o\n", 42);           /*-> "@moulitest: 0000000052" */
+		// printf("@moulitest: %.10o\n", 42);           /*-> "@moulitest: 0000000052" */
+
+		// ft_printf("%d\n", 1);                           /*-> "1" */
+		// printf("%d\n", 1);                           /*-> "1" */
+
+		// ft_printf("the %d\n", 1);                       /*-> "the 1" */
+		// printf("the %d\n", 1);                       /*-> "the 1" */
+
+		// ft_printf("%d is one\n", 1);                    /*-> "1 is one" */
+		// printf("%d is one\n", 1);                    /*-> "1 is one" */
+
+		// ft_printf("%d\n", -1);                          /*-> "-1" */
+		// printf("%d\n", -1);                          /*-> "-1" */
+
+		// ft_printf("%d\n", 4242);                        /*-> "4242" */
+		// printf("%d\n", 4242);                        /*-> "4242" */
+
+		// ft_printf("%d\n", -4242);                       /*-> "-4242" */
+		// printf("%d\n", -4242);                       /*-> "-4242" */
+
+		// ft_printf("%d\n", 2147483647);                  /*-> "2147483647" */
+		// printf("%d\n", 2147483647);                  /*-> "2147483647" */
+
+		// ft_printf("%d\n", (int)2147483648);                  /*-> "-2147483648" */
+		// printf("%d\n", (int)2147483648);                  /*-> "-2147483648" */
+
+		// ft_printf("%ld\n", (long)-2147483648);                 /*-> "-2147483648" */
+		// printf("%ld\n", (long)-2147483648);                 /*-> "-2147483648" */
+
+		// ft_printf("%ld\n", (long)-2147483649);                 /*-> "2147483647" */
+		// printf("%ld\n", (long)-2147483649);                 /*-> "2147483647" */
+
+		// ft_printf("% d\n", 42);                         /*-> " 42" */
+		// printf("% d\n", 42);                         /*-> " 42" */
+
+		// ft_printf("% d\n", -42);                        /*-> "-42" */
+		// printf("% d\n", -42);                        /*-> "-42" */
+
+		// ft_printf("%+d\n", 42);                         /*-> "+42" */
+		// printf("%+d\n", 42);                         /*-> "+42" */
+
+		// ft_printf("%+d\n", -42);                        /*-> "-42" */
+		// printf("%+d\n", -42);                        /*-> "-42" */
+
+		// ft_printf("%+d\n", 0);                          /*-> "+0" */
+		// printf("%+d\n", 0);                          /*-> "+0" */
+
+		// // ft_printf("%+d\n", 4242424242424242424242);     /*-> "-1" */
+		// // printf("%+d\n", 4242424242424242424242);     /*-> "-1" */
+
+		// // ft_printf("% +d\n", 42);                        /*-> "+42" */
+		// // printf("% +d\n", 42);                        /*-> "+42" */
+
+		// // ft_printf("% +d\n", -42);                       /*-> "-42" */
+		// // printf("% +d\n", -42);                       /*-> "-42" */
+
+		// // ft_printf("%+ d\n", 42);                        /*-> "+42" */
+		// // printf("%+ d\n", 42);                        /*-> "+42" */
+
+		// // ft_printf("%+ d\n", -42);                       /*-> "-42" */
+		// // printf("%+ d\n", -42);                       /*-> "-42" */
+
+		// // ft_printf("%  +d\n", 42);                       /*-> "+42" */
+		// // printf("%  +d\n", 42);                       /*-> "+42" */
+
+		// // ft_printf("%  +d\n", -42);                      /*-> "-42" */
+		// // printf("%  +d\n", -42);                      /*-> "-42" */
+
+		// // ft_printf("%+  d\n", 42);                       /*-> "+42" */
+		// // printf("%+  d\n", 42);                       /*-> "+42" */
+
+		// // ft_printf("%+  d\n", -42);                      /*-> "-42" */
+		// // printf("%+  d\n", -42);                      /*-> "-42" */
+
+		// // ft_printf("% ++d\n", 42);                       /*-> "+42" */
+		// // printf("% ++d\n", 42);                       /*-> "+42" */
+
+		// // ft_printf("% ++d\n", -42);                      /*-> "-42" */
+		// // printf("% ++d\n", -42);                      /*-> "-42" */
+
+		// // ft_printf("%++ d\n", 42);                       /*-> "+42" */
+		// // printf("%++ d\n", 42);                       /*-> "+42" */
+
+		// // ft_printf("%++ d\n", -42);                      /*-> "-42" */
+		// // printf("%++ d\n", -42);                      /*-> "-42" */
+
+		// ft_printf("%0d\n", -42);                        /*-> "-42" */
+		// printf("%0d\n", -42);                        /*-> "-42" */
+
+		// ft_printf("%00d\n", -42);                       /*-> "-42" */
+		// printf("%00d\n", -42);                       /*-> "-42" */
+
+		// ft_printf("%5d\n", 42);                         /*-> "   42" */
+		// printf("%5d\n", 42);                         /*-> "   42" */
+
+		// ft_printf("%05d\n", 42);                        /*-> "00042" */
+		// printf("%05d\n", 42);                        /*-> "00042" */
+
+		// ft_printf("%0+5d\n", 42);                       /*-> "+0042" */
+		// printf("%0+5d\n", 42);                       /*-> "+0042" */
+
+		// ft_printf("%5d\n", -42);                        /*-> "  -42" */
+		// printf("%5d\n", -42);                        /*-> "  -42" */
+
+		// ft_printf("%05d\n", -42);                       /*-> "-0042" */
+		// printf("%05d\n", -42);                       /*-> "-0042" */
+
+		// ft_printf("%0+5d\n", -42);                      /*-> "-0042" */
+		// printf("%0+5d\n", -42);                      /*-> "-0042" */
+
+		// ft_printf("%-5d\n", 42);                        /*-> "42   " */
+		// printf("%-5d\n", 42);                        /*-> "42   " */
+
+		// ft_printf("%-5d\n", (int)42);                       /*-> "42   " */
+		// printf("%-5d\n", (int)42);                       /*-> "42   " */
+
+		// ft_printf("%-5d\n", -42);                       /*-> "-42  " */
+		// printf("%-5d\n", -42);                       /*-> "-42  " */
+
+		// ft_printf("%-5d\n", -42);                      /*-> "-42  " */
+		// printf("%-5d\n", -42);                      /*-> "-42  " */
+
+		// ft_printf("%hd\n", (short)32767);                      /*-> "32767" */
+		// printf("%hd\n", (short)32767);                      /*-> "32767" */
+
+		// // ft_printf("%hd\n", (short)−32768);                   /*-> "0" */
+		// // printf("%hd\n", (short)−32768);                   /*-> "0" */
+
+		// ft_printf("%hd\n", (short)32768);                      /*-> "-32768" */
+		// printf("%hd\n", (short)32768);                      /*-> "-32768" */
+
+		// // ft_printf("%hd\n", (short)−32769);                   /*-> "0" */
+		// // printf("%hd\n", (short)−32769);                   /*-> "0" */
+
+		// ft_printf("%hhd\n", (signed char)127);                       /*-> "127" */
+		// printf("%hhd\n", (signed char)127);                       /*-> "127" */
+
+		// ft_printf("%hhd\n", (signed char)128);                       /*-> "-128" */
+		// printf("%hhd\n", (signed char)128);                       /*-> "-128" */
+
+		// ft_printf("%hhd\n", (signed char)-128);                      /*-> "-128" */
+		// printf("%hhd\n", (signed char)-128);                      /*-> "-128" */
+
+		// ft_printf("%hhd\n", (signed char)-129);                      /*-> "127" */
+		// printf("%hhd\n", (signed char)-129);                      /*-> "127" */
+
+		// ft_printf("%ld\n", (long)2147483647);                 /*-> "2147483647" */
+		// printf("%ld\n", (long)2147483647);                 /*-> "2147483647" */
+
+		// ft_printf("%ld\n", -2147483648);                /*-> "-2147483648" */
+		// printf("%ld\n", -2147483648);                /*-> "-2147483648" */
+
+		// ft_printf("%ld\n", 2147483648);                 /*-> "2147483648" */
+		// printf("%ld\n", 2147483648);                 /*-> "2147483648" */
+
+		// ft_printf("%ld\n", -2147483649);                /*-> "-2147483649" */
+		// printf("%ld\n", -2147483649);                /*-> "-2147483649" */
+
+		// ft_printf("%lld\n", (long long)9223372036854775807);       /*-> "9223372036854775807" */
+		// printf("%lld\n", (long long)9223372036854775807);       /*-> "9223372036854775807" */
+
+		// // ft_printf("%lld\n", (long long)-9223372036854775808);      /*-> "-9223372036854775808" */
+		// // printf("%lld\n", (long long)-9223372036854775808);      /*-> "-9223372036854775808" */
+
+		// ft_printf("%jd\n", 9223372036854775807);        /*-> "9223372036854775807" */
+		// printf("%jd\n", 9223372036854775807);        /*-> "9223372036854775807" */
+
+		// // ft_printf("%jd\n", -9223372036854775808);       /*-> "-9223372036854775808" */
+		// // printf("%jd\n", -9223372036854775808);       /*-> "-9223372036854775808" */
+
+		// ft_printf("%zd\n", 4294967295);                 /*-> "4294967295" */
+		// printf("%zd\n", 4294967295);                 /*-> "4294967295" */
+
+		// ft_printf("%zd\n", 4294967296);                 /*-> "4294967296" */
+		// printf("%zd\n", 4294967296);                 /*-> "4294967296" */
+
+		// ft_printf("%zd\n", (long)-0);                         /*-> "0" */
+		// printf("%zd\n", (long)-0);                         /*-> "0" */
+
+		// ft_printf("%zd\n", (long)-1);                         /*-> "-1" */
+		// printf("%zd\n", (long)-1);                         /*-> "-1" */
+
+		// ft_printf("%d\n", 1);                           /*-> "1" */
+		// printf("%d\n", 1);                           /*-> "1" */
+
+		// ft_printf("%d %d\n", 1, -2);                    /*-> "1 -2" */
+		// printf("%d %d\n", 1, -2);                    /*-> "1 -2" */
+
+		// ft_printf("%d %d %d\n", 1, -2, 33);             /*-> "1 -2 33" */
+		// printf("%d %d %d\n", 1, -2, 33);             /*-> "1 -2 33" */
+
+		// ft_printf("%d %d %d %d\n", 1, -2, 33, 42);      /*-> "1 -2 33 42" */
+		// printf("%d %d %d %d\n", 1, -2, 33, 42);      /*-> "1 -2 33 42" */
+
+		// ft_printf("%d %d %d %d gg!\n", 1, -2, 33, 42); /*-> "1 -2 33 42 gg!" */
+		// printf("%d %d %d %d gg!\n", 1, -2, 33, 42); /*-> "1 -2 33 42 gg!" */
+
+		// ft_printf("%4.15d\n", 42);                      /*-> "000000000000042" */
+		// printf("%4.15d\n", 42);                      /*-> "000000000000042" */
+
+		// ft_printf("%.2d\n", 4242);                      /*-> "4242" */
+		// printf("%.2d\n", 4242);                      /*-> "4242" */
+
+		// ft_printf("%.10d\n", 4242);                     /*-> "0000004242" */
+		// printf("%.10d\n", 4242);                     /*-> "0000004242" */
+
+		// ft_printf("%10.5d\n", 4242);                    /*-> "     04242" */
+		// printf("%10.5d\n", 4242);                    /*-> "     04242" */
+
+		// ft_printf("%-10.5d\n", 4242);                   /*-> "04242     " */
+		// printf("%-10.5d\n", 4242);                   /*-> "04242     " */
+
+		// ft_printf("% 10.5d\n", 4242);                   /*-> "     04242" */
+		// printf("% 10.5d\n", 4242);                   /*-> "     04242" */
+
+		// ft_printf("%+10.5d\n", 4242);                   /*-> "    +04242" */
+		// printf("%+10.5d\n", 4242);                   /*-> "    +04242" */
+
+		// ft_printf("%-+10.5d\n", 4242);                  /*-> "+04242    " */
+		// printf("%-+10.5d\n", 4242);                  /*-> "+04242    " */
+
+		// ft_printf("%03.2d\n", 0);                       /*-> " 00" */
+		// printf("%03.2d\n", 0);                       /*-> " 00" */
+
+		// ft_printf("%03.2d\n", 1);                       /*-> " 01" */
+		// printf("%03.2d\n", 1);                       /*-> " 01" */
+
+		// ft_printf("%03.2d\n", -1);                      /*-> "-01" */
+		// printf("%03.2d\n", -1);                      /*-> "-01" */
+
+		// ft_printf("@moulitest: %.10d\n", -42);          /*-> "@moulitest: -0000000042" */
+		// printf("@moulitest: %.10d\n", -42);          /*-> "@moulitest: -0000000042" */
+
+		// ft_printf("@moulitest: %.d %.0d\n", 42, 43);    /*-> "@moulitest: 42 43" */
+		// printf("@moulitest: %.d %.0d\n", 42, 43);    /*-> "@moulitest: 42 43" */
+
+		// ft_printf("@moulitest: %.d %.0d\n", 0, 0);      /*-> "@moulitest:  " */
+		// printf("@moulitest: %.d %.0d\n", 0, 0);      /*-> "@moulitest:  " */
+
+		// ft_printf("@moulitest: %5.d %5.0d\n", 0, 0);    /*-> "@moulitest:            " */
+		// printf("@moulitest: %5.d %5.0d\n", 0, 0);    /*-> "@moulitest:            " */
+
+		// ft_printf("%u\n", 0);                           /*-> "0" */
+		// printf("%u\n", 0);                           /*-> "0" */
+
+		// ft_printf("%u\n", 1);                           /*-> "1" */
+		// printf("%u\n", 1);                           /*-> "1" */
+
+		// ft_printf("%u\n", -1);                          /*-> "4294967295" */
+		// printf("%u\n", -1);                          /*-> "4294967295" */
+
+		// ft_printf("%lu\n", (long)4294967295);                  /*-> "4294967295" */
+		// printf("%lu\n", (long)4294967295);                  /*-> "4294967295" */
+
+		// ft_printf("%lu\n", (long)4294967296);                  /*-> "0" */
+		// printf("%lu\n", (long)4294967296);                  /*-> "0" */
+
+		// ft_printf("%5lu\n", 4294967295);                 /*-> "4294967295" */
+		// printf("%5lu\n", 4294967295);                 /*-> "4294967295" */
+
+		// ft_printf("%15lu\n", 4294967295);                /*-> "     4294967295" */
+		// printf("%15lu\n", 4294967295);                /*-> "     4294967295" */
+
+		// ft_printf("%-15lu\n", 4294967295);               /*-> "4294967295     " */
+		// printf("%-15lu\n", 4294967295);               /*-> "4294967295     " */
+
+		// ft_printf("%015u\n", (unsigned int)4294967295);               /*-> "000004294967295" */
+		// printf("%015u\n", (unsigned int)4294967295);               /*-> "000004294967295" */
+
+		// // ft_printf("% lu\n", (long)4294967295);                 /*-> "4294967295" */
+		// // printf("% lu\n", (long)4294967295);                 /*-> "4294967295" */
+
+		// // ft_printf("%+lu\n", (long)4294967295);                 /*-> "4294967295" */
+		// // printf("%+lu\n", (long)4294967295);                 /*-> "4294967295" */
+
+		// ft_printf("%lu\n", 4294967295);                 /*-> "4294967295" */
+		// printf("%lu\n", 4294967295);                 /*-> "4294967295" */
+
+		// ft_printf("%lu\n", 4294967296);                 /*-> "4294967296" */
+		// printf("%lu\n", 4294967296);                 /*-> "4294967296" */
+
+		// ft_printf("%lu\n", (long)-42);                        /*-> "18446744073709551574" */
+		// printf("%lu\n", (long)-42);                        /*-> "18446744073709551574" */
+
+		// ft_printf("%llu\n", (long long)4999999999);                /*-> "4999999999" */
+		// printf("%llu\n", (long long)4999999999);                /*-> "4999999999" */
+
+		// ft_printf("%ju\n", 4999999999);                 /*-> "4999999999" */
+		// printf("%ju\n", 4999999999);                 /*-> "4999999999" */
+
+		// ft_printf("%ju\n", 4294967296);                 /*-> "4294967296" */
+		// printf("%ju\n", 4294967296);                 /*-> "4294967296" */
+
+		// ft_printf("%lu\n", (long)4294967295);                  /*-> "4294967295" */
+		// printf("%lu\n", (long)4294967295);                  /*-> "4294967295" */
+
+		// ft_printf("%hU\n", (unsigned short)4294967296);                 /*-> "4294967296" */
+		// printf("%hU\n", (unsigned short)4294967296);                 /*-> "4294967296" */
+
+		// ft_printf("%U\n", (unsigned int)4294967296);                  /*-> "4294967296" */
+		// printf("%U\n", (unsigned int)4294967296);                  /*-> "4294967296" */
+
+		// ft_printf("@moulitest: %.5u\n", 42);            /*-> "@moulitest: 00042" */
+		// printf("@moulitest: %.5u\n", 42);            /*-> "@moulitest: 00042" */
+
+
+/* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
+
+	// i  =  ft_printf("%s %% %c %%ro, %% %d %% years ago %% %p %% %x %% %s %%\n", "Hello", 'b', -23, &free, 90, "came");
+	// j  =     printf("%s %% %c %%ro, %% %d %% years ago %% %p %% %x %% %s %%\n", "Hello", 'b', -23, &free, 90, "came");
+
+	// i  =  ft_printf("%.p, %.p\n", (void *)0, (void *)0);
+	// j  =     printf("%.p, %.p\n", (void *)0, (void *)0);
+
+	// i  =  ft_printf("%30.p, %.p\n", (void *)0, (void *)0);
+	// j  =     printf("%30.p, %.p\n", (void *)0, (void *)0);
+
+	// i  =  ft_printf("%-30.p, %.p\n", &free, &malloc);
+	// j  =     printf("%-30.p, %.p\n", &free, &malloc);
+
+	// i  =  ft_printf("%-30p\n", &main);
+	// j  =     printf("%-30p\n", &main);
+
+	int i;
+	int j;
+
+/* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
+
+	// j  =     printf("%0*zi\n", 31, (intmax_t)99999999999);
+	// i  =  ft_printf("%0*zi\n", 31, (intmax_t)99999999999);
+
+/* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
+
+	// i  =  ft_printf("%o, %ho, %hho\n", (unsigned short)-42, (unsigned short)-42, (unsigned char)-42);
+	// j  =     printf("%o, %ho, %hho\n", (unsigned short)-42, (unsigned short)-42, (unsigned char)-42);
+
+/* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
+
+	// i  =  ft_printf("{%-c}\n", 0);
+	// j  =     printf("{%-c}\n", 0);
+
+	// i  =  ft_printf("{%c}\n", 0);
+	// j  =     printf("{%c}\n", 0);
+
+	// i  =  ft_printf("{%-23c}\n", 0);
+	// j  =     printf("{%-23c}\n", 0);
+
+	// i  =  ft_printf("{%23c}\n", 0);
+	// j  =     printf("{%23c}\n", 0);
+
+	// i  =  ft_printf("hello {%c} bro\n", 0);
+	// j  =     printf("hello {%c} bro\n", 0);
+
+	// i  =  ft_printf("hello {%-c} bro\n", 0);
+	// j  =     printf("hello {%-c} bro\n", 0);
+
+	// i  =  ft_printf("hello {%20c} bro\n", 0);
+	// j  =     printf("hello {%20c} bro\n", 0);
+
+	// i  =  ft_printf("hello {%-20c} bro\n", 0);
+	// j  =     printf("hello {%-20c} bro\n", 0);
+
+	// i  =  ft_printf("hello {%*c} bro\n", 20, 0);
+	// j  =     printf("hello {%*c} bro\n", 20, 0);
+
+	// i  =  ft_printf("hello {%*c} bro\n", -20, 0);
+	// j  =     printf("hello {%*c} bro\n", -20, 0);
+
+/* — — — — – – – – – – – – – – – – – – – – – – – – – –  */
+
+	// i  =  ft_printf("{%-30.2f}{%-30.2f}\n", 1.42, -1.42);
+	// j  =     printf("{%-30.2f}{%-30.2f}\n", 1.42, -1.42);
+
+	// i  =  ft_printf("{%.30f}{%-30.2f}\n", 1.9237423482394729384729384234923027364283, -1.42);
+	// j  =     printf("{%.30f}{%-30.2f}\n", 1.9237423482394729384729384234923027364283, -1.42);
+
+	// i  =  ft_printf("{%f}{%f}\n", 21.0123456789012345678901234, -21.0123456789012345678901234);
+	// j  =     printf("{%f}{%f}\n", 21.0123456789012345678901234, -21.0123456789012345678901234);
+
+	// i  =  ft_printf("{%f}{%.6f}\n", 21.0123456789012345678901234, -21.01234);
+	// j  =     printf("{%f}{%.6f}\n", 21.0123456789012345678901234, -21.01234);
+
+	// i  =  ft_printf("{%0.21f}{%0.21f}\n", 9237623.23723245232342, -9237623.23723245232342);
+	// j  =     printf("{%0.21f}{%0.21f}\n", 9237623.23723245232342, -9237623.23723245232342);
+
+	i  =  ft_printf("{%.543Lf}\n{%.543Lf}\n\n", (long double)2387.23723245232342923724923462347289341203612312030120312301241032349028402384234238423842304230423423428340229384923429342304720423400234237420374872342039472390440234230423894283402834823094829034829038490238409823094809238490234802385325892309293582039852903580238523058203582305823053902348239489203840238509752348293047203592835027408322370592357023752082035820395230, (long double)-2387.23723245232342923724923462347289341203612312030120312301241032349028402384234238423842304230423423428340229384923429342304720423400234237420374872342039472390440234230423894283402834823094829034829038490238409823094809238490234802385325892309293582039852903580238523058203582305823053902348239489203840238509752348293047203592835027408322370592357023752082035820395230);
+	j  =     printf("{%.543Lf}\n{%.543Lf}\n\n", (long double)2387.23723245232342923724923462347289341203612312030120312301241032349028402384234238423842304230423423428340229384923429342304720423400234237420374872342039472390440234230423894283402834823094829034829038490238409823094809238490234802385325892309293582039852903580238523058203582305823053902348239489203840238509752348293047203592835027408322370592357023752082035820395230, (long double)-2387.23723245232342923724923462347289341203612312030120312301241032349028402384234238423842304230423423428340229384923429342304720423400234237420374872342039472390440234230423894283402834823094829034829038490238409823094809238490234802385325892309293582039852903580238523058203582305823053902348239489203840238509752348293047203592835027408322370592357023752082035820395230);
+
+	// i  =  ft_printf("{%+0.500Lf}\n", (long double)1 / 0);
+	// j  =     printf("{%+0.500Lf}\n", (long double)1 / 0);
+
+	printf("\n------------------------------\n");
+	printf("[%i] vs [%i]\n", i, j);
 
 	(void)ac;
 	(void)av;
-	// (void)i;
-	// (void)j;
+	(void)i;
+	(void)j;
 
 	return (0);
 }

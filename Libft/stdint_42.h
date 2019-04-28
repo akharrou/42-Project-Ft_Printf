@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 12:03:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/26 00:48:53 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/28 11:04:32 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef union				u_data
 	unsigned long long		ulong_long_;
 	double					double_;
 	long double				long_double_;
+	t_dbl					dbl_;
+	t_ldbl					ldbl_;
 	intmax_t				intmax_;
 	uintmax_t				uintmax_;
 	intptr_t				intptr_;

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uintmaxlen_base.c                               :+:      :+:    :+:   */
+/*   ft_strcpyfre.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/17 01:54:03 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/27 15:03:33 by akharrou         ###   ########.fr       */
+/*   Created: 2019/02/18 15:23:55 by akharrou          #+#    #+#             */
+/*   Updated: 2019/04/27 18:56:59 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_uintmaxlen_base(uintmax_t n, unsigned int base)
+char	*ft_strcpyfre(char *dst, const char *src, int free_dst, int free_src)
 {
-	size_t	length;
+	char	*res;
 
-	length = 1;
-	while (n >= base)
-	{
-		n /= base;
-		++length;
-	}
-	return (length);
+	res = ft_strcpy(dst, src);
+	if (free_dst && dst)
+		free(dst);
+	if (free_src && src)
+		free((char *)src);
+	return (res);
 }

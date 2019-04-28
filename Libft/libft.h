@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/17 16:20:29 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/26 23:26:30 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/28 10:52:01 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ size_t		ft_uintmaxlen_base(uintmax_t n, unsigned int base);
 
 int			ft_atoi(const char *str);
 
-char		*ft_itoa_base(intmax_t n, char *base, int precision);
 char		*ft_utoa_base(uintmax_t n, char *base, int precision);
-char		*ft_ftoa_base(long double n, char *base, int width, int precision);
+char		*ft_itoa_base(intmax_t n, char *base, int precision);
+
+char		*ft_dtoa_base(double n, char *base, int width, int precision);
+char		*ft_ldtoa_base(long double n, char *base, int width, int precision);
 
 size_t		ft_intlen(int n);
 size_t		ft_strlen(const char *str);
@@ -67,13 +69,16 @@ size_t		ft_strnlen(const char *s, size_t maxlen);
 int			ft_strcmp(const char *str1, const char *str2);
 char		*ft_strcat(char *dst, const char *src);
 char		*ft_strncat(char *dst, const char *src, size_t n);
+char		*ft_strcatfre(char *s1, const char *s2, int free_s1, int free_s2);
 char		*ft_strchr(const char *str, int c);
 char		*ft_strdup(const char *str);
 char		*ft_strndup(const char *src, size_t n);
 char		*ft_strdup_range(const char *str, int index, int end);
 char		*ft_strnew(size_t size);
-char		*ft_strncpy(char *dst, const char *src, size_t len);
 char		*ft_strcpy(char *dst, const char *src);
+char		*ft_strncpy(char *dst, const char *src, size_t len);
+char		*ft_strcpyfre(char *dst, const char *src, int free_dst,
+			int free_src);
 char		**ft_strsplit(char const *s, char c);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strjoinfre(char const *s1, char const *s2,
@@ -91,10 +96,6 @@ char		*ft_strnprepend(char const *s1, char const *s2, size_t len,
 			int free_str);
 
 int			ft_ischarset(int c, const char *seperators);
-
-long double	ft_round(long double n);
-long double	ft_round_with_prior(long double n);
-long double	ft_powl(long double x, long double y);
 
 /*
 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **

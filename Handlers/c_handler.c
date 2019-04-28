@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:40 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 09:51:21 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/27 12:55:07 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,28 @@
 
 #include "../ft_printf.h"
 
+#define CHARACTER 1
+#define SENTINAL 1
+
 char			*c_handler(t_format format, t_data arg)
 {
-	char		*character;
+	char		*charstr;
+	size_t		len;
 
-	character = malloc(2);
-	if (!character)
+	if (format.width)
+		format.width -= CHARACTER;
+	len = CHARACTER + format.width;
+	charstr = malloc(len + SENTINAL);
+	if (!charstr)
 		exit(-1);
-	character[0] = arg.char_;
-	character[1] = '\0';
-	format.width -= 1;
-	if (format.width > 0)
-		character = apply_width(format, character);
-	return (character);
+	if (!format.width || (format.width && format.flags & MINUS))
+		charstr[0] = arg.char_;
+	else
+		charstr[format.width] = arg.char_;
+	charstr[len] = '\0';
+	if (format.width)
+		(format.flags & MINUS) ?
+			ft_memset(charstr + 1, ' ', format.width) :
+			ft_memset(charstr, ' ', format.width);
+	return (charstr);
 }

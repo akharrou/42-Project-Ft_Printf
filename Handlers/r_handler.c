@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:51:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 09:52:12 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/27 10:05:30 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char			*r_handler(t_format format, t_data arg)
 	i = -1;
 	fstr = NULL;
 	if (arg.str_ != NULL)
-		while (tmp[++i] && i < format.precision)
+		while (tmp[++i])
 			fstr = (ISPRINT(tmp[i])) ?
 				ft_strappend(fstr, ft_strndup(tmp + i, 1), 1, 1) :
 				ft_strappend(fstr, ft_strprepend(

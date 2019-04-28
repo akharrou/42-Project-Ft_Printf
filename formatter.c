@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/27 01:18:08 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:22:39 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ char			*apply_width(t_format format, char *str)
 
 t_handler g_table[] =
 {
-	{    '%',    &mod_handler,    },
-	{    'c',    &c_handler,      },
-	{    'i',    &i_handler,      },
-	{    'u',    &u_handler,      },
-	{    'f',    &f_handler,      },
-	{    'b',    &b_handler,      },
-	{    'o',    &o_handler,      },
-	{    'd',    &d_handler,      },
-	{    'x',    &x_handler,      },
-	{    'X',    &xx_handler,     },
-	{    's',    &s_handler,      },
-	{    'r',    &r_handler,      },
-	{    'p',    &p_handler,      },
-	{    '\0',   NULL,            }
+	{'%', &mod_handler},
+	{'c', &c_handler},
+	{'i', &i_handler},
+	{'u', &u_handler},
+	{'f', &f_handler},
+	{'b', &b_handler},
+	{'o', &o_handler},
+	{'d', &d_handler},
+	{'x', &x_handler},
+	{'X', &xx_handler},
+	{'s', &s_handler},
+	{'r', &r_handler},
+	{'p', &p_handler},
+	{'\0', NULL}
 };
 
 /*
@@ -150,6 +150,11 @@ t_format		parse_format(const char *format, va_list *args)
 		' ',
 		i
 	};
+	if (info.width < 0)
+	{
+		info.flags |= MINUS;
+		info.width = -info.width;
+	}
 	if (info.flags & ZERO && !(info.flags & MINUS))
 		if (info.precision == NONE || ft_ischarset(info.specifier, "cf"))
 			info.pad = '0';
@@ -181,7 +186,7 @@ t_format		parse_format(const char *format, va_list *args)
 **         Returns the pulled off argument.
 */
 
-t_data	extract_argument(t_format format, va_list *args)
+t_data			extract_argument(t_format format, va_list *args)
 {
 	t_data	arg;
 
@@ -256,18 +261,21 @@ char			*formatter(const char **format, va_list *args, size_t *len)
 	fstr = NULL;
 	info = parse_format((*format) + 1, args);
 	if (info.specifier == NONE)
-		return (ft_strndup(*format, info.format_length + 1));
-	arg = extract_argument(info, args);
-	i = -1;
-	while (g_table[++i].specifier != '\0')
+		fstr = ft_strndup(*format, info.format_length + 1);
+	else
 	{
-		if (info.specifier == g_table[i].specifier)
-		{
-			fstr = style_handler(info, g_table[i].handler(info, arg));
-			break ;
-		}
+		if (info.specifier != '%')
+			arg = extract_argument(info, args);
+		i = -1;
+		while (g_table[++i].specifier != '\0')
+			if (info.specifier == g_table[i].specifier)
+			{
+				fstr = style_handler(info, g_table[i].handler(info, arg));
+				break ;
+			}
 	}
 	(*format) += info.format_length + 1;
-	(*len) = ft_strlen(fstr) + (info.specifier == 'c' && arg.char_ == 0);
+	(*len) = (info.specifier == 'c' && arg.char_ == 0) ?
+		1 + info.width - (info.width > 0) : ft_strlen(fstr);
 	return (fstr);
 }

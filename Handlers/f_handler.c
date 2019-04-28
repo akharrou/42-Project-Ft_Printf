@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:28 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/26 00:59:37 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/04/28 11:36:58 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,17 @@ char			*f_handler(t_format format, t_data arg)
 {
 	char	*fltstr;
 	bool	sign;
-	t_dbl	temp;
 
-	fltstr = ft_strdup("");
-	temp.val = arg.double_;
-	sign = temp.body[7] >> 7;
-	temp.val = (temp.val < 0) ? -temp.val : temp.val;
-	fltstr = ft_strappend(fltstr, ft_ftoa_base(
-		(long double)temp.val, DECIMAL_BASE, -1, format.precision), 1, 1);
+	sign = (format.length == LLL) ?
+		arg.ldbl_.body[9] >> 7 :
+		arg.dbl_.body[7] >> 7;
+	if (sign && format.length == LLL)
+		arg.long_double_ = -arg.long_double_;
+	else if (sign && format.length == NONE)
+		arg.double_ = -arg.double_;
+	fltstr = (format.length == LLL) ?
+		ft_ldtoa_base(arg.long_double_, DECIMAL_BASE, 0, format.precision) :
+		ft_dtoa_base(arg.double_, DECIMAL_BASE, 0, format.precision);
 	format.width -= ft_strlen(fltstr) +
 		(sign || (format.flags & PLUS || format.flags & SPACE) ? 1 : 0);
 	if (format.width && format.pad == '0')

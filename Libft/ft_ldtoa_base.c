@@ -6,61 +6,42 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 09:48:40 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/28 11:23:04 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/06 15:30:54 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#define SENTINAL 1
-#define DOT 1
+#define BIAS          16383
+#define BITSIZE       63
+#define _15BITS       32767
+#define MAX_EXPONENT  (32767 - BIAS - BITSIZE)
+#define EMPTY         9223372036854775808u
 
-static char	*get_precision(long double n, char *base, int precision)
+#define INF           (num.exponent == MAX_EXPONENT && num.mantissa == EMPTY)
+#define NAN_          (num.exponent == MAX_EXPONENT && num.mantissa != EMPTY)
+
+char	*ft_ldtoa_base(long double n, char *base, int width, int precision)
 {
-	int		i;
-	int		val;
-	int		intbase;
-	char	*precision_str;
+	t_long_double	num;
+	t_bigint		res;
 
-	precision_str = ft_memalloc(DOT + precision + SENTINAL);
-	if (!precision_str)
-		return (NULL);
-	precision_str[0] = '.';
-	intbase = ft_strlen(base);
-	val = 0;
-	i = 0;
-	while (precision > i++)
-	{
-		n = (n - val) * intbase;
-		val = (int)n;
-		if (precision == i)
-			val = val + ((int)((n - val) * intbase > 5) ? 1 : 0);
-		precision_str[i] = base[val % intbase];
-	}
-	return (precision_str);
-}
-
-char		*ft_ldtoa_base(long double n, char *base, int width, int precision)
-{
-	unsigned long long	val;
-	int					bodylen;
-	int					sign;
-	char				*fltstr;
-
-	sign = (n < 0);
-	n = (n < 0) ? -n : n;
-	val = (unsigned long long)n;
-	precision = ((precision >= 0) ? precision : 6);
-	bodylen = sign + ft_uintmaxlen_base(val, 10) + precision;
-	width -= (width - bodylen > 0) ? width - bodylen : 0;
-	if (!(fltstr = ft_memalloc(width + bodylen + SENTINAL)))
-		return (NULL);
-	fltstr[0] = '-';
-	ft_memset(fltstr + sign, '0', width);
-	fltstr = ft_strcpyfre(
-		fltstr + sign + width, ft_utoa_base(val, base, -1), 0, 1);
-	if (precision)
-		fltstr = ft_strcatfre(
-			fltstr, get_precision(n - val, base, precision), 0, 1);
-	return (fltstr);
+	num.ldbl_.val = n;
+	num.sign = num.ldbl_.body[9] >> 7 != 0;
+	num.exponent = (*(short *)&num.ldbl_.body[8] & _15BITS) - BIAS - BITSIZE;
+	num.mantissa = *(intmax_t *)num.ldbl_.body;
+	if (INF)
+		return (ft_strdup("inf"));
+	if (NAN_)
+		return (ft_strdup("nan"));
+	res = ft_utoa_base(num.mantissa, DECIMAL_BASE, 0);
+	if (num.exponent > 0)
+		while (num.exponent-- > 0)
+			res = bigint_mulfre(res, 2, base, 1);
+	else
+		while (num.exponent++ < 0)
+			res = bigint_divfre(res, 2, base, 1);
+	res = bigint_roundfre(res, base, precision, 1);
+	res = ft_strprepend(res, ft_padding(width - ft_strlen(res), '0'), 1, 1);
+	return ((num.sign) ? ft_strprepend(res, "-", 1, 0) : res);
 }

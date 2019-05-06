@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:28 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/28 11:36:58 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/06 16:07:00 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 
 #include "../ft_printf.h"
 
-char			*f_handler(t_format format, t_data arg)
+char		*f_handler(t_format format, t_data arg)
 {
 	char	*fltstr;
 	bool	sign;
@@ -61,7 +61,7 @@ char			*f_handler(t_format format, t_data arg)
 		arg.double_ = -arg.double_;
 	fltstr = (format.length == LLL) ?
 		ft_ldtoa_base(arg.long_double_, DECIMAL_BASE, 0, format.precision) :
-		ft_dtoa_base(arg.double_, DECIMAL_BASE, 0, format.precision);
+		ft_ldtoa_base(arg.double_, DECIMAL_BASE, 0, format.precision);
 	format.width -= ft_strlen(fltstr) +
 		(sign || (format.flags & PLUS || format.flags & SPACE) ? 1 : 0);
 	if (format.width && format.pad == '0')

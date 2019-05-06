@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_padding.c                                       :+:      :+:    :+:   */
+/*   bigint_cleaner.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/18 07:40:24 by akharrou          #+#    #+#             */
-/*   Updated: 2019/05/06 15:28:30 by akharrou         ###   ########.fr       */
+/*   Created: 2019/05/05 19:34:44 by akharrou          #+#    #+#             */
+/*   Updated: 2019/05/06 14:45:00 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_padding(int size, char c)
+t_bigint	bigint_cleaner(t_bigint number)
 {
-	char	*buf;
 	int		i;
 
-	buf = NULL;
-	if (size > 0)
+	i = 0;
+	while (number[i] && number[i] != '.')
+		++i;
+	if (ft_strchr(number, '.'))
 	{
-		buf = malloc(size + 1);
-		if (!buf)
-			return (NULL);
-		i = 0;
-		while (size > i)
-			buf[i++] = c;
-		buf[i++] = '\0';
+		number = ft_strrstrip(number, "0");
+		number = ft_strnlstrip(number, "0", i - 1);
 	}
-	return (buf);
+	else
+		number = ft_strnlstrip(number, "0", i - 1);
+	return (number);
 }

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/27 15:22:39 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:31:13 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ t_format		parse_format(const char *format, va_list *args)
 		info.width = -info.width;
 	}
 	if (info.flags & ZERO && !(info.flags & MINUS))
-		if (info.precision == NONE || ft_ischarset(info.specifier, "cf"))
+		if (info.precision == NONE || ft_ischarset(info.specifier, "cf%"))
 			info.pad = '0';
 	return (info);
 }

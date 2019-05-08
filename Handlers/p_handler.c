@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:39 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/27 11:34:45 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/06 16:00:13 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char			*p_handler(t_format format, t_data arg)
 		addr = ft_strappend(addr,
 			ft_utoa_base(arg.intptr_, HEX_LOWER_BASE, format.precision), 1, 1);
 	}
+	if (format.width && format.pad == '0')
+		addr = apply_width(format, addr);
 	addr = ft_strprepend(addr, "0x", 1, 0);
 	format.width -= ft_strlen(addr);
 	if (format.width > 0 && format.pad == ' ')

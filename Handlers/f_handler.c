@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:28 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/28 11:36:58 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:14:07 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,12 @@
 
 #include "../ft_printf.h"
 
-char			*f_handler(t_format format, t_data arg)
+char		*f_handler(t_format format, t_data arg)
 {
 	char	*fltstr;
 	bool	sign;
 
-	sign = (format.length == LLL) ?
-		arg.ldbl_.body[9] >> 7 :
-		arg.dbl_.body[7] >> 7;
+	sign = (format.length == LLL) ? arg.ldbl_.body[9] >> 7 : arg.uintmax_ >> 63;
 	if (sign && format.length == LLL)
 		arg.long_double_ = -arg.long_double_;
 	else if (sign && format.length == NONE)
@@ -62,6 +60,8 @@ char			*f_handler(t_format format, t_data arg)
 	fltstr = (format.length == LLL) ?
 		ft_ldtoa_base(arg.long_double_, DECIMAL_BASE, 0, format.precision) :
 		ft_dtoa_base(arg.double_, DECIMAL_BASE, 0, format.precision);
+	if (format.flags & HASH && format.precision == 0)
+		fltstr = ft_strappend(fltstr, ".", 1, 0);
 	format.width -= ft_strlen(fltstr) +
 		(sign || (format.flags & PLUS || format.flags & SPACE) ? 1 : 0);
 	if (format.width && format.pad == '0')

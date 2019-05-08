@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_padding.c                                       :+:      :+:    :+:   */
+/*   ft_strrstrip.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/18 07:40:24 by akharrou          #+#    #+#             */
-/*   Updated: 2019/05/06 15:28:30 by akharrou         ###   ########.fr       */
+/*   Created: 2019/04/30 10:57:42 by akharrou          #+#    #+#             */
+/*   Updated: 2019/05/06 19:21:30 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_padding(int size, char c)
+char		*ft_strrstrip(char const *s, char *charset)
 {
-	char	*buf;
-	int		i;
+	int		last;
+	char	*rstripped;
 
-	buf = NULL;
-	if (size > 0)
+	if (s)
 	{
-		buf = malloc(size + 1);
-		if (!buf)
-			return (NULL);
-		i = 0;
-		while (size > i)
-			buf[i++] = c;
-		buf[i++] = '\0';
+		last = ft_strlen(s) - 1;
+		while (last >= 0 && ft_ischarset(s[last], charset))
+			--last;
+		rstripped = ft_strndup(s, last + 1);
+		free((void *)s);
+		return (rstripped);
 	}
-	return (buf);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:40 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/27 12:55:07 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:34:15 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char			*c_handler(t_format format, t_data arg)
 	charstr[len] = '\0';
 	if (format.width)
 		(format.flags & MINUS) ?
-			ft_memset(charstr + 1, ' ', format.width) :
-			ft_memset(charstr, ' ', format.width);
+			ft_memset(charstr + 1, format.pad, format.width) :
+			ft_memset(charstr, format.pad, format.width);
 	return (charstr);
 }

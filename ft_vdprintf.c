@@ -6,11 +6,15 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 21:41:20 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/26 21:29:47 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:45:05 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Reproduction of the libc 'vdprintf()' function.
+*/
 
 int				ft_vdprintf(int filedes, const char *format, va_list *args)
 {

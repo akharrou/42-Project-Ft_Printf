@@ -6,11 +6,15 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 21:41:59 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/27 00:01:19 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:45:20 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Reproduction of the libc 'vsprintf()' function.
+*/
 
 int				ft_vsprintf(char *str, const char *format, va_list *args)
 {

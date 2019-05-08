@@ -6,13 +6,13 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:51:50 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/27 10:05:30 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:18:27 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 **    NAME
-**         r_handler -- formatted printable string conversion
+**         r_handler -- formatted non-printable string conversion
 **
 **    SYNOPSIS
 **         #include <libft.h>
@@ -22,27 +22,25 @@
 **
 **    PARAMETERS
 **
-**         t_format format     Structure containing the variable
-**                             and information about how it must
-**                             be formatted.
+**         t_format format     Structure containing information about how
+**                             the argument must be formatted in the string.
 **
 **         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
-**         Handles the '%r' specifier; prints a string of non-printable.
-**         Non printable characters are printed as hexadecimal digits.
+**         Handles the '%r' specifier; prints a string of non-printable
+**         characters in their hexadecimal representation.
 **
-**         Note: the only flags and fields that apply to this specifier
-**         are the following:
+**         Note: the flags and fields that apply to this specifier are
+**         the following:
 **
 **             Flags: '-'
 **             Width: defined or '*'
 **             Precision: defined or '*'
 **
-**
 **    RETURN VALUES
 **         If successful, returns a formatted string that follows the
-**         specified format; otherwise exits with a -1 on error.
+**         specified format; otherwise NULL.
 */
 
 #include "../ft_printf.h"

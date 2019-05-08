@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/05/07 17:31:13 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:42:54 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /*
 **    Utility function.
+**    Appends/Prepends padding to a string.
 */
 
 char			*apply_width(t_format format, char *str)
@@ -28,11 +29,6 @@ char			*apply_width(t_format format, char *str)
 **    DESCRIPTION
 **         Dispatch table associating every single format specifier to
 **         its function (handler).
-**
-**         The idea was to make the hanlders sort of independant
-**         plugins to the 'printf()' function, as opposed to
-**         intertwined with it. For that reason, they are laid
-**         out individually, and in seperate files.
 */
 
 t_handler g_table[] =
@@ -55,7 +51,8 @@ t_handler g_table[] =
 
 /*
 **    NAME
-**         parse_style -- parse the 'style' field in the formatted string
+**         parse_style -- parse 'style' field in the 'printf' format
+**                        string
 **
 **    SYNOPSIS
 **         #include <libft.h>
@@ -65,24 +62,17 @@ t_handler g_table[] =
 **
 **    PARAMETERS
 **
-**         const char *format      Formatted string.
+**         const char *format      Format string.
 **
-**         int8_t *i               Current index in the formatted
-**                                 string.
+**         int8_t *i               Index to start parsing from in the
+**                                 format string.
 **
 **    DESCRIPTION
 **         Parses for the 'style' field in the formatted string.
 **
-**         We first check for an opening curly bracket. If there is
-**         one, we will then look for its matching (closing) bracket.
-**
-**         If it is found we will parse out all the styles specified
-**         in between the two brackets, storing them in a 2D array.
-**         Finally the 2D array will be returned.
-**
 **    RETURN VALUES
-**         If styles we're specified, then a 2D array containing them
-**         will be returned; otherwise NULL is returned.
+**         If style(s) we're specified, then a 2D array containing
+**         them will be returned; otherwise NULL is returned.
 */
 
 char			**parse_style(const char *format, int8_t *i)
@@ -109,7 +99,7 @@ char			**parse_style(const char *format, int8_t *i)
 
 /*
 **    NAME
-**         parse_format -- parse out format
+**         parse_format -- parse 'printf' format specifier string
 **
 **    SYNOPSIS
 **         #include <libft.h>
@@ -119,19 +109,17 @@ char			**parse_style(const char *format, int8_t *i)
 **
 **    PARAMETERS
 **
-**         const char *format        A formatted string.
+**         const char *format        A format string.
 **
 **         va_list *args             A variable argument list.
 **
 **    DESCRIPTION
-**         Extracts variable from the variable argument list, parses
-**         out format and style of the format string and stores all
-**         of that information in a (t_format) structure.
+**         Parses a 'printf' format string and stores all of the
+**         information gathered from it in a (t_format) structure.
 **
 **    RETURN VALUES
-**         The function returns a (t_format) structure containing
-**         all the related information about the parsed out format
-**         specifier and style.
+**         Returns a (t_format) structure containing all the gathered
+**         information from the parsed format string.
 */
 
 t_format		parse_format(const char *format, va_list *args)
@@ -173,17 +161,16 @@ t_format		parse_format(const char *format, va_list *args)
 **
 **    PARAMETERS
 **
-**         const char *format        A formatted string.
+**         const char *format        A format string.
 **
 **         va_list *args             A variable argument list.
 **
 **    DESCRIPTION
-**         Pulls off the next argument in the variable
-**         argument list & stores it in the 't_data'
-**         union.
+**         Pulls off the next argument in the variable argument list &
+**         stores it in the 't_data' union.
 **
 **    RETURN VALUES
-**         Returns the pulled off argument.
+**         Returns the union containing the pulled off argument.
 */
 
 t_data			extract_argument(t_format format, va_list *args)
@@ -217,7 +204,7 @@ t_data			extract_argument(t_format format, va_list *args)
 **
 **    PARAMETERS
 **
-**         const char *format        A formatted string.
+**         const char *format        A format string.
 **
 **         va_list *args             A variable argument list.
 **
@@ -226,29 +213,12 @@ t_data			extract_argument(t_format format, va_list *args)
 **                                   string.
 **
 **    DESCRIPTION
-**         Converts the specified format into the actual output
-**         string.
-**
-**         First, the function parses out the format (& style).
-**
-**         If the format is incorrect, then the formatted string
-**         is returned.
-**
-**         If the format is correct, the function will look for the
-**         format specifier in the dispatch table and pass on the
-**         task of the actual conversion to its associated function
-**         (handler).
-**
-**         After the conversion is done, the converted string (output
-**         string) is passed to the 'style_handler' (the stylist) to
-**         be styled as specified (if specified).
-**
-**         Finally, the format string index is advanced by the format
-**         length amount and the output string is returned.
+**         Converts the specified format string into the formatted
+**         string that it specifies.
 **
 **    RETURN VALUES
-**         If the format is correctly specified, returns the converted
-**         output string; otherwise returns the format string.
+**         If the format is correctly specified, the functions returns
+**         a formatted string; otherwise returns the format string.
 */
 
 char			*formatter(const char **format, va_list *args, size_t *len)

@@ -6,13 +6,13 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:52:39 by akharrou          #+#    #+#             */
-/*   Updated: 2019/05/06 16:00:13 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:17:17 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 **    NAME
-**         p_handler -- formatted address conversion
+**         p_handler -- formatted memory address conversion
 **
 **    SYNOPSIS
 **         #include <libft.h>
@@ -22,25 +22,23 @@
 **
 **    PARAMETERS
 **
-**         t_format format     Structure containing the variable
-**                             and information about how it must
-**                             be formatted.
+**         t_format format     Structure containing information about how
+**                             the argument must be formatted in the string.
 **
 **         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%p' specifier like the libc 'printf()' function.
 **
-**         Note: the only flags and fields that apply to this specifier
-**         are the following:
+**         Note: the flags and fields that apply to this specifier are
+**         the following:
 **
-**             Flags: '-'
+**             Flags: '-', '0'
 **             Width: defined or '*'
-**
 **
 **    RETURN VALUES
 **         If successful, returns a formatted string that follows the
-**         specified format; otherwise exits with a -1 on error.
+**         specified format; otherwise NULL.
 */
 
 #include "../ft_printf.h"

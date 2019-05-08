@@ -6,11 +6,15 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 21:43:29 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 22:26:22 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:45:30 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Reproduction of the libc 'asprintf()' function.
+*/
 
 int				ft_asprintf(char **ret, const char *format, ...)
 {

@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:15 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/25 09:47:42 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 09:16:32 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,17 @@
 **    DESCRIPTION
 **         Handles the '%u' specifier like the libc 'printf()' function.
 **
-**         Note: the only flags and fields that apply to this specifier
-**         are the following:
+**         Note: the flags and fields that apply to this specifier are
+**         the following:
 **
 **             Flags: '-', '0'
 **             Width: defined or '*'
 **             Precision: defined or '*'
 **             Length: 'hh', 'h', 'l', 'll', 'j', 'z', 't'
 **
-**         PS: two's complement is used for negatives.
-**
 **    RETURN VALUES
 **         If successful, returns a formatted string that follows the
-**         specified format; otherwise exits with a -1 on error.
+**         specified format; otherwise NULL.
 */
 
 #include "../ft_printf.h"

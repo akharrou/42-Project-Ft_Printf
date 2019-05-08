@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 18:27:23 by akharrou          #+#    #+#             */
-/*   Updated: 2019/05/07 18:54:41 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:13:50 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,25 @@
 **
 **    PARAMETERS
 **
-**         t_format format     Structure containing the variable
-**                             and information about how it must
-**                             be formatted.
+**         t_format format     Structure containing information about how
+**                             the argument must be formatted in the string.
 **
 **         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%f' specifier like the libc 'printf()' function.
 **
-**         Note: the only flags and fields that apply to this specifier
-**         are the following:
+**         Note: the flags and fields that apply to this specifier are
+**         the following:
 **
-**             Flags: '-', '+', ' ', '0'
+**             Flags: '#', '-', '+', ' ', '0'
 **             Width: defined or '*'
 **             Precision: defined or '*'
 **             Length: 'L'
 **
-**
 **    RETURN VALUES
 **         If successful, returns a formatted string that follows the
-**         specified format; otherwise exits with a -1 on error.
+**         specified format; otherwise NULL.
 */
 
 #include "../ft_printf.h"

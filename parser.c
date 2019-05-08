@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:45 by akharrou          #+#    #+#             */
-/*   Updated: 2019/05/07 18:54:20 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:34:25 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 **    NAME
-**         parse_flags -- parses the 'flags' field in the formatted string
+**         parse_flags -- parse 'flags' field in the 'printf' format string
 **
 **    SYNOPSIS
 **         #include <libft.h>
@@ -24,20 +24,13 @@
 **
 **    PARAMETERS
 **
-**         const char *format      Formatted string.
+**         const char *format      Format string.
 **
-**         int8_t *i               Current index in the formatted
-**                                 string.
+**         int8_t *i               Index to start parsing from in the
+**                                 format string.
 **
 **    DESCRIPTION
-**         Parses for the 'flags' field in the formatted string.
-**
-**         We iterate through the formatted string turning on bits in an
-**         integer. Each bit in the integer is mapped to a certain flag,
-**         the mapping is found in the 'e_flags' enum (defined in ft_printf.h).
-**
-**         At the end we end up with a mask that corresponds to the activated
-**         flags.
+**         Parses for the 'flags' field in the 'printf' format string.
 **
 **    RETURN VALUES
 **         Returns a mask representing the specified flags.
@@ -69,7 +62,7 @@ int8_t			parse_flags(const char *format, int8_t *i)
 
 /*
 **    NAME
-**         parse_width -- parse the 'width' field in the formatted string
+**         parse_width -- parse 'width' field in the 'printf' format string
 **
 **    SYNOPSIS
 **         #include <libft.h>
@@ -79,27 +72,15 @@ int8_t			parse_flags(const char *format, int8_t *i)
 **
 **    PARAMETERS
 **
-**         const char *format      Formatted string.
+**         const char *format      Format string.
 **
 **         va_list *args           Variable argument list.
 **
-**         int8_t *i               Current index in the formatted
-**                                 string.
+**         int8_t *i               Index to start parsing from in the
+**                                 format string.
 **
 **    DESCRIPTION
-**         Parses for the 'width' field in the formatted string.
-**
-**         First we check if the '*' flag is present, in which case it
-**         would indicate to us that this is a variable sized 'width'.
-**         If the star is present, we extract a variable from the
-**         va_list assigning it to the format's 'width' field.
-**
-**         Otherwise, starting from the first character after the flags
-**         field in the formatted string, we parse out digits until the
-**         first non-digit character (using ft_atoi).
-**
-**         If 'width' is greater than 0, we increment the index by the
-**         length (in characters) of the obtained integer.
+**         Parses for the 'width' field in the 'printf' format string.
 **
 **    RETURN VALUES
 **         Returns a signed 8 bit integer representing the width
@@ -126,8 +107,8 @@ int32_t			parse_width(const char *format, va_list *args, int8_t *i)
 
 /*
 **    NAME
-**         parse_precison -- parse the 'precision' field of the formatted
-**                           string
+**         parse_precison -- parse the 'precision' field in the 'printf'
+**                           format string.
 **
 **    SYNOPSIS
 **         #include <libft.h>
@@ -137,36 +118,20 @@ int32_t			parse_width(const char *format, va_list *args, int8_t *i)
 **
 **    PARAMETERS
 **
-**         const char *format      Formatted string.
+**         const char *format      Format string.
 **
 **         va_list *args           Variable argument list.
 **
-**         int8_t *i               Current index in the formatted
-**                                 string.
+**         int8_t *i               Index to start parsing from in the
+**                                 format string.
 **
 **    DESCRIPTION
-**         Parses for the 'precision' field in the formatted string.
-**
-**         First we check if a '.' dot is specified, if so then,
-**         parsing ensues; otherwise NONE (i.e -1) is returned
-**         specifying that no precision was specified.
-**
-**         If the '.' is present we then firstly check if the '*'
-**         flag is present, in which case it would indicate to us
-**         that this is a variable sized 'precision'. If the star
-**         is present, we extract a variable from the va_list
-**         assigning it to the format's 'precision' field.
-**
-**         Otherwise, we skip all '0's if any, then we parse out
-**         digits until the first non-digit character (using ft_atoi).
-**
-**         If 'precision' is greater than 0, we increment the index
-**         by the length (in characters) of the obtained integer.
+**         Parses for the 'precision' field in the 'printf' format string.
 **
 **    RETURN VALUES
 **         Returns a signed 8 bit integer representing the precision
-**         specified or NONE (-1, macro defined in ft_printf.h) to
-**         indicate that no precision was specified.
+**         specified or NONE (expands to -1) to indicate that no
+**         precision was specified.
 */
 
 int32_t			parse_precison(const char *format, va_list *args, int8_t *i)
@@ -196,7 +161,8 @@ int32_t			parse_precison(const char *format, va_list *args, int8_t *i)
 
 /*
 **    NAME
-**         parse_length -- parse the 'length' field in the formatted string
+**         parse_length -- parse the 'length' field in the 'printf'
+**                         format string
 **
 **    SYNOPSIS
 **         #include <libft.h>
@@ -206,30 +172,18 @@ int32_t			parse_precison(const char *format, va_list *args, int8_t *i)
 **
 **    PARAMETERS
 **
-**         const char *format      Formatted string.
+**         const char *format      Format string.
 **
-**         int8_t *i               Current index in the formatted
-**                                 string.
+**         int8_t *i               Index to start parsing from in the
+**                                 format string.
 **
 **    DESCRIPTION
-**         Parses for the 'length' field in the formatted string.
-**
-**         We check for an exact match of 'h', 'l', 'L', 'hh',
-**         'll', 'j', 'z', 't' with a series of if/else if
-**         statements.
-**
-**         (switch statements are not permitted with the school's
-**         'norminette').
-**
-**         The index 'i' is incremented accordingly.
-**
-**         If no 'length' is specified, the index stays the same
-**         and NONE (-1) is returned.
+**         Parses for the 'length' field in the 'printf' format string.
 **
 **    RETURN VALUES
 **         Returns a signed 8 bit integer representing the specified
-**         length or NONE (-1, macro defined in ft_printf.h) to indicate
-**         that the defaults should be use.
+**         length or NONE (expands to -1) to indicate that the default
+**         should be use.
 */
 
 int8_t			parse_length(const char *format, int8_t *i)
@@ -258,8 +212,8 @@ int8_t			parse_length(const char *format, int8_t *i)
 
 /*
 **    NAME
-**         parse_specifier -- parse the 'specifier' field in the formatted
-**                            string
+**         parse_specifier -- parse the 'specifier' field in the 'printf'
+**                            format string
 **
 **    SYNOPSIS
 **         #include <libft.h>
@@ -269,25 +223,18 @@ int8_t			parse_length(const char *format, int8_t *i)
 **
 **    PARAMETERS
 **
-**         const char *format      Formatted string.
+**         const char *format      Format string.
 **
-**         int8_t *i               Current index in the formatted
-**                                 string.
+**         int8_t *i               Index to start parsing from in the
+**                                 format string.
 **
 **    DESCRIPTION
-**         Parses for the 'specifier' field in the formatted string.
-**
-**         We check if the character we are on is part of the (handled)
-**         specifiers. If the specifier is indeed part of them, then it
-**         is returned (as an 8 bit integer); otherwise NONE (-1) is
-**         returned.
-**
-**         The index 'i' is incremented accordingly.
+**         Parses for the 'specifier' field in the 'printf' format string.
 **
 **    RETURN VALUES
-**         Returns the obtained specifier (as an 8 bit integer) or NONE (-1,
-**         macro defined in ft_printf.h) to indicate that no valid specifier
-**         was specified.
+**         Returns the obtained specifier (as an 8 bit integer) or NONE
+**         (expands to -1) to indicate that no valid specifier was
+**         specified.
 */
 
 int8_t			parse_specifier(const char *format, int8_t *i)

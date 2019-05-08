@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/27 01:23:54 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 10:34:23 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 **    DESCRIPTION
-**         Dispatch g_styles_table associating every style to its ANSI code.
+**         Dispatch 'g_styles_table' associates every style to its ANSI code.
 **
 **         Note:
 **
@@ -25,14 +25,13 @@
 **
 **         How to specify a style in the format string ?
 **
-**               After the regular specifier format
-**               append, between two curly brackets '{}',
-**               all the styles that you want to apply to
-**               the output, by name, seperated by spaces.
+**               After the regular specifier format, append,
+**               between two curly brackets '{}', all the
+**               styles that you want to apply to the output,
+**               by name, seperated by spaces.
 **
 **               Valid names of styles are only those found
-**               in the styles dispatch table below in the
-**               'style' field of each (t_style) element.
+**               in the styles dispatch table below.
 **
 **         Examples:
 **
@@ -108,36 +107,34 @@ t_style g_styles_table[] =
 **
 **    PARAMETERS
 **
-**         t_format format     Structure containing the variable
-**                             and information about how it must
-**                             be formatted.
+**         t_format format     Structure containing information about how
+**                             the argument must be formatted in the string;
+**                             also about how it must be styled.
 **
 **         t_data arg          Argument pulled off of the 'va_list'.
 **
-**         char *string          Output string that we want to style.
+**         char *string        Output string that we want to style.
 **
 **    DESCRIPTION
 **         Handles the 'style' specification of a formatted string.
 **
-**         Goes through the styles parsed in the format string and
-**         prepends them as their corresponding ANSI code to the output
-**         string.
+**         Goes through the styles parsed 'format' variable and prepends
+**         the corresponding ANSI code to the output string.
 **
 **         After having applied all styles, a reset ANSI code is appended
-**         to the end of the output string; this is so that the styling is
-**         not applied to characters that might come after in the output.
+**         to the end of the output string.
 **
 **    RETURN VALUES
 **         If style(s) were specified and successfully applied, the output
-**         string all styled up is returned; otherwise the output string
+**         string, all styled up, is returned; otherwise the output string
 **         untouched is returned.
 */
 
 char		*style_handler(t_format format, char *string)
 {
+	char	*style_str;
 	int8_t	i;
 	int8_t	j;
-	char	*style_str;
 
 	if (format.style == NULL)
 		return (string);
@@ -153,11 +150,11 @@ char		*style_handler(t_format format, char *string)
 						style_str, g_styles_table[j].ansi_code, 1, 0);
 				if (format.style[i + 1] != NULL)
 					style_str = ft_strappend(style_str, ";", 1, 0);
+				free(format.style[i]);
 			}
 	}
 	free(format.style);
 	style_str = ft_strappend(style_str, "m", 1, 0);
 	string = ft_strprepend(string, style_str, 1, 1);
-	string = ft_strappend(string, "\033[0m", 1, 0);
-	return (string);
+	return (ft_strappend(string, "\033[0m", 1, 0));
 }

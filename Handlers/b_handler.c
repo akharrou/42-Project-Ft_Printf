@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/28 19:40:57 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:14:00 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,26 @@
 **
 **    PARAMETERS
 **
-**         t_format format     Structure containing the variable
-**                             and information about how it must
-**                             be formatted.
+**         t_format format     Structure containing information about how
+**                             the argument must be formatted in the string.
 **
 **         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%b' specifier; binary number conversion, similar
-**         to the hexadecimal or octal or decimal conversions.
+**         to the '%x' or '%o' or '%d' conversions.
 **
-**         Note: the only flags and fields that apply to this specifier
-**         are the following:
+**         Note: the flags and fields that apply to this specifier are
+**         the following:
 **
 **             Flags: '-', '+', ' ', '0', '#'
 **             Width: defined or '*'
 **             Precision: defined or '*'
 **             Length: 'hh', 'h', 'l', 'll', 'j', 'z', 't'
 **
-**
 **    RETURN VALUES
 **         If successful, returns a formatted string that follows the
-**         specified format; otherwise exits with a -1 on error.
+**         specified format; otherwise NULL.
 */
 
 #include "../ft_printf.h"

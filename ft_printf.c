@@ -6,11 +6,15 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 23:17:26 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/26 00:17:05 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:44:42 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Reproduction of the libc 'printf()' function.
+*/
 
 int				ft_printf(const char *format, ...)
 {

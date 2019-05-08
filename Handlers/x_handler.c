@@ -6,13 +6,14 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/04/27 17:22:18 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/08 08:24:42 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 **    NAME
-**         x_handler -- formatted hexadecimal number conversion
+**         x_handler -- formatted (lowercased) hexadecimal base number
+**                      conversion
 **
 **    SYNOPSIS
 **         #include <libft.h>
@@ -22,27 +23,25 @@
 **
 **    PARAMETERS
 **
-**         t_format format     Structure containing the variable
-**                             and information about how it must
-**                             be formatted.
+**         t_format format     Structure containing information about how
+**                             the argument must be formatted in the string.
 **
 **         t_data arg          Argument pulled off of the 'va_list'.
 **
 **    DESCRIPTION
 **         Handles the '%x' specifier like the libc 'printf()' function.
 **
-**         Note: the only flags and fields that apply to this specifier
-**         are the following:
+**         Note: the flags and fields that apply to this specifier are
+**         the following:
 **
 **             Flags: '-', '+', ' ', '0', '#'
 **             Width: defined or '*'
 **             Precision: defined or '*'
 **             Length: 'hh', 'h', 'l', 'll', 'j', 'z', 't'
 **
-**
 **    RETURN VALUES
 **         If successful, returns a formatted string that follows the
-**         specified format; otherwise exits with a -1 on error.
+**         specified format; otherwise NULL.
 */
 
 #include "../ft_printf.h"

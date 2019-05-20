@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 18:56:25 by akharrou          #+#    #+#             */
-/*   Updated: 2019/05/08 10:34:23 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/19 21:22:54 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,13 +132,13 @@ t_style g_styles_table[] =
 
 char		*style_handler(t_format format, char *string)
 {
-	char	*style_str;
+	char	*style;
 	int8_t	i;
 	int8_t	j;
 
 	if (format.style == NULL)
 		return (string);
-	style_str = ft_strdup("\033[");
+	style = ft_strdup("\033[");
 	i = -1;
 	while (format.style[++i])
 	{
@@ -146,15 +146,15 @@ char		*style_handler(t_format format, char *string)
 		while (g_styles_table[++j].style)
 			if (ft_strcmp(format.style[i], g_styles_table[j].style) == 0)
 			{
-				style_str = ft_strappend(
-						style_str, g_styles_table[j].ansi_code, 1, 0);
+				style = ft_strappend(style, g_styles_table[j].ansi_code, 1, 0);
 				if (format.style[i + 1] != NULL)
-					style_str = ft_strappend(style_str, ";", 1, 0);
+					style = ft_strappend(style, ";", 1, 0);
 				free(format.style[i]);
+				break ;
 			}
 	}
 	free(format.style);
-	style_str = ft_strappend(style_str, "m", 1, 0);
-	string = ft_strprepend(string, style_str, 1, 1);
+	style = ft_strappend(style, "m", 1, 0);
+	string = ft_strprepend(string, style, 1, 1);
 	return (ft_strappend(string, "\033[0m", 1, 0));
 }

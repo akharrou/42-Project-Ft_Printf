@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 18:24:13 by akharrou          #+#    #+#             */
-/*   Updated: 2019/05/07 18:24:14 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/21 17:12:28 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 */
 
 void		ft_bzero(void *str, size_t n);
+void		*ft_malloc(size_t size, char c);
 void		*ft_memalloc(size_t size);
 void		*ft_memset(void *dst, int c, size_t n);
 char		*ft_padding(int size, char c);

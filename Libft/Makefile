@@ -6,7 +6,7 @@
 #    By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/07 18:55:39 by akharrou          #+#    #+#              #
-#    Updated: 2019/05/07 18:55:41 by akharrou         ###   ########.fr        #
+#    Updated: 2019/05/21 17:10:58 by akharrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,6 @@ SOURCES     =    arithmetic_dispatcher.c                                      \
                  ft_strndup.c                                                 \
                  ft_strnew.c                                                  \
                  ft_strnjoin.c                                                \
-                 ft_strnjoinfre.c                                             \
                  ft_strnlen.c                                                 \
                  ft_strnlstrip.c                                              \
                  ft_strnprepend.c                                             \
@@ -82,7 +81,7 @@ SOURCES     =    arithmetic_dispatcher.c                                      \
                  ft_uintmaxlen_base.c                                         \
                  ft_utoa_base.c                                               \
                  valid_base.c                                                 \
-
+                 ft_malloc.c                                                  \
 
 # Main — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 

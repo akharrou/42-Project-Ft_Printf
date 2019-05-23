@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 21:41:59 by akharrou          #+#    #+#             */
-/*   Updated: 2019/05/21 18:56:47 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/23 14:30:40 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				ft_vsprintf(char *str, const char *format, va_list *args)
 			fstr = formatter(&format, args, &len);
 			if (!fstr)
 				return (-1);
-			str = ft_strncat(str, fstr, len);
+			ft_memcpy(str + pos, fstr, len);
 			pos += len;
 			free(fstr);
 		}

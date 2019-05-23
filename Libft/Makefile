@@ -6,14 +6,29 @@
 #    By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/07 18:55:39 by akharrou          #+#    #+#              #
-#    Updated: 2019/05/21 17:10:58 by akharrou         ###   ########.fr        #
+#    Updated: 2019/05/23 14:22:57 by akharrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 
 CC          =   gcc
-CFLAGS      =   -Wall -Wextra -Werror
+CFLAGS      =   -Wall -Wextra -Werror -g #$(DEBUG_FLAGS)
+
+# — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
+
+DEBUG_FLAGS =   -O0 -g                                                      \
+                                                                            \
+                -fsanitize=address                                          \
+                -fsanitize=undefined                                        \
+                -fsanitize=bounds                                           \
+                -fsanitize=nullability-arg                                  \
+                -fsanitize=nullability-return                               \
+                -fsanitize=nullability-assign                               \
+                -fsanitize=undefined                                        \
+                -fsanitize-address-use-after-scope                          \
+                # -fsanitize=integer                                          \
+                # -fsanitize=object-size                                      \
 
 # — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 
@@ -50,6 +65,7 @@ SOURCES     =    arithmetic_dispatcher.c                                      \
                  ft_ldtoa_base.c                                              \
                  ft_memalloc.c                                                \
                  ft_memset.c                                                  \
+                 ft_memcpy.c                                                  \
                  ft_padding.c                                                 \
                  ft_strappend.c                                               \
                  ft_strcat.c                                                  \

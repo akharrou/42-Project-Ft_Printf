@@ -6,7 +6,7 @@
 /*   By: akharrou <akharrou@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 18:29:48 by akharrou          #+#    #+#             */
-/*   Updated: 2019/05/08 08:42:54 by akharrou         ###   ########.fr       */
+/*   Updated: 2019/05/21 18:59:19 by akharrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,20 @@ char			*apply_width(t_format format, char *str)
 
 t_handler g_table[] =
 {
-	{'%', &mod_handler},
-	{'c', &c_handler},
-	{'i', &i_handler},
-	{'u', &u_handler},
-	{'f', &f_handler},
-	{'b', &b_handler},
-	{'o', &o_handler},
-	{'d', &d_handler},
-	{'x', &x_handler},
-	{'X', &xx_handler},
-	{'s', &s_handler},
-	{'r', &r_handler},
-	{'p', &p_handler},
-	{'\0', NULL}
+	{ '%', &mod_handler },
+	{ 'c', &c_handler },
+	{ 'i', &i_handler },
+	{ 'u', &u_handler },
+	{ 'f', &f_handler },
+	{ 'b', &b_handler },
+	{ 'o', &o_handler },
+	{ 'd', &d_handler },
+	{ 'x', &x_handler },
+	{ 'X', &xx_handler },
+	{ 's', &s_handler },
+	{ 'r', &r_handler },
+	{ 'p', &p_handler },
+	{ '\0', NULL }
 };
 
 /*
